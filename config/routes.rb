@@ -2,6 +2,8 @@ Hackday::Application.routes.draw do
 
   root :to => 'hacks#index'
 
+  resources :hacks
+
   match 'auth/:provider/callback', to: 'sessions#create'
   match 'auth/failure', to: redirect('/')
   match 'signout', to: 'sessions#destroy', as: 'signout'

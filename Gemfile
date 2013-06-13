@@ -22,6 +22,10 @@ end
 
 gem 'jquery-rails'
 
+gem 'omniauth-facebook'
+# should we post to FB? via koala7?
+
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

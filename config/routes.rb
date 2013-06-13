@@ -3,6 +3,9 @@ Hackday::Application.routes.draw do
   root :to => 'hacks#index'
 
   resources :hacks
+  match 'hacks/:id/downvote', to: 'hacks#downvote'
+  match 'hacks/:id/upvote', to: 'hacks#upvote'
+
 
   match 'auth/:provider/callback', to: 'sessions#create'
   match 'auth/failure', to: redirect('/')

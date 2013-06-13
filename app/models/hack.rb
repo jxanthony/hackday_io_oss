@@ -11,7 +11,7 @@
 #
 
 class Hack < ActiveRecord::Base
-  attr_accessible :description, :score, :title
+  attr_accessible :description, :score, :title, :votes
 
   has_many :comments
   has_many :contributors

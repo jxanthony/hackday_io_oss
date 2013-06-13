@@ -25,18 +25,10 @@ gem 'jquery-rails'
 gem 'omniauth-facebook'
 # should we post to FB? via koala7?
 
+group :development, :test do
+	gem 'ruby-debug19', :require => 'ruby-debug'
 
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
-
-# To use debugger
-# gem 'debugger'
+	gem 'rspec-rails'
+	gem 'annotate'
+	gem 'simplecov'
+end

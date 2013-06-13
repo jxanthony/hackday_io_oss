@@ -26,7 +26,7 @@ class Hack < ActiveRecord::Base
 
   def downvote(user)
     self.votes -= 1
-    user.bankroll += 1
+    user.bankroll -= 1
 
     self.save
     user.save

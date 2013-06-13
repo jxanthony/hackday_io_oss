@@ -1,6 +1,7 @@
 class ChangeUidType < ActiveRecord::Migration
   def up
-  	change_column :users, :uid, :integer
+  	remove_column :users, :uid
+  	add_column :users, :uid, :integer
   end
 
   def down

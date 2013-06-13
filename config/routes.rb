@@ -1,8 +1,17 @@
 Hackday::Application.routes.draw do
 
+  root :to => 'hacks#index'
+
   match 'auth/:provider/callback', to: 'sessions#create'
   match 'auth/failure', to: redirect('/')
   match 'signout', to: 'sessions#destroy', as: 'signout'
+
+
+  # TODO: need routes for..
+  # create comment
+  # add me as a contributor / remove me as a contributor
+  # vote
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

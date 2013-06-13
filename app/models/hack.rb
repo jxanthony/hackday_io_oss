@@ -13,5 +13,6 @@
 class Hack < ActiveRecord::Base
   attr_accessible :description, :score, :title
 
-  has_many :comments, :contributors
+  has_many :comments
+  has_many :contributors
 end

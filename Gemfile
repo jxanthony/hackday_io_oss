@@ -5,8 +5,11 @@ gem 'rails', '3.2.13'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'pg'
+gem 'thin'
 
+group :production do
+	gem "pg"
+end
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -27,6 +30,7 @@ gem 'omniauth-facebook'
 
 group :development, :test do
 	gem 'ruby-debug19', :require => 'ruby-debug'
+	gem 'sqlite3'
 
 	gem 'rspec-rails'
 	gem 'annotate'

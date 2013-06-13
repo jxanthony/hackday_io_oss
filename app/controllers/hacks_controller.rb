@@ -1,6 +1,6 @@
 class HacksController < ApplicationController
 	def index
-		@hacks = Hacks.order("score DESC")
+		@hacks = Hack.order("score DESC")
 	end
 
 	def show

@@ -8,18 +8,34 @@
   </head>
   <body>
 
+    <% if flash[:error] %>
+    <div class="alert alert-error">
+      <%= flash[:error] %>
+      <a class="close" data-dismiss="alert" href="#">&times;</a>
+    </div>
+    <% end %>
+
+    <% if flash[:message] %>
+    <div class="alert alert-success">
+      <%= flash[:message] %>
+      <a class="close" data-dismiss="alert" href="#">&times;</a>
+    </div>  
+    <% end %>
+
+
     <div class="container-fluid">
       <div class="row-fluid">
 
         <div class="span8">
           <h1>SharePoint Hack Day!</h1>
-          <p class="lead">Democratizing hack day judging. Freedom from director tyranny at last!</p>
+          <p class="lead">Democratizing hack day judging. Freedom from Lauren's tyranny at last!</p>
         </div>
 
         <div class="span12">
           <div id="login" class="span4 offset8">
             <% if current_user %>
-              Signed in as <strong><%= current_user.name %></strong>!<br>
+              <img src="https://graph.facebook.com/<%= current_user.uid %>/picture?width=140&height=140" class="img-circle" /><br/>
+              <strong><%= current_user.name %></strong>!<br>
               Bankroll: <strong><%= current_user.bankroll %></strong>
               <%= link_to "Sign out", signout_path, id: "sign_out" %>
             <% else %>

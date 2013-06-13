@@ -11,6 +11,8 @@ Hackday::Application.routes.draw do
   match 'auth/failure', to: redirect('/')
   match 'signout', to: 'sessions#destroy', as: 'signout'
 
+  resources :comments
+
 
   # TODO: need routes for..
   # create comment

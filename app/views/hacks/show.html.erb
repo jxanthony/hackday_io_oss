@@ -26,3 +26,26 @@
 <% end %>
 
 <!-- TODO: add comment button -->
+
+<button id="new_comment_button" class="btn">Add Comment</button>
+
+<div id="new_comment_form" style="display:none">
+	<%= form_for @hack.comments.new do |f| %>
+	  <fieldset class="input">
+	    <%= f.text_field :body %>
+	    <%= hidden_field_tag 'hack_id', @hack.id %>
+	    <%= hidden_field_tag 'user_id', current_user.id %>
+	  </fieldset>
+
+	  <fieldset class="button">
+	    <%= f.submit "Post" %>
+	  </fieldset>
+	<% end %>
+</div>
+
+<script type="text/javascript">
+  jQuery('#new_comment_button').click(function(e){
+	  jQuery('#new_comment_form').css('display', 'block');
+	  jQuery('#new_comment_button').css('display', 'none');
+	});
+</script>

@@ -5,11 +5,7 @@ class ApplicationController < ActionController::Base
   private
 
   def current_user
-    if Rails.env.development?
-      @current_user = User.find_by_id(1)
-    else
-      @current_user ||= User.find(session[:user_id]) if session[:user_id]
-    end
+    @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
   helper_method :current_user

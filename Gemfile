@@ -25,8 +25,9 @@ end
 
 gem 'jquery-rails'
 
+gem 'omniauth'
 gem 'omniauth-facebook'
-# should we post to FB? via koala7?
+gem 'omniauth-yammer', :git => 'git://github.com/le0pard/omniauth-yammer.git'
 
 group :development, :test do
  gem 'debugger' 

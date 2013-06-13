@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/le0pard/omniauth-yammer.git
+  revision: 9414bb9fc37143842277ad7010e71f903f5e4138
+  specs:
+    omniauth-yammer (0.0.6)
+      omniauth-oauth2 (>= 1.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -160,7 +167,9 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   debugger
   jquery-rails
+  omniauth
   omniauth-facebook
+  omniauth-yammer!
   pg
   rails (= 3.2.13)
   rspec-rails

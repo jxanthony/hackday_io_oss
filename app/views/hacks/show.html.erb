@@ -1,20 +1,28 @@
-<ul>
-	<% @hacks.each do |hack| %>
-	<li class="hack">
-		<a href="/votes/up"><i class="icon-chevron-up"></i></a>
-		<%= hack.score %>
-		<a href="/votes/down"><i class="icon-chevron-down"></i></a>
-		<h2><%= link_to hack.title, hack %></h2>
-		<p><%= truncate(hack.description, :length => 140) %></p>
-		<p><%= hack.comments.count %> Comments</p>
-	</li>	
-	<% end %>
-</ul>
+<a href="/votes/up"><i class="icon-chevron-up"></i></a>
+<%= @hack.votes %>
+<%= link_to 'upvote', upvote_path(@hack) %>
+<%= link_to 'downvote', downvote_path(@hack) %>
+
+<h2><%= link_to @hack.title, @hack %></h2>
+<p><%= truncate(@hack.description, :length => 140) %></p>
+
+<% unless @hack.url.blank? %>
+<p><em>URL:</em> <%= hack.url %></p>
+<% end %>
 
 <h3>Comments</h3>
 
-<% @hacks.comments.each do |comment| %>
-
-
-
+<% unless @hack.comments.empty? %>
+<ul>
+	<% @hack.comments.each do |comment| %>
+		<li>
+			<p><em><%= comment.user.name %> says.. </em></p>
+			<p><%= comment.body %></p>
+		</li>
+	<% end %>
+</ul>
+<% else %>
+<p>Sadly no one has commented yet!</p>
 <% end %>
+
+<!-- TODO: add comment button -->

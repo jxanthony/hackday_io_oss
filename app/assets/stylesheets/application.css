@@ -12,5 +12,5 @@
  *= require_tree .
  */
 
-ul { list-style: none; }
-li { padding: 0; margin: 0; }
+ul { list-style-type: none; margin: 0; padding: 0; }
+#nav-hacks .inline-list { display: inline; }

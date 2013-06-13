@@ -1,8 +1,13 @@
+<ul id="nav-hacks" class="inline-list">
+	<li><a href="/">Top Rated</a></li>
+	<li><a href="/hacks/favorites">My Favorites</a></li>
+</ul>
+
 <ul>
 	<% @hacks.each do |hack| %>
 	<li class="hack">
 		<a href="/votes/up"><i class="icon-chevron-up"></i></a>
-		<%= hack.score %>
+		<%= hack.votes %>
 		<a href="/votes/down"><i class="icon-chevron-down"></i></a>
 		<h2><%= link_to hack.title, hack %></h2>
 		<p><%= truncate(hack.description, :length => 140) %></p>

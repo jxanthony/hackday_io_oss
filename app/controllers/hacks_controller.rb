@@ -10,14 +10,22 @@ class HacksController < ApplicationController
   end
 
   def upvote
-    @hack.upvote(current_user)
-
+    if current_user.bankroll == 0
+      flash[:error] = "no more votes left to give!"
+    else
+      flash[:message] = "you have cast your vote!"
+      @hack.upvote(current_user)
+    end
     redirect_to :back
   end
 
   def downvote
-    @hack.downvote(current_user)
-
+    if current_user.bankroll == 0
+      flash[:error]   = "no more votes left to give!"
+    else
+      flash[:message] = "you are a terrible person"
+      @hack.downvote(current_user)
+    end
     redirect_to :back
   end
 

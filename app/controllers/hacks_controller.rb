@@ -10,7 +10,7 @@ class HacksController < ApplicationController
   end
 
   def upvote
-    if current_user.bankroll == 0
+    if current_user.bankroll <= 0
       flash[:error] = "no more votes left to give!"
     else
       flash[:message] = "you have cast your vote!"
@@ -20,7 +20,7 @@ class HacksController < ApplicationController
   end
 
   def downvote
-    if current_user.bankroll == 0
+    if current_user.bankroll <= 0
       flash[:error]   = "no more votes left to give!"
     else
       flash[:message] = "you are a terrible person"

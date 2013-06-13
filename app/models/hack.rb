@@ -32,4 +32,16 @@ class Hack < ActiveRecord::Base
     user.save
   end
 
+  def has_contributor?(user)
+    self.contributors.detect { |contributor| c.user_id == user.id }
+  end
+
+  def add_contributor(user)
+    Contributor.create(:user_id => user.id, :hack_id => self.id)
+  end
+
+  def remove_contributor(user)
+    self.contributors.detect { |contributor| c.user_id == user.id }.destroy
+  end
+
 end

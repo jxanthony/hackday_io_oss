@@ -2,7 +2,8 @@
 	<% @hacks.each do |hack| %>
 	<li class="hack">
 		<h2><%= hack.title %></h2>
-		<p><%= hack.description %></p>
+		<p><%= truncate(hack.description, :length => 140) %></p>
+		<p><%= hack.comments.count %> Comments</p>
 	</li>	
 	<% end %>
 </ul>

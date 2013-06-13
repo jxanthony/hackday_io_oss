@@ -13,11 +13,11 @@ class HacksController < ApplicationController
   end
 
   def upvote
-    # TODO: increment hack score, decrement user score
+    @hack.upvote(current_user)
   end
 
   def downvote
-    # TODO: decrement hack score, increment user bankroll
+    @hack.downvote(current_user)
   end
 
 end

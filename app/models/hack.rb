@@ -15,4 +15,15 @@ class Hack < ActiveRecord::Base
 
   has_many :comments
   has_many :contributors
+
+  def upvote(user)
+    votes += 1
+    user.bankroll -= 1
+  end
+
+  def downvote(user)
+    votes -= 1
+    user.bankroll += 1
+  end
+
 end

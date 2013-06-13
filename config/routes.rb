@@ -3,8 +3,8 @@ Hackday::Application.routes.draw do
   root :to => 'hacks#index'
 
   resources :hacks
-  match 'hacks/:id/downvote', to: 'hacks#downvote'
-  match 'hacks/:id/upvote', to: 'hacks#upvote'
+  match 'hacks/:id/downvote' => 'hacks#downvote', :as => 'downvote'
+  match 'hacks/:id/upvote' => 'hacks#upvote', :as => 'upvote'
 
 
   match 'auth/:provider/callback', to: 'sessions#create'

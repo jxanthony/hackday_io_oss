@@ -29,7 +29,7 @@ gem 'omniauth-facebook'
 # should we post to FB? via koala7?
 
 group :development, :test do
-	gem 'ruby-debug19', :require => 'ruby-debug'
+ gem 'debugger' 
 	gem 'sqlite3'
 
 	gem 'rspec-rails'

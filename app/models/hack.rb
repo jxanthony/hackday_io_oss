@@ -11,8 +11,19 @@
 #
 
 class Hack < ActiveRecord::Base
-  attr_accessible :description, :score, :title
+  attr_accessible :description, :score, :title, :votes
 
   has_many :comments
   has_many :contributors
+
+  def upvote(user)
+    votes += 1
+    user.bankroll -= 1
+  end
+
+  def downvote(user)
+    votes -= 1
+    user.bankroll += 1
+  end
+
 end

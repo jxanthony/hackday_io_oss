@@ -14,7 +14,8 @@ class Hack < ActiveRecord::Base
   attr_accessible :description, :score, :title, :votes
 
   has_many :comments
-  has_many :contributors
+  has_many :contributions
+  has_many :activities
 
   def upvote(user)
     self.votes += 1
@@ -23,9 +24,9 @@ class Hack < ActiveRecord::Base
     self.save
     user.save
 
-    h = CONNECTION.post("/api/v1/messages.json?group_id=2032538&body=heyhighlife", nil, HEADERS)
-    raise h.inspect
+    YAMMER.create_message("#{user.name} has voted for #{self.title}", :group_id => 2032538)
 
+    Activity.create(:user_id => user.id, :hack_id => self.id, :action => 'upvote')
   end
 
   def downvote(user)
@@ -34,18 +35,22 @@ class Hack < ActiveRecord::Base
 
     self.save
     user.save
+
+    YAMMER.create_message("#{user.name} has DOWNVOTED for #{self.title}", :group_id => 2032538)
+
+    Activity.create(:user_id => user.id, :hack_id => self.id, :action => 'downvote')
   end
 
-  def has_contributor?(user)
-    self.contributors.detect { |contributor| c.user_id == user.id }
+  def has_contribution?(user)
+    self.contributions.detect { |contribution| c.user_id == user.id }
   end
 
-  def add_contributor(user)
-    Contributor.create(:user_id => user.id, :hack_id => self.id)
+  def add_contribution(user)
+    Contribution.create(:user_id => user.id, :hack_id => self.id)
   end
 
-  def remove_contributor(user)
-    self.contributors.detect { |contributor| c.user_id == user.id }.destroy
+  def remove_contribution(user)
+    self.contributions.detect { |contribution| c.user_id == user.id }.destroy
   end
 
 end

@@ -14,7 +14,7 @@
 	<p><a href="<%= hack.url %>">Learn more here!</a></p>
 	<% end %>
 
-	<strong>Contributors:</strong>
+	<strong>Contributors</strong><br/>
 
 	<% unless @hack.contributions.empty? %>
 		<% @hack.contributions.each do |contribution| %>
@@ -23,7 +23,7 @@
 	<% else %>
 		<span><em>No one has claimed this hack yet!</em></span>
 	<% end %>
-	<% unless @hack.contributions.detect {|c| c.user_id == curent_user.id} %>
+	<% unless @hack.contributions.detect {|c| c.user_id == current_user.id} %>
 		<%= link_to "I helped!", ihelped_path(@hack), :class=>'btn btn-small btn-success' %>
 	<% end %>
 

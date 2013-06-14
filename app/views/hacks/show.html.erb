@@ -1,29 +1,35 @@
 <a href="/votes/up"><i class="icon-chevron-up"></i></a>
-<%= @hack.votes %>
-<%= link_to 'upvote', upvote_path(@hack) %>
-<%= link_to 'downvote', downvote_path(@hack) %>
 
 <h2><%= @hack.title %></h2>
-<p><%= @hack.description %></p>
+<div class="hack-voting">
+	<%= link_to image_tag('arrow-up.png'), upvote_path(@hack) %>
+	<span class="votes"><%= @hack.votes %></span>
+	<%= link_to image_tag('arrow-down.png'), downvote_path(@hack) %>
+</div>
 
-<% unless @hack.url.blank? %>
-<p><a href="<%= hack.url %>">Learn more here!</a></p>
-<% end %>
+<div class="hack-details">
+	<p><%= @hack.description %></p>
 
-<% unless @hack.contributions.empty? %>
-<p>
-	<strong>Contributors</strong><br/>
-	<% @hack.contributions.each do |contribution| %>
-    	<img src="https://graph.facebook.com/<%= contribution.user.uid %>/picture" class="img-circle" />
+	<% unless @hack.url.blank? %>
+	<p><a href="<%= hack.url %>">Learn more here!</a></p>
+	<% end %>
+
+	<strong>Contributors:</strong>
+
+	<% unless @hack.contributions.empty? %>
+		<% @hack.contributions.each do |contribution| %>
+	    	<img src="https://graph.facebook.com/<%= contribution.user.uid %>/picture" class="img-circle" />
+		<% end %>
+	<% else %>
+		<span><em>No one has claimed this hack yet!</em></span>
 	<% end %>
 	<% unless @hack.contributions.detect {|c| c.user_id == curent_user.id} %>
-		<%= button_to "I helped!", ihelped_path(@hack) %>
+		<%= link_to "I helped!", ihelped_path(@hack), :class=>'btn btn-small btn-success' %>
 	<% end %>
-</p>
-<% else %>
-	<p>No one has claimed this hack yet!</p>
-<% end %>
 
+</div>
+
+<div style="clear:both;"></div>
 
 <h3>Comments</h3>
 <% unless @hack.comments.empty? %>

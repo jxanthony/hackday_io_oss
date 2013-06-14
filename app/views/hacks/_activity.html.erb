@@ -1,7 +1,68 @@
-<ul>
-  <% activities.each do |activity| %>
-  <li class="activity">
-    <p><%= generate_activity_message(activity) %></p> 
-  </li> 
-  <% end %>
+<ul id="activities">
 </ul>
+
+
+<script type="text/javascript">
+(function(){
+  var cursor = 0;
+
+  var activityDisplay = {
+      run: function() {
+        var self = this;
+        self.request();
+        setInterval(function(){
+          self.request();
+        }, 5000);
+      }
+    , request: function() {
+        var self = this;
+        // do the ajax thing
+        $.ajax({
+          type: "GET"
+        , url: "<%= activities_path %>"
+        , success: function(data) { self.success(data); }
+        });
+      }
+    , success: function(results) {
+        var self = this;
+        _.each(results, function(item) {
+          $activities = $('#activities');
+          $item = $(item);
+          if ($item.attr('id') > cursor) {
+            var markup = self.generateActivityMessage(item);
+            $activities.prepend($(markup));
+            cursor = $item.attr('id');
+          }
+          // generate dom node, prepend
+        });
+      }
+    , error: function(error) {
+        // this is not important for now
+      }
+    , generateActivityMessage: function(activity) {
+        $activity = $(activity);
+        $user = $($activity.attr('user'));
+        $hack = $($activity.attr('hack'));
+        var message = '';
+        switch($activity.attr('action')) {
+          case 'upvote':
+            message = $user.attr('name') + ' upvoted ' + $hack.attr('title') + '.';
+            break;
+          case 'downvote':
+            message = $user.attr('name') + ' downvoted ' + $hack.attr('title') + '.';
+            break;
+          case 'comment':
+            message = $user.attr('name') + ' commented on ' + $hack.attr('title') + '.';
+            break;
+        }
+        return '<li class="activity" id="activity ' + $activity.attr('id') + '">' +
+               '<p><img src="https://graph.facebook.com/' + $user.attr('uid') + '/picture" class="image-circle" />' + message + '<p>' +
+               '</li>';
+      }
+  };
+
+  $(document).ready(function(){
+    activityDisplay.run();
+  });
+})();
+</script>

@@ -40,8 +40,15 @@
               <%= link_to "Sign in with Facebook!", "/auth/facebook", id: "sign_in" %>
             <% end %>
         </div>
-      
-        <div class="span6">
+      </div>
+
+      <div class="row-fluid" style="float:right;width:500px;">
+        <div class="span4">
+          <%= render "hacks/activity" %>
+        </div>
+      </div>
+
+      <div class="row-fluid" style="float:left;">
           <%= yield %>
         </div>
       </div>

@@ -15,6 +15,7 @@ Hackday::Application.routes.draw do
   match 'signout', to: 'sessions#destroy', as: 'signout'
 
   resources :comments
+  resources :activities
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

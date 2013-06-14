@@ -1,33 +1,42 @@
 <a href="/votes/up"><i class="icon-chevron-up"></i></a>
-<%= @hack.votes %>
-<%= link_to 'upvote', upvote_path(@hack) %>
-<%= link_to 'downvote', downvote_path(@hack) %>
 
 <h2><%= @hack.title %></h2>
-<p><%= truncate(@hack.description, :length => 140) %></p>
+<div class="hack-voting">
+	<%= link_to image_tag('arrow-up.png'), upvote_path(@hack) %>
+	<span class="votes"><%= @hack.votes %></span>
+	<%= link_to image_tag('arrow-down.png'), downvote_path(@hack) %>
+</div>
 
-<% unless @hack.url.blank? %>
-<p><a href="<%= hack.url %>">Learn more here!</a></p>
-<% end %>
+<div class="hack-details">
+	<p><%= @hack.description %></p>
 
-<% unless @hack.contributions.empty? %>
-<p>
-	<strong>Contributors:</strong>
-	<% @hack.contributions.each do |contribution| %>
-    	<img src="https://graph.facebook.com/<%= contribution.user.uid %>/picture" class="img-circle" />
+	<% unless @hack.url.blank? %>
+	<p><a href="<%= hack.url %>">Learn more here!</a></p>
 	<% end %>
-</p>
-<% else %>
-	<p>No one has claimed this yet!</p>
-<% end %>
-<%= link_to "I helped!", ihelped_path(@hack) %>
 
+	<strong>Contributors</strong><br/>
+
+	<% unless @hack.contributions.empty? %>
+		<% @hack.contributions.each do |contribution| %>
+	    	<img src="https://graph.facebook.com/<%= contribution.user.uid %>/picture" class="img-circle" />
+		<% end %>
+	<% else %>
+		<span><em>No one has claimed this hack yet!</em></span>
+	<% end %>
+	<% unless @hack.contributions.detect {|c| c.user_id == current_user.id} %>
+		<%= link_to "I helped!", ihelped_path(@hack), :class=>'btn btn-small btn-success' %>
+	<% end %>
+
+</div>
+
+<div style="clear:both;"></div>
 
 <h3>Comments</h3>
 <% unless @hack.comments.empty? %>
 <ul>
 	<% @hack.comments.each do |comment| %>
-		<li>
+		<li class="comment">
+			<img src="https://graph.facebook.com/<%= comment.user.uid %>/picture" class="img-circle"/>
 			<p><em><%= comment.user.name %> says.. </em></p>
 			<p><%= comment.body %></p>
 		</li>
@@ -38,12 +47,13 @@
 <% end %>
 
 <div id="new_comment_form">
+	<strong>Add your thoughts!</strong>
 	<%= form_for @hack.comments.new do |f| %>
 	  <fieldset class="input">
-	    <%= f.text_field :body %>
+	    <%= f.text_area :body %>
 	    <%= hidden_field_tag 'hack_id', @hack.id %>
 	  </fieldset>
 
-	    <%= f.submit "Post", :class => 'btn' %>
+	    <%= f.submit "Make my voice heard!", :class => 'btn btn-success' %>
 	<% end %>
 </div>

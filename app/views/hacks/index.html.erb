@@ -1,14 +1,14 @@
-<div id="navigation">
-	<ul id="nav-hacks" class="inline-list">
-	  <li><a href="/">Top Rated</a></li>
-	  <li><a href="/hacks/favorites">My Favorites</a></li>
-	</ul>
-</div>
+<h2>Top Hacks</h2>
 
-<div id="hacks" style="float:left;">
-	<%= render "hacks/hacks", :hacks => @hacks %>
-</div>
+<% @hacks.each do |hack| %>
+  <div class="hack-voting">
+    <%= link_to image_tag('arrow-up.png'), upvote_path(hack) %>
+	<span class="votes"><%= hack.votes %></span>
+	<%= link_to image_tag('arrow-down.png'), downvote_path(hack) %>
+  </div>
 
-<div id="activity" style="float:right;">
-	<%= render "hacks/activity", :activities => @activities %>
-</div>
+  <div class="hack-details">
+    <h3><%= link_to hack.title, hack %></h3>
+    <p><%= truncate(hack.description, :length => 140) %></p>
+  </div>
+<% end %>

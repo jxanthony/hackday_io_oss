@@ -1,7 +1,75 @@
-<ul>
-  <% activities.each do |activity| %>
-  <li class="activity">
-    <p><%= generate_activity_message(activity) %></p> 
-  </li> 
-  <% end %>
+<ul id="activities">
 </ul>
+
+
+<script type="text/javascript">
+(function(){
+  var cursor = 0;
+
+  var activityDisplay = {
+      run: function() {
+        var self = this;
+        self.request();
+        setInterval(function(){
+          self.request();
+        }, 5000);
+      }
+    , request: function() {
+        var self = this;
+        // do the ajax thing
+        $.ajax({
+          type: "GET"
+        , url: "<%= activities_path %>"
+        , success: function(data) { self.success(data); }
+        });
+      }
+    , success: function(results) {
+        var self = this;
+        _.each(results, function(item) {
+          $activities = $('#activities');
+          $item = $(item);
+          if ($item.attr('id') > cursor) {
+            var markup = self.generateActivityMessage(item);
+            $activities.prepend($(markup));
+            cursor = $item.attr('id');
+          }
+          // generate dom node, prepend
+        });
+      }
+    , error: function(error) {
+        // this is not important for now
+      }
+    , generateActivityMessage: function(activity) {
+        $activity = $(activity);
+        $user = $($activity.attr('user'));
+        $hack = $($activity.attr('hack'));
+        var message = '';
+        switch($activity.attr('action')) {
+          case 'upvote':
+            message = '<b>' + $user.attr('name') + '</b> voted up <i>' + $hack.attr('title') + '</i>';
+            break;
+          case 'downvote':
+            message = '<b>' + $user.attr('name') + '</b> voted down <i>' + $hack.attr('title') + '</i>';
+            break;
+          case 'comment':
+            message = '<b>' + $user.attr('name') + '</b> commented on <i>' + $hack.attr('title') + '</i>';
+            break;
+          case 'add_contribution':
+            message = '<b>' + $user.attr('name') + '</b> was a contributor on <i>' + $hack.attr('title') + '</i>';
+            break;
+          case 'remove_contribution':
+            message = '<b>' + $user.attr('name') + '</b> was no longer a contributor on <i>' + $hack.attr('title') + '</i>';
+            break;
+        }
+        return '<li class="activity" id="activity ' + $activity.attr('id') + '">' +
+               '<img src="https://graph.facebook.com/' + $user.attr('uid') + '/picture" class="img-circle" />' +
+               message + 
+               '</li>';
+      }
+  };
+
+  $(document).ready(function(){
+    activityDisplay.run();
+  });
+})();
+</script>

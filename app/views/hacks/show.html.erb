@@ -3,15 +3,27 @@
 <%= link_to 'upvote', upvote_path(@hack) %>
 <%= link_to 'downvote', downvote_path(@hack) %>
 
-<h2><%= link_to @hack.title, @hack %></h2>
+<h2><%= @hack.title %></h2>
 <p><%= truncate(@hack.description, :length => 140) %></p>
 
 <% unless @hack.url.blank? %>
-<p><em>URL:</em> <%= hack.url %></p>
+<p><a href="<%= hack.url %>">Learn more here!</a></p>
 <% end %>
 
-<h3>Comments</h3>
+<% unless @hack.contributions.empty? %>
+<p>
+	<strong>Contributors:</strong>
+	<% @hack.contributions.each do |contribution| %>
+    	<img src="https://graph.facebook.com/<%= contribution.user.uid %>/picture" class="img-circle" />
+	<% end %>
+</p>
+<% else %>
+	<p>No one has claimed this yet!</p>
+<% end %>
+<%= link_to "I helped!", ihelped_path(@hack) %>
 
+
+<h3>Comments</h3>
 <% unless @hack.comments.empty? %>
 <ul>
 	<% @hack.comments.each do |comment| %>
@@ -25,27 +37,13 @@
 <p>Sadly no one has commented yet!</p>
 <% end %>
 
-<!-- TODO: add comment button -->
-
-<button id="new_comment_button" class="btn">Add Comment</button>
-
-<div id="new_comment_form" style="display:none">
+<div id="new_comment_form">
 	<%= form_for @hack.comments.new do |f| %>
 	  <fieldset class="input">
 	    <%= f.text_field :body %>
 	    <%= hidden_field_tag 'hack_id', @hack.id %>
-	    <%= hidden_field_tag 'user_id', current_user.id %>
 	  </fieldset>
 
-	  <fieldset class="button">
-	    <%= f.submit "Post" %>
-	  </fieldset>
+	    <%= f.submit "Post", :class => 'btn' %>
 	<% end %>
 </div>
-
-<script type="text/javascript">
-  jQuery('#new_comment_button').click(function(e){
-	  jQuery('#new_comment_form').css('display', 'block');
-	  jQuery('#new_comment_button').css('display', 'none');
-	});
-</script>

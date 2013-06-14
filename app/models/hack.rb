@@ -14,7 +14,7 @@ class Hack < ActiveRecord::Base
   attr_accessible :description, :score, :title, :votes
 
   has_many :comments
-  has_many :contributors
+  has_many :contributions
 
   def upvote(user)
     self.votes += 1
@@ -32,16 +32,16 @@ class Hack < ActiveRecord::Base
     user.save
   end
 
-  def has_contributor?(user)
-    self.contributors.detect { |contributor| c.user_id == user.id }
+  def has_contribution?(user)
+    self.contributions.detect { |contribution| c.user_id == user.id }
   end
 
-  def add_contributor(user)
-    Contributor.create(:user_id => user.id, :hack_id => self.id)
+  def add_contribution(user)
+    Contribution.create(:user_id => user.id, :hack_id => self.id)
   end
 
-  def remove_contributor(user)
-    self.contributors.detect { |contributor| c.user_id == user.id }.destroy
+  def remove_contribution(user)
+    self.contributions.detect { |contribution| c.user_id == user.id }.destroy
   end
 
 end

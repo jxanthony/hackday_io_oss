@@ -6,19 +6,15 @@ Hackday::Application.routes.draw do
   match 'hacks/:id/downvote' => 'hacks#downvote', :as => 'downvote'
   match 'hacks/:id/upvote' => 'hacks#upvote', :as => 'upvote'
 
+  match 'hacks/:id/add_contribution' => 'hacks#add_contribution', :as => 'ihelped'
+  match 'hacks/:id/remove_contribution' => 'hacks#remove_contribution', :as => 'ilied'
+
 
   match 'auth/:provider/callback', to: 'sessions#create'
   match 'auth/failure', to: redirect('/')
   match 'signout', to: 'sessions#destroy', as: 'signout'
 
   resources :comments
-
-
-  # TODO: need routes for..
-  # create comment
-  # add me as a contributor / remove me as a contributor
-  # vote
-
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

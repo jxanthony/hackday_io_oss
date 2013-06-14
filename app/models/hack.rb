@@ -42,7 +42,7 @@ class Hack < ActiveRecord::Base
   end
 
   def has_contribution?(user)
-    self.contributions.detect { |contribution| c.user_id == user.id }
+    self.contributions.detect { |contribution| contribution.user_id == user.id }
   end
 
   def add_contribution(user)
@@ -51,7 +51,7 @@ class Hack < ActiveRecord::Base
   end
 
   def remove_contribution(user)
-    self.contributions.detect { |contribution| c.user_id == user.id }.destroy
+    self.contributions.detect { |contribution| contribution.user_id == user.id }.destroy
     Activity.create(:user_id => user.id, :hack_id => self.id, :action => 'remove_contribution')
   end
 

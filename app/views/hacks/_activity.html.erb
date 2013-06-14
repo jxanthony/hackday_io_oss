@@ -54,6 +54,12 @@
           case 'comment':
             message = '<b>' + $user.attr('name') + '</b> commented on <i>' + $hack.attr('title') + '</i>';
             break;
+          case 'add_contribution':
+            message = '<b>' + $user.attr('name') + '</b> was a contributor on <i>' + $hack.attr('title') + '</i>';
+            break;
+          case 'remove_contribution':
+            message = '<b>' + $user.attr('name') + '</b> was no longer a contributor on <i>' + $hack.attr('title') + '</i>';
+            break;
         }
         return '<li class="activity" id="activity ' + $activity.attr('id') + '">' +
                '<img src="https://graph.facebook.com/' + $user.attr('uid') + '/picture" class="img-circle" />' +

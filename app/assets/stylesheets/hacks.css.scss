@@ -1,3 +1,25 @@
 // Place all the styles related to the hacks controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.comment 
+{
+	display: block;
+	img 
+	{ 
+		float: left; 
+		padding-right: 10px;
+		margin-bottom: 50px;
+	}
+}
+
+#new_comment_form 
+{
+	margin-top: 30px;
+	textarea 
+	{ 
+		width: 400px; 
+		height: 100px;
+	}
+}

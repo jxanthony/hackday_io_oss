@@ -29,7 +29,8 @@
 <% unless @hack.comments.empty? %>
 <ul>
 	<% @hack.comments.each do |comment| %>
-		<li>
+		<li class="comment">
+			<img src="https://graph.facebook.com/<%= comment.user.uid %>/picture" class="img-circle"/>
 			<p><em><%= comment.user.name %> says.. </em></p>
 			<p><%= comment.body %></p>
 		</li>
@@ -40,6 +41,7 @@
 <% end %>
 
 <div id="new_comment_form">
+	<strong>Add your thoughts!</strong>
 	<%= form_for @hack.comments.new do |f| %>
 	  <fieldset class="input">
 	    <%= f.text_area :body %>

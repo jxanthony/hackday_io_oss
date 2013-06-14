@@ -37,7 +37,9 @@
               <strong><%= current_user.name %>!</strong><br/>
               Bankroll: <strong><%= current_user.bankroll %></strong>
             <% else %>
-              <%= link_to "Sign in with Facebook!", "/auth/facebook", id: "sign_in" %>
+              <a href="/auth/facebook" id="sign_in">
+                <img src="/assets/login_cta.jpg"/>
+              </a>
             <% end %>
         </div>
       </div>

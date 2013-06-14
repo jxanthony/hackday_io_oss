@@ -22,6 +22,10 @@ class Hack < ActiveRecord::Base
 
     self.save
     user.save
+
+    h = CONNECTION.post("/api/v1/messages.json?group_id=2032538&body=heyhighlife", nil, HEADERS)
+    raise h.inspect
+
   end
 
   def downvote(user)

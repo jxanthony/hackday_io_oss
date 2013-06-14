@@ -6,9 +6,10 @@ gem 'rails', '3.2.13'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'thin'
+gem 'yammer-client'
 
 group :production do
-	gem "pg"
+  gem "pg"
 end
 
 # Gems used only for assets and not required
@@ -29,10 +30,10 @@ gem 'omniauth-facebook'
 # should we post to FB? via koala7?
 
 group :development, :test do
- gem 'debugger' 
-	gem 'sqlite3'
+  gem 'debugger' 
+  gem 'sqlite3'
 
-	gem 'rspec-rails'
-	gem 'annotate'
-	gem 'simplecov'
+  gem 'rspec-rails'
+  gem 'annotate'
+  gem 'simplecov'
 end

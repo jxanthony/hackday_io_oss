@@ -46,10 +46,10 @@
         var message = '';
         switch($activity.attr('action')) {
           case 'upvote':
-            message = '<b>' + $user.attr('name') + '</b> upvoted <i>' + $hack.attr('title') + '</i>';
+            message = '<b>' + $user.attr('name') + '</b> voted up <i>' + $hack.attr('title') + '</i>';
             break;
           case 'downvote':
-            message = '<b>' + $user.attr('name') + '</b> downvoted <i>' + $hack.attr('title') + '</i>';
+            message = '<b>' + $user.attr('name') + '</b> voted down <i>' + $hack.attr('title') + '</i>';
             break;
           case 'comment':
             message = '<b>' + $user.attr('name') + '</b> commented on <i>' + $hack.attr('title') + '</i>';

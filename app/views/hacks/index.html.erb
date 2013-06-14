@@ -1,11 +1,14 @@
-<ul id="hacks_display">
-  <% @hacks.each do |hack| %>
-  <li class="hack">
-    <a href="/votes/up"><i class="icon-chevron-up"></i></a>
-    <%= hack.votes %>
-    <a href="/votes/down"><i class="icon-chevron-down"></i></a>
-    <h2><%= link_to hack.title, hack %></h2>
+<h2>Top Hacks</h2>
+
+<% @hacks.each do |hack| %>
+  <div class="hack-voting">
+    <%= link_to image_tag('arrow-up.png'), upvote_path(hack) %>
+	<span class="votes"><%= hack.votes %></span>
+	<%= link_to image_tag('arrow-down.png'), downvote_path(hack) %>
+  </div>
+
+  <div class="hack-details">
+    <h3><%= link_to hack.title, hack %></h3>
     <p><%= truncate(hack.description, :length => 140) %></p>
-  </li> 
-  <% end %>
-</ul>
+  </div>
+<% end %>

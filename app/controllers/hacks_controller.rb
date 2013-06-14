@@ -12,7 +12,7 @@ class HacksController < ApplicationController
 
   def upvote
     unless current_user
-      flash[:error] = "sign in before you can vote you dumbass"
+      flash[:error] = "You have to sign in before you can vote you dumbass."
       return redirect_to hack_path(@hack)
     end
 
@@ -27,7 +27,7 @@ class HacksController < ApplicationController
 
   def downvote
     unless current_user
-      flash[:error] = "sign in before you can vote you dumbass"
+      flash[:error] = "You have to sign in before you can vote you dumbass!"
       return redirect_to hack_path(@hack)
     end
 
@@ -35,22 +35,22 @@ class HacksController < ApplicationController
       flash[:error]   = "no more votes left to give!"
     else
       @hack.downvote(current_user)
-      flash[:message] = "you are a terrible person"
+      flash[:message] = "You just voted down someone's hard work. You are a terrible person!"
     end
     redirect_to :back
   end
 
   def add_contribution
     unless current_user
-      flash[:error] = "sign in before you can claim a hack you dumbass"
+      flash[:error] = "You have to sign in before you can claim a hack you dumbass"
       return redirect_to hack_path(@hack)
     end
 
     if @hack.has_contribution?(current_user)
-      flash[:error] = "you're already a contributor!"
+      flash[:error] = "You're already a contributor!"
     else
       @hack.add_contribution(current_user)
-      flash[:message] = "we recognize you for your efforts, thank you"
+      flash[:message] = "We recognize you for your efforts, thank you for your service."
     end
     redirect_to hack_path(@hack)
   end

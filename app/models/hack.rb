@@ -24,7 +24,7 @@ class Hack < ActiveRecord::Base
     self.save
     user.save
 
-    YAMMER.create_message("#{user.name} has voted for #{self.title}", :group_id => 2032538)
+   # YAMMER.create_message("#{user.name} has voted for #{self.title}", :group_id => 2032538)
 
     Activity.create(:user_id => user.id, :hack_id => self.id, :action => 'upvote')
   end
@@ -36,7 +36,7 @@ class Hack < ActiveRecord::Base
     self.save
     user.save
 
-    YAMMER.create_message("#{user.name} has DOWNVOTED for #{self.title}", :group_id => 2032538)
+   # YAMMER.create_message("#{user.name} has DOWNVOTED for #{self.title}", :group_id => 2032538)
 
     Activity.create(:user_id => user.id, :hack_id => self.id, :action => 'downvote')
   end

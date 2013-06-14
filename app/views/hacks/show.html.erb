@@ -4,7 +4,7 @@
 <%= link_to 'downvote', downvote_path(@hack) %>
 
 <h2><%= @hack.title %></h2>
-<p><%= truncate(@hack.description, :length => 140) %></p>
+<p><%= @hack.description %></p>
 
 <% unless @hack.url.blank? %>
 <p><a href="<%= hack.url %>">Learn more here!</a></p>
@@ -12,15 +12,17 @@
 
 <% unless @hack.contributions.empty? %>
 <p>
-	<strong>Contributors:</strong>
+	<strong>Contributors</strong><br/>
 	<% @hack.contributions.each do |contribution| %>
     	<img src="https://graph.facebook.com/<%= contribution.user.uid %>/picture" class="img-circle" />
 	<% end %>
+	<% unless @hack.contributions.detect {|c| c.user_id == curent_user.id} %>
+		<%= button_to "I helped!", ihelped_path(@hack) %>
+	<% end %>
 </p>
 <% else %>
-	<p>No one has claimed this yet!</p>
+	<p>No one has claimed this hack yet!</p>
 <% end %>
-<%= link_to "I helped!", ihelped_path(@hack) %>
 
 
 <h3>Comments</h3>
@@ -40,10 +42,10 @@
 <div id="new_comment_form">
 	<%= form_for @hack.comments.new do |f| %>
 	  <fieldset class="input">
-	    <%= f.text_field :body %>
+	    <%= f.text_area :body %>
 	    <%= hidden_field_tag 'hack_id', @hack.id %>
 	  </fieldset>
 
-	    <%= f.submit "Post", :class => 'btn' %>
+	    <%= f.submit "Make my voice heard!", :class => 'btn btn-success' %>
 	<% end %>
 </div>

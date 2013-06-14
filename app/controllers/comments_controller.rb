@@ -12,10 +12,10 @@ class CommentsController < ApplicationController
 
   def find_hack_and_user
     @hack = Hack.find_by_id params[:hack_id]
-    @user = User.find_by_id params[:user_id]
+    @user = current_user
     unless @hack and @user
       flash[:error] = "no hack found or no user found!"
-      redirect_to home_path
+      redirect_to hack_path(@hack)
     end
   end
 

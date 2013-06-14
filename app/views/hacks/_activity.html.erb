@@ -46,17 +46,18 @@
         var message = '';
         switch($activity.attr('action')) {
           case 'upvote':
-            message = $user.attr('name') + ' upvoted ' + $hack.attr('title') + '.';
+            message = $user.attr('name') + ' upvoted ' + $hack.attr('title');
             break;
           case 'downvote':
-            message = $user.attr('name') + ' downvoted ' + $hack.attr('title') + '.';
+            message = $user.attr('name') + ' downvoted ' + $hack.attr('title');
             break;
           case 'comment':
-            message = $user.attr('name') + ' commented on ' + $hack.attr('title') + '.';
+            message = $user.attr('name') + ' commented on ' + $hack.attr('title');
             break;
         }
         return '<li class="activity" id="activity ' + $activity.attr('id') + '">' +
-               '<p><img src="https://graph.facebook.com/' + $user.attr('uid') + '/picture" class="image-circle" />' + message + '<p>' +
+               '<img src="https://graph.facebook.com/' + $user.attr('uid') + '/picture" class="img-circle" />' +
+               message + 
                '</li>';
       }
   };

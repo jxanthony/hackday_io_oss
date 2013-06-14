@@ -14,3 +14,14 @@
 
 ul { list-style-type: none; margin: 0; padding: 0; }
 #nav-hacks .inline-list { display: inline; }
+
+.activity
+{
+	margin-top: 15px;
+	img { display: block; float: left; padding-right: 10px; }
+}
+
+.main 
+{
+	margin-top: -75px;
+}

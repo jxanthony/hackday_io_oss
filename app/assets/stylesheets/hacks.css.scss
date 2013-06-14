@@ -4,7 +4,9 @@
 
 
 .comment 
-{
+{	
+	clear: both;
+	margin-top: 15px;
 	display: block;
 	img 
 	{ 
@@ -17,6 +19,7 @@
 #new_comment_form 
 {
 	margin-top: 30px;
+	clear: both;
 	textarea 
 	{ 
 		width: 400px; 

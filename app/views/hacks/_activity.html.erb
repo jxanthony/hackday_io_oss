@@ -63,7 +63,7 @@
         }
         return '<li class="activity" id="activity ' + $activity.attr('id') + '">' +
                '<img src="https://graph.facebook.com/' + $user.attr('uid') + '/picture" class="img-circle" />' +
-               message + 
+               '<div class="activity-body">' + message + '</div>'
                '</li>';
       }
   };

@@ -21,7 +21,11 @@ ul { list-style-type: none; margin: 0; padding: 0; }
 	img { display: block; float: left; padding-right: 10px; }
 }
 
-.main 
+#user-points { float: left; }
+#user-points .bankroll { font-size: 5em; line-height: 1; }
+
+#user-profile
 {
-	margin-top: -60px;
+	float: left;
+	span { text-align: center; }
 }

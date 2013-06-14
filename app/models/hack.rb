@@ -15,6 +15,7 @@ class Hack < ActiveRecord::Base
 
   has_many :comments
   has_many :contributions
+  has_many :activities
 
   def upvote(user)
     self.votes += 1
@@ -22,6 +23,8 @@ class Hack < ActiveRecord::Base
 
     self.save
     user.save
+
+    Activity.create(:user_id => user.id, :hack_id => self.id, :action => 'upvote')
   end
 
   def downvote(user)
@@ -30,6 +33,8 @@ class Hack < ActiveRecord::Base
 
     self.save
     user.save
+
+    Activity.create(:user_id => user.id, :hack_id => self.id, :action => 'downvote')
   end
 
   def has_contribution?(user)

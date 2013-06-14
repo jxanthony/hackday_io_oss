@@ -4,6 +4,7 @@ class CommentsController < ApplicationController
   
   def create
     @hack.comments.create(:user_id => @user.id, :body => params[:comment][:body])
+    Activity.create(:user_id => @user.id, :hack_id => @hack.id, :action => 'comment')
     redirect_to hack_path(@hack)
   end
 

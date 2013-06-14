@@ -4,6 +4,7 @@ class HacksController < ApplicationController
 
   def index
     @hacks = Hack.order("votes DESC")
+    @activities = Activity.order("created_at DESC").limit(20)
   end
 
   def show

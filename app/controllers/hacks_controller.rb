@@ -3,7 +3,7 @@ class HacksController < ApplicationController
   before_filter :get_hack, :only => [:upvote, :downvote, :show, :add_contribution]
 
   def index
-    @hacks = Hack.order("votes DESC")
+    @hacks = Hack.order("votes DESC").paginate(:page => params[:page] || 1, :per_page => 10)
     @activities = Activity.order("created_at DESC").limit(20)
   end
 

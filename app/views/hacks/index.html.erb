@@ -12,3 +12,7 @@
     <p><%= truncate(hack.description, :length => 140) %></p>
   </div>
 <% end %>
+
+<div class="pagination">
+  <%= will_paginate @hacks %>
+</div>

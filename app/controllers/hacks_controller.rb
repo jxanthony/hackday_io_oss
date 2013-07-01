@@ -36,6 +36,9 @@ class HacksController < ApplicationController
 
     if current_user.bankroll <= 0
       flash[:error] = "no more votes left to give!"
+    elsif @hack.contributions.detect { |c| c.user_id == current_user.id }
+      flash[:error] = "Trying to upvote our own hack are we? Sorry can't do!"
+      return redirect_to :back
     else
       @hack.upvote(current_user)
       flash[:message] = "you have cast your vote!"

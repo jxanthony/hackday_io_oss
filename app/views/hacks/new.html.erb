@@ -1,9 +1,13 @@
 <div class="new_hack_form">
-  <strong>Add Your Hack!</strong>
     <%= form_for Hack.new do |f| %>
-      Name: <%= f.text_field :title %> <br />
-      Description: <%= f.text_area :description %> <br />
-      How many hackers do you want/need? <%= number_field_tag 'requested_hackers', 1, in: 1...15 %> <br />
-      <%= f.submit %>
+      <fieldset class="input">
+        <p><strong>Name:</strong></p>
+        <%= f.text_field :title, style: "width:350px;" %>
+        <p><strong>Description:</strong></p>
+        <%= f.text_area :description, style: "width:350px;" %>
+        <p><strong>How Many hackers do you want/need?</strong></p>
+        <%= number_field_tag 'requested_hackers', 1, in: 1...16, style: "width:35px;" %> <br />
+      </fieldset>
+      <%= f.submit "Submit!", :class => "btn btn-success" %>
     <% end %>
 </div>

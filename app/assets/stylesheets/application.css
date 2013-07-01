@@ -33,3 +33,23 @@ ul { list-style-type: none; margin: 0; padding: 0; }
 	float: left;
 	span { text-align: center; }
 }
+
+.unfulfilled_hacker_slot
+{
+  -moz-border-radius: 45px/45px;
+  -webkit-border-radius: 45px 45px;
+  border-radius: 45px/45px;;
+  border:solid 2px #000; 
+  width:45px;
+  height:45px;
+  text-align:center;
+  line-height:45px;
+  font-size:30px;
+  font-weight:bold;
+  display:inline-block;
+}
+
+.all_hackers
+{
+  width:500px;
+}

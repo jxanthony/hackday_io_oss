@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130613234736) do
+ActiveRecord::Schema.define(:version => 20130701204132) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -39,10 +39,11 @@ ActiveRecord::Schema.define(:version => 20130613234736) do
   create_table "hacks", :force => true do |t|
     t.string   "title"
     t.string   "description"
-    t.integer  "votes",       :default => 0
+    t.integer  "votes",             :default => 0
     t.string   "url"
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+    t.integer  "requested_hackers"
   end
 
   create_table "users", :force => true do |t|

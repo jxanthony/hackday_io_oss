@@ -16,12 +16,24 @@
 
 	<strong>Contributors</strong><br/>
 
-	<% unless @hack.contributions.empty? %>
-		<% @hack.contributions.each do |contribution| %>
-	    	<img src="https://graph.facebook.com/<%= contribution.user.uid %>/picture" class="img-circle" />
-		<% end %>
-	<% else %>
-		<span><em>No one has claimed this hack yet!</em></span>
+	<% @hack.contributions.each do |contribution| %>
+	    <img src="https://graph.facebook.com/<%= contribution.user.uid %>/picture" class="img-circle" />
+	<% end %>
+
+  <% unless @hack.contributions.size >= @hack.requested_hackers %>
+  <p>
+    <% (@hack.requested_hackers - @hack.contributions.size).times do |i| %>
+	    <div class="unfulfilled_hacker_slot">
+	    	<span>?</span>
+	    </div>
+	  <% end %>
+	</p>
+  <% end %>
+
+  <% if @hack.contributions.empty? %>
+		<span><em>No one has claimed this hack yet! This hack needs <%= @hack.requested_hackers %> more hackers!</em></span>
+	<% elsif @hack.requested_hackers > @hack.contributions.size %>
+	  <span><em>This hack needs <%= @hack.requested_hackers - @hack.contributions.size %> more hackers!</em></span>
 	<% end %>
 	<% unless @hack.contributions.detect {|c| c.user_id == current_user.id} %>
 		<%= link_to "I helped!", ihelped_path(@hack), :class=>'btn btn-small btn-success' %>

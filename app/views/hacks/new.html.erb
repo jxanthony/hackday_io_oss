@@ -3,6 +3,7 @@
     <%= form_for Hack.new do |f| %>
       Name: <%= f.text_field :title %> <br />
       Description: <%= f.text_area :description %> <br />
+      How many hackers do you want/need? <%= number_field_tag 'requested_hackers', 1, in: 1...15 %> <br />
       <%= f.submit %>
     <% end %>
 </div>

@@ -1,5 +1,8 @@
 Hackday::Application.routes.draw do
 
+  resources :admin_comments
+
+
   get "hacks/new"
 
   get "hacks/create"

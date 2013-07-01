@@ -49,13 +49,23 @@
       </div>
 
       <div class="row-fluid">
-        <div class="span7 main">
+        <% if current_user.admin? %>
+          <div class="span4 main">
+        <% else %>
+          <div class="span7 main">
+        <% end %>
           <%= yield %>
         </div>
         <div class="span4">
           <h3>Recent Activity</h3>
           <%= render "hacks/activity" %>
         </div>
+        <% if current_user.admin? %>
+          <div class="span4">
+            <h3>Judges' Corner</h3>
+            <%= render "layouts/admin" %>
+          </div>
+        <% end %>
       </div>    
 
     </div><!-- end of container -->

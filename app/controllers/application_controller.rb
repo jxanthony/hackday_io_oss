@@ -12,6 +12,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def admin_comments
+    AdminComment.order("created_at DESC").paginate(:page => params[:page] || 1, :per_page => 8)
+  end
+
   helper_method :current_user
+  helper_method :admin_comments
 
 end

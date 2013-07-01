@@ -1,0 +1,26 @@
+<% if admin_comments.any? %>
+  <ul>
+    <% admin_comments.each do |comment| %>
+      <li class="comment">
+        <img src="https://graph.facebook.com/<%= comment.user.uid %>/picture" class="img-circle"/>
+        <p><em><%= comment.user.name %> says.. </em></p>
+        <p><%= comment.body %></p>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No comments yet.</p>
+<% end %>
+
+<%= will_paginate admin_comments %>
+
+<div id="new_comment_form">
+  <strong>How well are these hacks doing?</strong>
+  <%= form_for AdminComment.new do |f| %>
+    <fieldset class="input">
+      <%= f.text_area :body %>
+    </fieldset>
+
+      <%= f.submit "Comment", :class => 'btn btn-success' %>
+  <% end %>
+</div>

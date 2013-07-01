@@ -1,5 +1,9 @@
 Hackday::Application.routes.draw do
 
+  get "hacks/new"
+
+  get "hacks/create"
+
   root :to => 'hacks#index'
 
   resources :hacks

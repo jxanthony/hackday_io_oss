@@ -2,6 +2,24 @@ class HacksController < ApplicationController
 
   before_filter :get_hack, :only => [:upvote, :downvote, :show, :add_contribution]
 
+  def new
+  end
+
+  def create
+    hack = Hack.create(params[:hack])
+    if hack.errors.any?
+      error_message = ""
+      error_message += "Please include a title. " if hack.errors.messages[:title]
+      error_message += "Please include a description." if hack.errors.messages[:description]
+      flash[:error] = error_message
+      redirect_to new_hack_path
+    else
+      flash[:message] = "#{hack.title} has been created and added to the list."
+      Activity.create(:user_id => current_user.id, :hack_id => hack.id, :action => 'create')
+      return redirect_to root_path
+    end
+  end
+
   def index
     @hacks = Hack.order("votes DESC").paginate(:page => params[:page] || 1, :per_page => 10)
     @activities = Activity.order("created_at DESC").limit(20)

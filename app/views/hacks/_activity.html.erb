@@ -60,6 +60,9 @@
           case 'remove_contribution':
             message = '<b>' + $user.attr('name') + '</b> was no longer a contributor on <i><a href="/hacks/' + $hack.attr('id') + '">' + $hack.attr('title') + '<a></i>';
             break;
+          case 'create':
+            message = '<b>' + $user.attr('name') + '</b> created an entry for <i><a href="/hacks/' + $hack.attr('id') + '">' + $hack.attr('title') + '<a></i>';
+            break;
         }
         return '<li class="activity" id="activity ' + $activity.attr('id') + '">' +
                '<img src="https://graph.facebook.com/' + $user.attr('uid') + '/picture" class="img-circle" />' +

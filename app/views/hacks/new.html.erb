@@ -1,0 +1,8 @@
+<div class="new_hack_form">
+  <strong>Add Your Hack!</strong>
+    <%= form_for Hack.new do |f| %>
+      Name: <%= f.text_field :title %> <br />
+      Description: <%= f.text_area :description %> <br />
+      <%= f.submit %>
+    <% end %>
+</div>

@@ -17,6 +17,8 @@ class Hack < ActiveRecord::Base
   has_many :contributions
   has_many :activities
 
+  validates_presence_of :title, :description
+
   def upvote(user)
     self.votes += 1
     user.bankroll -= 1

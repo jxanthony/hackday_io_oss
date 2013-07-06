@@ -97,10 +97,15 @@ class HacksController < ApplicationController
   end
 
   def move_up_in_queue
+    unless @hack.contributions.detect {|c| c.user.id == current_user.id}
+      flash[:error] = "What are you doing? That's not your hack!"
+      return redirect_to :back
+    end
     unless @hack.presentation_index == 1
       swap_target = Hack.where(:presentation_index => @hack.presentation_index - 1).first
       swap_target.update_attribute(:presentation_index, @hack.presentation_index) if swap_target
       @hack.update_attribute(:presentation_index, @hack.presentation_index - 1)
+      Activity.create(:user_id => current_user.id, :hack_id => @hack.id, :action => 'move_up_in_queue')
       flash[:message] = "Your hack has been moved up in the presentation queue."
     else
       flash[:error] = "Your hack is already at the top of the queue."
@@ -109,10 +114,15 @@ class HacksController < ApplicationController
   end
 
   def move_down_in_queue
+    unless @hack.contributions.detect {|c| c.user.id == current_user.id}
+      flash[:error] = "What are you doing? That's not your hack!"
+      return redirect_to :back
+    end
     unless @hack.presentation_index + 1 > Hack.where("hacks.presentation_index IS NOT NULL").size
       swap_target = Hack.where(:presentation_index => @hack.presentation_index + 1).first
       swap_target.update_attribute(:presentation_index, @hack.presentation_index) if swap_target
       @hack.update_attribute(:presentation_index, @hack.presentation_index + 1)
+      Activity.create(:user_id => current_user.id, :hack_id => @hack.id, :action => 'move_down_in_queue')
       flash[:message] = "Your hack has been moved down in the presentation queue."
     else
       flash[:error] = "Your hack is already the last one in the queue."
@@ -123,12 +133,14 @@ class HacksController < ApplicationController
   def join_presentation
     new_index = Hack.where("hacks.presentation_index IS NOT NULL").size + 1
     @hack.update_attribute(:presentation_index, new_index)
+    Activity.create(:user_id => current_user.id, :hack_id => @hack.id, :action => 'join_presentation')
     flash[:message] = "Woohoo! Let's show the judges your hard work!"
     redirect_to hacks_path(:view => :presentation)
   end
 
   def leave_presentation
     @hack.update_attribute(:presentation_index, nil)
+    Activity.create(:user_id => current_user.id, :hack_id => @hack.id, :action => 'leave_presentation')
     reorder_presentation_queue
     flash[:message] = "You are no longer presenting your hack."
     redirect_to :back

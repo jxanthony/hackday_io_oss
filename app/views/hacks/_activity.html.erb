@@ -58,10 +58,22 @@
             message = '<b>' + $user.attr('name') + '</b> was a contributor on <i><a href="/hacks/' + $hack.attr('id') + '">' + $hack.attr('title') + '</a></i>';
             break;
           case 'remove_contribution':
-            message = '<b>' + $user.attr('name') + '</b> was no longer a contributor on <i><a href="/hacks/' + $hack.attr('id') + '">' + $hack.attr('title') + '<a></i>';
+            message = '<b>' + $user.attr('name') + '</b> was no longer a contributor on <i><a href="/hacks/' + $hack.attr('id') + '">' + $hack.attr('title') + '</a></i>';
             break;
           case 'create':
-            message = '<b>' + $user.attr('name') + '</b> created an entry for <i><a href="/hacks/' + $hack.attr('id') + '">' + $hack.attr('title') + '<a></i>';
+            message = '<b>' + $user.attr('name') + '</b> created an entry for <i><a href="/hacks/' + $hack.attr('id') + '">' + $hack.attr('title') + '</a></i>';
+            break;
+          case 'join_presentation':
+            message = '<b>' + $user.attr('name') + '</b> will be presenting <i><a href="/hacks/' + $hack.attr('id') + '">' + $hack.attr('title') + '</a></i>';
+            break;
+          case 'leave_presentation':
+            message = '<b>' + $user.attr('name') + '</b> is no longer presenting <i><a href="/hacks/' + $hack.attr('id') + '">' + $hack.attr('title') + '</a></i>';
+            break;
+          case 'move_up_in_queue':
+            message = '<b>' + $user.attr('name') + '</b> moved <i><a href="/hacks/' + $hack.attr('id') + '">' + $hack.attr('title') + '</a></i> up in the presentation queue';
+            break;
+          case 'move_down_in_queue':
+            message = '<b>' + $user.attr('name') + '</b> moved <i><a href="/hacks/' + $hack.attr('id') + '">' + $hack.attr('title') + '</a></i> down in the presentation queue';
             break;
         }
         return '<li class="activity" id="activity ' + $activity.attr('id') + '">' +

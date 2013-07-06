@@ -37,6 +37,12 @@
 	<% end %>
 	<% unless @hack.contributions.detect {|c| c.user_id == current_user.id} %>
 		<%= link_to "I helped!", ihelped_path(@hack), :class=>'btn btn-small btn-success' %>
+	<% else %>
+	  <% unless @hack.presentation_index %>
+		  <%= link_to "Present this hack!", join_presentation_hack_path(@hack), :class => "btn btn-small btn-primary" %>
+		<% else %>
+		  <%= link_to "Don't present this hack", leave_presentation_hack_path(@hack), :class => "btn btn-small btn-inverse" %>
+		<% end %>
 	<% end %>
 
 </div>

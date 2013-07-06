@@ -9,7 +9,14 @@ Hackday::Application.routes.draw do
 
   root :to => 'hacks#index'
 
-  resources :hacks
+  resources :hacks do
+    member do
+      match :move_up_in_queue, :via => [:get]
+      match :move_down_in_queue, :via => [:get]
+      match :join_presentation, :via => [:get]
+      match :leave_presentation, :via => [:get]
+    end
+  end
   match 'hacks/:id/downvote' => 'hacks#downvote', :as => 'downvote'
   match 'hacks/:id/upvote' => 'hacks#upvote', :as => 'upvote'
 

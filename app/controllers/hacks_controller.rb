@@ -1,6 +1,6 @@
 class HacksController < ApplicationController
 
-  before_filter :get_hack, :only => [:upvote, :downvote, :show, :add_contribution]
+  before_filter :get_hack, :only => [:upvote, :downvote, :show, :add_contribution, :move_up_in_queue, :move_down_in_queue, :join_presentation, :leave_presentation]
 
   def new
   end
@@ -22,7 +22,12 @@ class HacksController < ApplicationController
   end
 
   def index
-    @hacks = Hack.order("votes DESC").paginate(:page => params[:page] || 1, :per_page => 10)
+    @view = params[:view] || 'top'
+    if @view == 'top'
+      @hacks = Hack.order("votes DESC").paginate(:page => params[:page] || 1, :per_page => 10)
+    elsif @view == 'presentation'
+      @hacks = Hack.where("presentation_index IS NOT NULL").order("presentation_index ASC").paginate(:page => params[:page] || 1, :per_page => 10)
+    end
     @activities = Activity.order("created_at DESC").limit(20)
   end
 
@@ -87,10 +92,55 @@ class HacksController < ApplicationController
     redirect_to hack_path(@hack)
   end
 
+  def move_up_in_queue
+    unless @hack.presentation_index == 1
+      swap_target = Hack.where(:presentation_index => @hack.presentation_index - 1).first
+      swap_target.update_attribute(:presentation_index, @hack.presentation_index) if swap_target
+      @hack.update_attribute(:presentation_index, @hack.presentation_index - 1)
+      flash[:message] = "Your hack has been moved up in the presentation queue."
+    else
+      flash[:error] = "Your hack is already at the top of the queue."
+    end
+    redirect_to :back
+  end
+
+  def move_down_in_queue
+    unless @hack.presentation_index + 1 > Hack.where("hacks.presentation_index IS NOT NULL").size
+      swap_target = Hack.where(:presentation_index => @hack.presentation_index + 1).first
+      swap_target.update_attribute(:presentation_index, @hack.presentation_index) if swap_target
+      @hack.update_attribute(:presentation_index, @hack.presentation_index + 1)
+      flash[:message] = "Your hack has been moved down in the presentation queue."
+    else
+      flash[:error] = "Your hack is already the last one in the queue."
+    end
+    redirect_to :back
+  end
+
+  def join_presentation
+    new_index = Hack.where("hacks.presentation_index IS NOT NULL").size + 1
+    @hack.update_attribute(:presentation_index, new_index)
+    flash[:message] = "Woohoo! Let's show the judges your hard work!"
+    redirect_to hacks_path(:view => :presentation)
+  end
+
+  def leave_presentation
+    @hack.update_attribute(:presentation_index, nil)
+    reorder_presentation_queue
+    flash[:message] = "You are no longer presenting your hack."
+    redirect_to :back
+  end
+
   private
 
   def get_hack
     @hack = Hack.find(params[:id])
+  end
+
+  def reorder_presentation_queue
+    hacks = Hack.where("hacks.presentation_index IS NOT NULL").order("presentation_index ASC")
+    hacks.each_with_index do |hack, index|
+      hack.update_attribute(:presentation_index, index + 1)
+    end
   end
 
 end

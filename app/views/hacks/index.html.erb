@@ -1,18 +1,44 @@
-<h2>Top Hacks</h2>
+<span style="display:block;">
+  <% if @view == 'top' %>
+    <h2 style="display:inline;">Top Hacks | </h2>
+    <h2 style="display:inline;"><%= link_to "Presentation Queue", hacks_path(:view => :presentation) %></h2>
+  <% elsif @view == 'presentation' %>
+    <h2 style="display:inline;"><%= link_to "Top Hacks", hacks_path(:view => :top) %> | </h2>
+    <h2 style="display:inline;">Presentation Queue</h2>
+  <% end %>
+</span>
 
-<% @hacks.each do |hack| %>
-  <div class="hack-voting">
-    <%= link_to image_tag('arrow-up.png'), upvote_path(hack) %>
-	<span class="votes"><%= hack.votes %></span>
-	<%= link_to image_tag('arrow-down.png'), downvote_path(hack) %>
-  </div>
+<% if @hacks %>
+  <% @hacks.each_with_index do |hack, index| %>
+    <% if @view == 'top' %>
+      <div class="hack-voting">
+        <%= link_to image_tag('arrow-up.png'), upvote_path(hack) %>
+    	  <span class="votes"><%= hack.votes %></span>
+    	  <%= link_to image_tag('arrow-down.png'), downvote_path(hack) %>
+      </div>
 
-  <div class="hack-details">
-    <h3><%= link_to hack.title, hack %></h3>
-    <p><%= truncate(hack.description, :length => 140) %></p>
+      <div class="hack-details">
+        <h3><%= link_to hack.title, hack %></h3>
+        <p><%= truncate(hack.description, :length => 140) %></p>
+      </div>
+    <% elsif @view == 'presentation' %>
+      <div class="hack-voting">
+        <%= link_to image_tag('arrow-up.png'), move_up_in_queue_hack_path(hack) %>
+        <span class="votes"><%= hack.presentation_index %></span>
+        <%= link_to image_tag('arrow-down.png'), move_down_in_queue_hack_path(hack) %>
+      </div>
+
+      <div class="hack-details">
+        <h3><%= link_to hack.title, hack %></h3>
+        <p><%= truncate(hack.description, :length => 140) %></p>
+        <% if current_user.admin? && index == 0 %>
+          <p><%= link_to "This presentatino is done", leave_presentation_hack_path(hack), :class => "btn btn-small btn-primary" %></p>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+
+  <div class="pagination">
+    <%= will_paginate @hacks %>
   </div>
 <% end %>
-
-<div class="pagination">
-  <%= will_paginate @hacks %>
-</div>

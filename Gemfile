@@ -29,7 +29,7 @@ gem 'jquery-rails'
 
 gem 'omniauth'
 gem 'omniauth-facebook'
-gem 'omniauth-yammer', :git => 'git://github.com/le0pard/omniauth-yammer.git'
+gem 'omniauth-yammer'
 
 group :development, :test do
   gem 'debugger' 

@@ -24,6 +24,7 @@ Hackday::Application.routes.draw do
   match 'hacks/:id/remove_contribution' => 'hacks#remove_contribution', :as => 'ilied'
 
 
+  match 'welcome/index' => 'welcome#index', :as => 'welcome'
   match 'auth/:provider/callback', to: 'sessions#create'
   match 'auth/failure', to: redirect('/')
   match 'signout', to: 'sessions#destroy', as: 'signout'

@@ -17,7 +17,7 @@
 	<strong>Contributors</strong><br/>
 
 	<% @hack.contributions.each do |contribution| %>
-	    <img src="https://graph.facebook.com/<%= contribution.user.uid %>/picture" class="img-circle" />
+	    <img src="<%= contribution.user.mugshot_url %>" class="img-circle" />
 	<% end %>
 
   <% unless @hack.contributions.size >= @hack.requested_hackers %>
@@ -54,7 +54,7 @@
 <ul>
 	<% @hack.comments.each do |comment| %>
 		<li class="comment">
-			<img src="https://graph.facebook.com/<%= comment.user.uid %>/picture" class="img-circle"/>
+			<img src="<%= comment.user.mugshot_url %>" class="img-circle"/>
 			<p><em><%= comment.user.name %> says.. </em></p>
 			<p><%= comment.body %></p>
 		</li>

@@ -2,7 +2,7 @@
   <ul>
     <% admin_comments.each do |comment| %>
       <li class="comment">
-        <img src="https://graph.facebook.com/<%= comment.user.uid %>/picture" class="img-circle"/>
+        <img src="<%= comment.user.mugshot_url %>" class="img-circle"/>
         <p><em><%= comment.user.name %> says.. </em></p>
         <p><%= comment.body %></p>
       </li>

@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 
   def current_user
     if Rails.env.development?
-      @current_user = User.find_by_id(1)
+      @current_user = User.first
     else
       @current_user ||= User.find(session[:user_id]) if session[:user_id]
     end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130702003409) do
+ActiveRecord::Schema.define(:version => 20130706053636) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -62,8 +62,8 @@ ActiveRecord::Schema.define(:version => 20130702003409) do
     t.integer  "bankroll",         :default => 10
     t.datetime "created_at",                       :null => false
     t.datetime "updated_at",                       :null => false
-    t.string   "uid"
     t.boolean  "admin"
+    t.integer  "uid"
   end
 
 end

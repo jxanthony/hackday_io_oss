@@ -5,8 +5,7 @@ Hackday::Application.routes.draw do
 
   resources :hacks do
     member do
-      get :move_up_in_queue, :move_down_in_queue, :join_presentation,:leave_presentation
-      post :downvote, :upvote
+      get :move_up_in_queue, :move_down_in_queue, :join_presentation, :leave_presentation, :downvote, :upvote
       post :add_contribution, :as => 'ihelped'
       post :remove_contribution, :as => 'ilied'
     end

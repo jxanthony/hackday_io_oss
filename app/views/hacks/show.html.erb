@@ -1,5 +1,3 @@
-<a href="/votes/up"><i class="icon-chevron-up"></i></a>
-
 <h2><%= @hack.title %></h2>
 <div class="hack-voting">
 	<%= link_to image_tag('arrow-up.png'), upvote_hack_path(@hack) %>
@@ -36,7 +34,7 @@
 	  <span><em>This hack needs <%= @hack.requested_hackers - @hack.contributions.size %> more hackers!</em></span>
 	<% end %>
 	<% unless @hack.contributions.detect {|c| c.user_id == current_user.id} %>
-		<%= link_to "I helped!", ihelped_hack_path(@hack), :class=>'btn btn-small btn-success' %>
+    <%= link_to "I helped!", ihelped_hack_path(@hack), :'data-method' => :post, :class=>'btn btn-small btn-success' %>
 	<% else %>
 	  <% unless @hack.presentation_index %>
 		  <%= link_to "Present this hack!", join_presentation_hack_path(@hack), :class => "btn btn-small btn-primary" %>

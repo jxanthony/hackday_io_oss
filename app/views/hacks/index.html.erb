@@ -1,12 +1,12 @@
-<span style="display:block;">
+<ul class="nav nav-pills">
   <% if @view == 'top' %>
-    <h2 style="display:inline;">Top Hacks | </h2>
-    <h2 style="display:inline;"><%= link_to "Presentation Queue", hacks_path(:view => :presentation) %></h2>
+    <li class="active"><a href="#">Top Hacks</a></li>
+    <li><%= link_to "Presentation Queue", hacks_path(:view => :presentation) %></li>
   <% elsif @view == 'presentation' %>
-    <h2 style="display:inline;"><%= link_to "Top Hacks", hacks_path(:view => :top) %> | </h2>
-    <h2 style="display:inline;">Presentation Queue</h2>
+    <li><%= link_to "Top Hacks", hacks_path(:view => :top) %></li>
+    <li class="active"><a href="#">Presentation Queue</a></li>
   <% end %>
-</span>
+</ul>
 
 <% if @hacks %>
   <% @hacks.each_with_index do |hack, index| %>

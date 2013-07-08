@@ -18,7 +18,7 @@ ul { list-style-type: none; margin: 0; padding: 0; }
 .activity
 {
 	margin-top: 15px;
-	img { display: block; float: left; }
+	img { display: block; float: left; margin-right: 10px; }
 }
 .activity-body 
 {

@@ -2,7 +2,7 @@
   <ul>
     <% admin_comments.each do |comment| %>
       <li class="comment">
-        <img src="<%= comment.user.mugshot_url %>" class="img-circle"/>
+        <%= render :partial => 'mugshot', :locals => {:user => comment.user} %>
         <p><em><%= comment.user.name %> says.. </em></p>
         <p><%= comment.body %></p>
       </li>

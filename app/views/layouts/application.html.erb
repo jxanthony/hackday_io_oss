@@ -54,7 +54,9 @@
                   <span>Remaining points</span><br/>
                   <span class="bankroll"><%= current_user.bankroll %></span>
                 </div>
-                <%= render :partial => 'mugshot', :locals => {:user => current_user, :large => true, :placement => 'bottom'} %>
+                <div class="user-mugshot">
+                  <%= render :partial => 'mugshot', :locals => {:user => current_user, :large => true, :placement => 'bottom'} %>
+                </div>
               <% else %>
                 <a href="/auth/facebook" id="sign_in">
                   <img src="/assets/login_cta.jpg"/>

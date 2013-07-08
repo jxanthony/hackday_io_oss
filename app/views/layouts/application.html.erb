@@ -33,13 +33,18 @@
           <% else %>
           <div class="span7">
           <% end %>
-            <h1><%= link_to "Hack Day!", root_path %></h1>
+            <div class="yam-logo">
+              <%= image_tag('yammer-logo.png', :class => 'yam-logo-img') %>
+            </div>
+            <div class="yam-logo-text">
+              <h1><%= link_to "Hack Day!", root_path %></h1>
+            </div>
             <p class="lead">Democratizing hack day judging.</p>
           </div>
 
           <% if current_user %>
             <div class="span3">
-              <h3><%= link_to "Add Your Hack", new_hack_path, :class => "btn btn-primary" %></h3>
+              <h3 style="margin-top:18px;"><%= link_to "Add Your Hack", new_hack_path, :class => "btn btn-primary" %></h3>
             </div>
           <% end %>
 

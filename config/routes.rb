@@ -1,28 +1,16 @@
 Hackday::Application.routes.draw do
 
   resources :admin_comments
-
-
-  get "hacks/new"
-
-  get "hacks/create"
-
   root :to => 'hacks#index'
 
   resources :hacks do
     member do
-      match :move_up_in_queue, :via => [:get]
-      match :move_down_in_queue, :via => [:get]
-      match :join_presentation, :via => [:get]
-      match :leave_presentation, :via => [:get]
+      get :move_up_in_queue, :move_down_in_queue, :join_presentation,:leave_presentation
+      post :downvote, :upvote
+      post :add_contribution, :as => 'ihelped'
+      post :remove_contribution, :as => 'ilied'
     end
   end
-  match 'hacks/:id/downvote' => 'hacks#downvote', :as => 'downvote'
-  match 'hacks/:id/upvote' => 'hacks#upvote', :as => 'upvote'
-
-  match 'hacks/:id/add_contribution' => 'hacks#add_contribution', :as => 'ihelped'
-  match 'hacks/:id/remove_contribution' => 'hacks#remove_contribution', :as => 'ilied'
-
 
   match 'welcome/index' => 'welcome#index', :as => 'welcome'
   match 'auth/:provider/callback', to: 'sessions#create'

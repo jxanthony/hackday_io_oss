@@ -12,9 +12,9 @@
   <% @hacks.each_with_index do |hack, index| %>
     <% if @view == 'top' %>
       <div class="hack-voting">
-        <%= link_to image_tag('arrow-up.png'), upvote_path(hack) %>
+        <%= link_to image_tag('arrow-up.png'), upvote_hack_path(hack) %>
     	  <span class="votes"><%= hack.votes %></span>
-    	  <%= link_to image_tag('arrow-down.png'), downvote_path(hack) %>
+    	  <%= link_to image_tag('arrow-down.png'), downvote_hack_path(hack) %>
       </div>
 
       <div class="hack-details">

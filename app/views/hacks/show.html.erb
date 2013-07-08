@@ -31,16 +31,22 @@
   <% if @hack.contributions.empty? %>
 		<span><em>No one has claimed this hack yet! This hack needs <%= @hack.requested_hackers %> more hackers!</em></span>
 	<% elsif @hack.requested_hackers > @hack.contributions.size %>
+    <% if is_current_contributor %>
+      <div id='current-contributor'>
+        <em>You contributed to this hack! Nicely done</em>
+        <%= link_to "I lied...", ilied_hack_path(@hack), :'data-method' => :post, :class => 'btn btn-small btn-danger' %>
+      </div>
+    <% end %>
 	  <span><em>This hack needs <%= @hack.requested_hackers - @hack.contributions.size %> more hackers!</em></span>
 	<% end %>
-	<% unless @hack.contributions.detect {|c| c.user_id == current_user.id} %>
-    <%= link_to "I helped!", ihelped_hack_path(@hack), :'data-method' => :post, :class=>'btn btn-small btn-success' %>
-	<% else %>
+	<% if is_current_contributor %>
 	  <% unless @hack.presentation_index %>
 		  <%= link_to "Present this hack!", join_presentation_hack_path(@hack), :class => "btn btn-small btn-primary" %>
 		<% else %>
 		  <%= link_to "Don't present this hack", leave_presentation_hack_path(@hack), :class => "btn btn-small btn-inverse" %>
 		<% end %>
+  <% else %>
+    <%= link_to "I helped!", ihelped_hack_path(@hack), :'data-method' => :post, :class=>'btn btn-small btn-success' %>
 	<% end %>
 
 </div>

@@ -1,6 +1,6 @@
 class HacksController < ApplicationController
 
-  before_filter :get_hack, :only => [:upvote, :downvote, :show, :add_contribution, :move_up_in_queue, :move_down_in_queue, :join_presentation, :leave_presentation]
+  before_filter :get_hack, :only => [:upvote, :downvote, :show, :add_contribution, :remove_contribution, :move_up_in_queue, :move_down_in_queue, :join_presentation, :leave_presentation]
 
   def new
   end

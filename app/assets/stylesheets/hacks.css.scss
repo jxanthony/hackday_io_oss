@@ -11,7 +11,7 @@
 	img 
 	{ 
 		float: left; 
-		padding-right: 10px;
+		margin-right: 10px;
 		margin-bottom: 50px;
 	}
 }
@@ -42,4 +42,9 @@
 .hack-details
 {
 	margin-left: 60px;
+}
+
+#current-contributor
+{
+  margin-bottom: 10px;
 }

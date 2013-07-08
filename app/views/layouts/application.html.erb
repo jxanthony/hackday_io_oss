@@ -54,7 +54,9 @@
                   <span>Remaining points</span><br/>
                   <span class="bankroll"><%= current_user.bankroll %></span>
                 </div>
-                <img src="<%= current_user.mugshot_url ? current_user.mugshot_url.gsub("48x48", "110x110") : '' %>" class="img-circle" />
+                <div class="user-mugshot">
+                  <img src="<%= current_user.mugshot_url ? current_user.mugshot_url.gsub("48x48", "95x95") : '' %>" class="img-circle" />
+                </div>
               <% else %>
                 <a href="/auth/facebook" id="sign_in">
                   <img src="/assets/login_cta.jpg"/>

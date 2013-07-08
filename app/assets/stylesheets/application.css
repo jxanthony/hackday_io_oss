@@ -25,7 +25,7 @@ ul { list-style-type: none; margin: 0; padding: 0; }
 	height: 50px;
 }
 
-#user-points { float: left; }
+#user-points { float: left; padding-top:10px; }
 #user-points .bankroll { font-size: 5em; line-height: 1; }
 
 #user-profile
@@ -38,6 +38,11 @@ ul { list-style-type: none; margin: 0; padding: 0; }
 {
   margin-top:13px;
   margin-left:20px;
+}
+
+.user-mugshot
+{
+  padding-top:10px;
 }
 
 .unfulfilled_hacker_slot

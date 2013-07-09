@@ -33,6 +33,9 @@ class User < ActiveRecord::Base
       user.save!
     else
       user = user.first
+      user.name = auth.info.name unless user.name == auth.info.name
+      user.email = auth.info.email unless user.email == auth.info.email
+      user.mugshot_url = auth.info.image unless user.mugshot_url == auth.info.image
     end
     user
   end

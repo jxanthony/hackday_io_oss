@@ -140,7 +140,7 @@ class HacksController < ApplicationController
 
   def leave_presentation
     @hack.update_attribute(:presentation_index, nil)
-    Activity.create(:user_id => current_user.id, :hack_id => @hack.id, :action => 'leave_presentation')
+    Activity.create(:user_id => current_user.id, :hack_id => @hack.id, :action => 'leave_presentation') unless current_user.admin?
     reorder_presentation_queue
     flash[:message] = "You are no longer presenting your hack."
     redirect_to :back

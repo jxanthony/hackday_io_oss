@@ -54,9 +54,9 @@
 <div style="clear:both;"></div>
 
 <h3>Comments</h3>
-<% unless @hack.comments.empty? %>
+<% unless @hack_comments.empty? %>
 <ul>
-	<% @hack.comments.each do |comment| %>
+	<% @hack_comments.each do |comment| %>
 		<li class="comment">
       <%= render :partial => 'mugshot', :locals => {:user => comment.user} %>
 			<p><em><%= comment.user.name %> says.. </em></p>
@@ -64,6 +64,9 @@
 		</li>
 	<% end %>
 </ul>
+  <div class="pagination">
+    <%= will_paginate @hack_comments %>
+  </div>
 <% else %>
 <p>Sadly no one has commented yet!</p>
 <% end %>

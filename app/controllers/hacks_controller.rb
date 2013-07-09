@@ -36,6 +36,7 @@ class HacksController < ApplicationController
   end
 
   def show
+    @hack_comments = @hack.comments.paginate(:page => params[:page] || 1, :per_page => 10)
   end
 
   def upvote

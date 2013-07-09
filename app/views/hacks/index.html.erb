@@ -38,6 +38,14 @@
     <% end %>
   <% end %>
 
+  <% if @hacks.empty? %>
+    <% if @view == 'top' %>
+      <p>No hacks yet. Why not add one?</p>
+    <% elsif @view == 'presentation' %>
+      <p>There's nothing queued up right now.</p>
+    <% end %>
+  <% end %>
+
   <div class="pagination">
     <%= will_paginate @hacks %>
   </div>

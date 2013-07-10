@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130710180516) do
+ActiveRecord::Schema.define(:version => 20130710222659) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(:version => 20130710180516) do
     t.integer  "uid"
     t.string   "email"
     t.string   "mugshot_url"
+    t.boolean  "mc"
   end
 
 end

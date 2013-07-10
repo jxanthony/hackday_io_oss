@@ -156,7 +156,7 @@ class HacksController < ApplicationController
   end
 
   def verify_participation
-    unless @hack.contributions.detect {|c| c.user.id == current_user.id} || @hack.creator == current_user
+    unless current_user.admin? || current_user.mc? || (@hack.creator == current_user) || @hack.contributions.detect {|c| c.user.id == current_user.id}
       flash[:error] = "What are you doing? That's not your hack!"
       return redirect_to :back
     end

@@ -52,6 +52,14 @@ class Hack < ActiveRecord::Base
   def add_contribution(user)
     Contribution.create(:user_id => user.id, :hack_id => self.id)
     Activity.create(:user_id => user.id, :hack_id => self.id, :action => 'add_contribution')
+    past_acts = Activity.where(:hack_id => self.id, :action => 'upvote', :user_id => user.id)
+    if past_acts.any?
+      self.votes -= past_acts.size
+      self.save
+      user.bankroll += past_acts.size
+      user.save
+      past_acts.destroy_all
+    end
   end
 
   def remove_contribution(user)

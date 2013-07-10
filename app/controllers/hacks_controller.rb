@@ -138,7 +138,7 @@ class HacksController < ApplicationController
     @hack.update_attribute(:presentation_index, nil)
     Activity.create(:user_id => current_user.id, :hack_id => @hack.id, :action => 'leave_presentation') unless params[:no_activity]
     reorder_presentation_queue
-    flash[:message] = "You are no longer presenting your hack."
+    flash[:message] = "You are no longer presenting your hack." unless params[:no_activity]
     redirect_to :back
   end
 

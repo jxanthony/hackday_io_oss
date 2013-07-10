@@ -50,9 +50,17 @@
 		<% else %>
 		  <%= link_to "Don't present this hack", leave_presentation_hack_path(@hack), :class => "btn btn-small btn-inverse" %>
 		<% end %>
+  <% elsif is_creator %>
+    <%= link_to "I helped!", ihelped_hack_path(@hack), :'data-method' => :post, :class=>'btn btn-small btn-success' %>
+    <br/>
+    <% unless @hack.presentation_index %>
+      <%= link_to "Present this hack!", join_presentation_hack_path(@hack), :class => "btn btn-small btn-primary" %>
+    <% else %>
+      <%= link_to "Don't present this hack", leave_presentation_hack_path(@hack), :class => "btn btn-small btn-inverse" %>
+    <% end %>
   <% else %>
     <%= link_to "I helped!", ihelped_hack_path(@hack), :'data-method' => :post, :class=>'btn btn-small btn-success' %>
-	<% end %>
+  <% end %>
 
 </div>
 

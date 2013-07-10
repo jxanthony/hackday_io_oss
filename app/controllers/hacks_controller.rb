@@ -99,7 +99,7 @@ class HacksController < ApplicationController
   end
 
   def move_up_in_queue
-    unless @hack.contributions.detect {|c| c.user.id == current_user.id}
+    unless @hack.contributions.detect {|c| c.user.id == current_user.id} || @hack.creator == current_user
       flash[:error] = "What are you doing? That's not your hack!"
       return redirect_to :back
     end
@@ -116,7 +116,7 @@ class HacksController < ApplicationController
   end
 
   def move_down_in_queue
-    unless @hack.contributions.detect {|c| c.user.id == current_user.id}
+    unless @hack.contributions.detect {|c| c.user.id == current_user.id} || @hack.creator == current_user
       flash[:error] = "What are you doing? That's not your hack!"
       return redirect_to :back
     end

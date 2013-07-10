@@ -12,6 +12,11 @@
 	<p><a href="<%= hack.url %>">Learn more here!</a></p>
 	<% end %>
 
+	<strong>Submitter</strong><br/>
+	<%= render :partial => 'mugshot', :locals => {:user => @hack.creator} %>
+	<br/>
+	<p></p>
+
 	<strong>Contributors</strong><br/>
 
 	<% @hack.contributions.each do |contribution| %>

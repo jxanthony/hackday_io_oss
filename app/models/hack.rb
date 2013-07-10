@@ -17,6 +17,8 @@ class Hack < ActiveRecord::Base
   has_many :contributions
   has_many :activities
 
+  belongs_to :creator, :class_name => 'User', :foreign_key => "creator_id"
+
   validates_presence_of :title, :description
 
   def upvote(user)

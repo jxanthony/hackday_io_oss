@@ -8,6 +8,7 @@ class HacksController < ApplicationController
   def create
     hack = Hack.create(params[:hack])
     hack.update_attribute(:requested_hackers, params[:requested_hackers] || 1)
+    hack.update_attribute(:creator_id, current_user.id)
     if hack.errors.any?
       error_message = ""
       error_message += "Please include a title. " if hack.errors.messages[:title]

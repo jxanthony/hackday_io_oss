@@ -1,6 +1,8 @@
 class HacksController < ApplicationController
 
-  before_filter :get_hack, :only => [:upvote, :downvote, :show, :add_contribution, :remove_contribution, :move_up_in_queue, :move_down_in_queue, :join_presentation, :leave_presentation]
+  before_filter :get_hack, :only => [:upvote, :downvote, :show, :add_contribution, 
+    :remove_contribution, :move_up_in_queue, :move_down_in_queue, :join_presentation, :leave_presentation]
+  before_filter :verify_participation, :only => [:move_up_in_queue, :move_down_in_queue, :join_presentation, :leave_presentation]
 
   def new
   end
@@ -99,10 +101,6 @@ class HacksController < ApplicationController
   end
 
   def move_up_in_queue
-    unless @hack.contributions.detect {|c| c.user.id == current_user.id} || @hack.creator == current_user
-      flash[:error] = "What are you doing? That's not your hack!"
-      return redirect_to :back
-    end
     unless @hack.presentation_index == 1
       swap_target = Hack.where(:presentation_index => @hack.presentation_index - 1).first
       swap_target.update_attribute(:presentation_index, @hack.presentation_index) if swap_target
@@ -116,10 +114,6 @@ class HacksController < ApplicationController
   end
 
   def move_down_in_queue
-    unless @hack.contributions.detect {|c| c.user.id == current_user.id} || @hack.creator == current_user
-      flash[:error] = "What are you doing? That's not your hack!"
-      return redirect_to :back
-    end
     unless @hack.presentation_index + 1 > Hack.where("hacks.presentation_index IS NOT NULL").size
       swap_target = Hack.where(:presentation_index => @hack.presentation_index + 1).first
       swap_target.update_attribute(:presentation_index, @hack.presentation_index) if swap_target
@@ -158,6 +152,13 @@ class HacksController < ApplicationController
     hacks = Hack.where("hacks.presentation_index IS NOT NULL").order("presentation_index ASC")
     hacks.each_with_index do |hack, index|
       hack.update_attribute(:presentation_index, index + 1)
+    end
+  end
+
+  def verify_participation
+    unless @hack.contributions.detect {|c| c.user.id == current_user.id} || @hack.creator == current_user
+      flash[:error] = "What are you doing? That's not your hack!"
+      return redirect_to :back
     end
   end
 

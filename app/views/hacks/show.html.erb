@@ -54,7 +54,7 @@
     <%= link_to "I helped!", ihelped_hack_path(@hack), :'data-method' => :post, :class=>'btn btn-small btn-success' %>
     <br/>
     <% unless @hack.presentation_index %>
-      <%= link_to "Present this hack!", join_presentation_hack_path(@hack), :class => "btn btn-small btn-primary" %>
+      <%= link_to "This hack will be presented!", join_presentation_hack_path(@hack), :class => "btn btn-small btn-primary" %>
     <% else %>
       <%= link_to "Don't present this hack", leave_presentation_hack_path(@hack), :class => "btn btn-small btn-inverse" %>
     <% end %>

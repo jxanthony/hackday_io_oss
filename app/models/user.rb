@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
   has_many :activities
 
   def self.from_omniauth(auth)
+    return false unless auth.extra.raw_info.network_id == YAMMER_NETWORK_ID
     user = self.where(:provider => auth.provider, :uid => auth.uid)
     if user.empty?
       user = User.new

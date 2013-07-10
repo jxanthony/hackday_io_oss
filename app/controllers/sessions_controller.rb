@@ -1,8 +1,13 @@
 class SessionsController < ApplicationController
   def create
     user = User.from_omniauth(request.env['omniauth.auth'])
-    session[:user_id] = user.id
-    redirect_to root_url
+    if user
+      session[:user_id] = user.id
+      redirect_to root_url
+    else
+      flash[:error] = "Sorry it doesn't look like you have access."
+      redirect_to welcome_path
+    end
   end
 
   def destroy

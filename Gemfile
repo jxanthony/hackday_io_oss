@@ -8,6 +8,7 @@ gem 'rails', '3.2.13'
 gem 'thin'
 gem 'yammer-client'
 gem 'will_paginate'
+gem 'unicorn'
 
 group :production do
   gem "pg"

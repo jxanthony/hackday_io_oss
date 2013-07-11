@@ -12,7 +12,7 @@
   <p>No comments yet.</p>
 <% end %>
 
-<%= will_paginate admin_comments %>
+<%= will_paginate admin_comments, :param_name => 'admin_comments_page' %>
 
 <div id="new_comment_form">
   <strong>How are these hacks doing?</strong>

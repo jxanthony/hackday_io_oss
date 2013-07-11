@@ -78,7 +78,7 @@
 	<% end %>
 </ul>
   <div class="pagination">
-    <%= will_paginate @hack_comments %>
+    <%= will_paginate @hack_comments, :param_name => 'hack_comments_page' %>
   </div>
 <% else %>
 <p>Sadly no one has commented yet!</p>

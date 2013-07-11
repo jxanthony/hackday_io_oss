@@ -28,9 +28,9 @@ class HacksController < ApplicationController
     if current_user
       @view = params[:view] || 'top'
       if @view == 'top'
-        @hacks = Hack.order("votes DESC").paginate(:page => params[:page] || 1, :per_page => 10)
+        @hacks = Hack.order("votes DESC").paginate(:page => params[:hacks_page] || 1, :per_page => 10)
       elsif @view == 'presentation'
-        @hacks = Hack.where("presentation_index IS NOT NULL").order("presentation_index ASC").paginate(:page => params[:page] || 1, :per_page => 10)
+        @hacks = Hack.where("presentation_index IS NOT NULL").order("presentation_index ASC").paginate(:page => params[:hacks_page] || 1, :per_page => 10)
       end
       @activities = Activity.order("created_at DESC").limit(20)
     else
@@ -39,7 +39,7 @@ class HacksController < ApplicationController
   end
 
   def show
-    @hack_comments = @hack.comments.paginate(:page => params[:page] || 1, :per_page => 10)
+    @hack_comments = @hack.comments.paginate(:page => params[:hack_comments_page] || 1, :per_page => 10)
   end
 
   def upvote

@@ -20,6 +20,7 @@
         $.ajax({
           type: "GET"
         , url: "<%= activities_path %>"
+        , data: { cursor: cursor }
         , success: function(data) { self.success(data); }
         });
       }

@@ -29,7 +29,19 @@
       </div>
 
       <div class="hack-details">
-        <h3><%= link_to hack.title, hack %></h3>
+        <span>
+          <h3 class="presentation-queue-title"><%= link_to hack.title, hack %></h3>
+          <b>
+            by 
+            <% hack_submitter = hack.creator %>
+            <% hack.contributions.each_with_index do |contribution, i| %>
+              <% unless contribution.user == hack_submitter %>
+                <%= contribution.user.name %>, 
+              <% end %>
+            <% end %>
+            <%= hack_submitter.name %>
+          </b>
+        </span>
         <p><%= truncate(hack.description, :length => 140) %></p>
         <% if (current_user.mc? || current_user.admin?) && index == 0 %>
           <p><%= link_to "This presentatino is done", leave_presentation_hack_path(hack, :no_activity => true), :class => "btn btn-small btn-primary" %></p>

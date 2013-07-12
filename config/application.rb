@@ -9,7 +9,7 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
-YAMMER_NETWORK_ID = 107
+YAMMER_NETWORK_IDS = [107,62]
 
 module Hackday
   class Application < Rails::Application

@@ -1,8 +1,16 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  before_filter :login_required
+
 
   private
+
+  def login_required
+    unless current_user
+      redirect_to welcome_path
+    end
+  end
 
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]

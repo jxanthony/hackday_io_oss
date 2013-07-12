@@ -25,16 +25,11 @@ class HacksController < ApplicationController
   end
 
   def index
-    if current_user
-      @view = params[:view] || 'top'
-      if @view == 'top'
-        @hacks = Hack.order("votes DESC").paginate(:page => params[:hacks_page] || 1, :per_page => 10)
-      elsif @view == 'presentation'
-        @hacks = Hack.where("presentation_index IS NOT NULL").order("presentation_index ASC").paginate(:page => params[:hacks_page] || 1, :per_page => 10)
-      end
-      @activities = Activity.order("created_at DESC").limit(20)
-    else
-      return redirect_to welcome_path
+    @view = params[:view] || 'top'
+    if @view == 'top'
+      @hacks = Hack.order("votes DESC").paginate(:page => params[:hacks_page] || 1, :per_page => 10)
+    elsif @view == 'presentation'
+      @hacks = Hack.where("presentation_index IS NOT NULL").order("presentation_index ASC").paginate(:page => params[:hacks_page] || 1, :per_page => 10)
     end
   end
 

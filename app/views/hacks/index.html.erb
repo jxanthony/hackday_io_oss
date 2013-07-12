@@ -44,7 +44,7 @@
         </span>
         <p><%= truncate(hack.description, :length => 140) %></p>
         <% if (current_user.mc? || current_user.admin?) && index == 0 %>
-          <p><%= link_to "This presentatino is done", leave_presentation_hack_path(hack, :no_activity => true), :class => "btn btn-small btn-primary" %></p>
+          <p><%= link_to "This presentation is done", leave_presentation_hack_path(hack, :no_activity => true), :class => "btn btn-small btn-primary" %></p>
         <% end %>
       </div>
     <% end %>

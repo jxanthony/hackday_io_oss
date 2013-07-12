@@ -20,7 +20,7 @@
   <%= will_paginate @admin_comments, :param_name => 'hack_admin_comments_page' %>
 
   <div id="new_comment_form">
-    <strong>How are these hacks doing?</strong>
+    <strong>How is this hack doing?</strong>
     <%= form_for @admin_comments.new do |f| %>
       <fieldset class="input">
         <%= f.text_area :body %>

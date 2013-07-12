@@ -34,7 +34,7 @@
   <% end %>
 
   <% if @hack.contributions.empty? %>
-		<span><em>No one has claimed this hack yet! This hack needs <%= @hack.requested_hackers %> more hackers!</em></span>
+		<span><em>No one has claimed this hack yet! This hack needs <%= @hack.requested_hackers %> more <%= @hack.requested_hackers > 1 ? 'hackers' : 'hacker' %>!</em></span>
 	<% elsif @hack.requested_hackers > @hack.contributions.size %>
     <% if is_current_contributor %>
       <div id='current-contributor'>
@@ -42,7 +42,7 @@
         <%= link_to "I lied...", ilied_hack_path(@hack), :'data-method' => :post, :class => 'btn btn-small btn-danger' %>
       </div>
     <% end %>
-	  <span><em>This hack needs <%= @hack.requested_hackers - @hack.contributions.size %> more hackers!</em></span>
+	  <span><em>This hack needs <%= @hack.requested_hackers - @hack.contributions.size %> more <%= @hack.requested_hackers - @hack.contributions.size > 1 ? 'hackers' : 'hacker' %>!</em></span>
 	<% end %>
 	<% if is_current_contributor %>
 	  <% unless @hack.presentation_index %>

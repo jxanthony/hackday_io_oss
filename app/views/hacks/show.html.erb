@@ -74,6 +74,9 @@
       <%= render :partial => 'mugshot', :locals => {:user => comment.user} %>
 			<p><em><%= comment.user.name %> says.. </em></p>
 			<p><%= comment.body %></p>
+			<abbr class="timeago" title="<%= comment.created_at.getutc.iso8601 %>">
+  			<%= comment.created_at.to_s %>
+			</abbr>
 		</li>
 	<% end %>
 </ul>

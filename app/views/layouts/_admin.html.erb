@@ -9,6 +9,9 @@
         <% unless @hack_admin_comments %>
           <p>about: <%= link_to comment.hack.title, hack_path(comment.hack) %></p>
         <% end %>
+        <abbr class="timeago" title="<%= comment.created_at.getutc.iso8601 %>">
+          <%= comment.created_at.to_s %>
+        </abbr>
       </li>
     <% end %>
   </ul>

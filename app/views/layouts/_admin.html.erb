@@ -1,10 +1,14 @@
-<% if admin_comments.any? %>
+<% @admin_comments = @hack_admin_comments ? @hack_admin_comments : admin_comments %>
+<% if @admin_comments.any? %>
   <ul>
-    <% admin_comments.each do |comment| %>
+    <% @admin_comments.each do |comment| %>
       <li class="comment">
         <%= render :partial => 'mugshot', :locals => {:user => comment.user} %>
         <p><em><%= comment.user.name %> says.. </em></p>
         <p><%= comment.body %></p>
+        <% unless @hack_admin_comments %>
+          <p>about: <%= link_to comment.hack.title, hack_path(comment.hack) %></p>
+        <% end %>
       </li>
     <% end %>
   </ul>
@@ -12,15 +16,21 @@
   <p>No comments yet.</p>
 <% end %>
 
-<%= will_paginate admin_comments, :param_name => 'admin_comments_page' %>
+<% if @hack_admin_comments %>
+  <%= will_paginate @admin_comments, :param_name => 'hack_admin_comments_page' %>
 
-<div id="new_comment_form">
-  <strong>How are these hacks doing?</strong>
-  <%= form_for AdminComment.new do |f| %>
-    <fieldset class="input">
-      <%= f.text_area :body %>
-    </fieldset>
+  <div id="new_comment_form">
+    <strong>How are these hacks doing?</strong>
+    <%= form_for @admin_comments.new do |f| %>
+      <fieldset class="input">
+        <%= f.text_area :body %>
+        <%= hidden_field_tag 'hack_id', @hack.id %>
+        <%= hidden_field_tag 'admin_comment', true %>
+      </fieldset>
 
       <%= f.submit "Comment", :class => 'btn btn-success' %>
-  <% end %>
-</div>
+    <% end %>
+  </div>
+<% else %>
+  <%= will_paginate @admin_comments, :param_name => 'admin_comments_page' %>
+<% end %>

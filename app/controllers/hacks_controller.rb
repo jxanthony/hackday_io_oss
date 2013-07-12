@@ -39,7 +39,8 @@ class HacksController < ApplicationController
   end
 
   def show
-    @hack_comments = @hack.comments.paginate(:page => params[:hack_comments_page] || 1, :per_page => 10)
+    @hack_comments = @hack.comments.where(:admin_comment => nil).order('created_at DESC').paginate(:page => params[:hack_comments_page] || 1, :per_page => 10)
+    @hack_admin_comments = @hack.comments.where(:admin_comment => true).order('created_at DESC').paginate(:page => params[:hack_admin_comments_page] || 1, :per_page => 8)
   end
 
   def upvote
@@ -87,7 +88,7 @@ class HacksController < ApplicationController
       @hack.add_contribution(current_user)
       flash[:message] = "We recognize you for your efforts, thank you for your service."
     end
-    redirect_to hack_path(@hack)
+    redirect_to :back
   end
 
   def remove_contribution
@@ -97,7 +98,7 @@ class HacksController < ApplicationController
       @hack.remove_contribution(current_user)
       flash[:message] = "you are no longer a contributor :("
     end
-    redirect_to hack_path(@hack)
+    redirect_to :back
   end
 
   def move_up_in_queue

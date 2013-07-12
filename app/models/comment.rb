@@ -11,8 +11,10 @@
 #
 
 class Comment < ActiveRecord::Base
-  attr_accessible :body, :hack_id, :user_id
+  attr_accessible :body, :hack_id, :user_id, :admin_comment
 
   belongs_to :hack
   belongs_to :user
+
+  validates_presence_of :body, :hack_id, :user_id
 end

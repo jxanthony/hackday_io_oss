@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130710222659) do
+ActiveRecord::Schema.define(:version => 20130711233358) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -32,8 +32,9 @@ ActiveRecord::Schema.define(:version => 20130710222659) do
     t.integer  "hack_id"
     t.text     "body"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.boolean  "admin_comment"
   end
 
   create_table "contributions", :force => true do |t|

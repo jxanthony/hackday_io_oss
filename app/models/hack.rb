@@ -33,14 +33,13 @@ class Hack < ActiveRecord::Base
     #user.bankroll -= 1
 
     self.upvoted_by << user.id unless self.upvoted_by.include? user.id
-    self.downvoted_by.delete(user.id) if self.downvoted_by.include? user.id
 
     self.save
     #user.save
 
    # YAMMER.create_message("#{user.name} has voted for #{self.title}", :group_id => 2032538)
 
-    Activity.create(:user_id => user.id, :hack_id => self.id, :action => 'upvote')
+    #Activity.create(:user_id => user.id, :hack_id => self.id, :action => 'upvote')
   end
 
   def downvote(user)
@@ -48,14 +47,13 @@ class Hack < ActiveRecord::Base
     #user.bankroll -= 1
 
     self.downvoted_by << user.id unless self.downvoted_by.include? user.id
-    self.upvoted_by.delete(user.id) if self.upvoted_by.include? user.id
 
     self.save
     #user.save
 
    # YAMMER.create_message("#{user.name} has DOWNVOTED for #{self.title}", :group_id => 2032538)
 
-    Activity.create(:user_id => user.id, :hack_id => self.id, :action => 'downvote')
+    #Activity.create(:user_id => user.id, :hack_id => self.id, :action => 'downvote')
   end
 
   def has_contribution?(user)
@@ -65,14 +63,6 @@ class Hack < ActiveRecord::Base
   def add_contribution(user)
     Contribution.create(:user_id => user.id, :hack_id => self.id)
     Activity.create(:user_id => user.id, :hack_id => self.id, :action => 'add_contribution')
-    past_acts = Activity.where(:hack_id => self.id, :action => 'upvote', :user_id => user.id)
-    if past_acts.any?
-      self.votes -= past_acts.size
-      self.save
-      user.bankroll += past_acts.size
-      user.save
-      past_acts.destroy_all
-    end
   end
 
   def remove_contribution(user)

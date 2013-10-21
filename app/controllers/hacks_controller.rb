@@ -46,9 +46,6 @@ class HacksController < ApplicationController
 
     if @hack.upvoted_by.include? current_user.id
       flash[:error] = "can't vote again!"
-    elsif @hack.contributions.detect { |c| c.user_id == current_user.id } || (@hack.creator == current_user)
-      flash[:error] = "Trying to upvote our own hack are we? Sorry can't do!"
-      return redirect_to :back
     else
       @hack.upvote(current_user)
       flash[:message] = "you have cast your vote!"

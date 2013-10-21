@@ -44,8 +44,8 @@ class HacksController < ApplicationController
       return redirect_to hack_path(@hack)
     end
 
-    if current_user.bankroll <= 0
-      flash[:error] = "no more votes left to give!"
+    if @hack.upvoted_by.include? current_user.id
+      flash[:error] = "can't vote again!"
     elsif @hack.contributions.detect { |c| c.user_id == current_user.id } || (@hack.creator == current_user)
       flash[:error] = "Trying to upvote our own hack are we? Sorry can't do!"
       return redirect_to :back
@@ -62,8 +62,8 @@ class HacksController < ApplicationController
       return redirect_to hack_path(@hack)
     end
 
-    if current_user.bankroll <= 0
-      flash[:error]   = "no more votes left to give!"
+    if @hack.downvoted_by.include? current_user.id
+      flash[:error]   = "can't vote again!"
     else
       @hack.downvote(current_user)
       flash[:message] = "You just voted down someone's hard work. You are a terrible person!"

@@ -11,7 +11,10 @@
 #
 
 class Hack < ActiveRecord::Base
-  attr_accessible :description, :score, :title, :votes
+  attr_accessible :description, :score, :title, :votes, :upvoted_by, :downvoted_by
+
+  serialize :upvoted_by
+  serialize :downvoted_by
 
   has_many :comments
   has_many :contributions
@@ -21,12 +24,19 @@ class Hack < ActiveRecord::Base
 
   validates_presence_of :title, :description
 
+  def votes
+    upvoted_by.size - downvoted_by.size
+  end
+
   def upvote(user)
-    self.votes += 1
-    user.bankroll -= 1
+    #self.votes += 1
+    #user.bankroll -= 1
+
+    self.upvoted_by << user.id unless self.upvoted_by.include? user.id
+    self.downvoted_by.delete(user.id) if self.downvoted_by.include? user.id
 
     self.save
-    user.save
+    #user.save
 
    # YAMMER.create_message("#{user.name} has voted for #{self.title}", :group_id => 2032538)
 
@@ -34,11 +44,14 @@ class Hack < ActiveRecord::Base
   end
 
   def downvote(user)
-    self.votes -= 1
-    user.bankroll -= 1
+    #self.votes -= 1
+    #user.bankroll -= 1
+
+    self.downvoted_by << user.id unless self.downvoted_by.include? user.id
+    self.upvoted_by.delete(user.id) if self.upvoted_by.include? user.id
 
     self.save
-    user.save
+    #user.save
 
    # YAMMER.create_message("#{user.name} has DOWNVOTED for #{self.title}", :group_id => 2032538)
 

@@ -29,6 +29,7 @@ class Hack < ActiveRecord::Base
     #user.bankroll -= 1
 
     self.upvoted_by << user.id unless self.upvoted_by.include? user.id
+    self.downvoted_by.delete(user.id) if self.downvoted_by.include? user.id
     self.votes = self.upvoted_by.size - self.downvoted_by.size
 
     self.save
@@ -44,8 +45,9 @@ class Hack < ActiveRecord::Base
     #user.bankroll -= 1
 
     self.downvoted_by << user.id unless self.downvoted_by.include? user.id
+    self.upvoted_by.delete(user.id) if self.upvoted_by.include? user.id
     self.votes = self.upvoted_by.size - self.downvoted_by.size
-    
+
     self.save
     #user.save
 

@@ -1,4 +1,8 @@
-<h2><%= @hack.title %></h2>
+<h2><%= @hack.title %>
+  <% if @hack.group_number %>
+    <span class="display-group badge badge-info">Group <%= @hack.group_number %></span>
+  <% end %>
+</h2>
 <div class="hack-voting">
 	<%= link_to image_tag('arrow-up.png'), upvote_hack_path(@hack) %>
 	<span class="votes"><%= @hack.votes %></span>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131021231122) do
+ActiveRecord::Schema.define(:version => 20131023224243) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -44,6 +44,12 @@ ActiveRecord::Schema.define(:version => 20131021231122) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "global_configurations", :force => true do |t|
+    t.boolean  "presentation_in_progress"
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+  end
+
   create_table "hacks", :force => true do |t|
     t.string   "title"
     t.text     "description",        :limit => 255
@@ -56,6 +62,7 @@ ActiveRecord::Schema.define(:version => 20131021231122) do
     t.integer  "creator_id"
     t.text     "upvoted_by",                        :default => "'--- []\n'"
     t.text     "downvoted_by",                      :default => "'--- []\n'"
+    t.integer  "group_number"
   end
 
   create_table "users", :force => true do |t|

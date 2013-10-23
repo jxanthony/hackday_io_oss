@@ -11,17 +11,24 @@
 <% if @hacks %>
   <% @hacks.each_with_index do |hack, index| %>
     <% if @view == 'top' %>
-      <div class="hack-voting">
-        <%= link_to image_tag('arrow-up.png'), upvote_hack_path(hack) %>
-    	  <span class="votes"><%= hack.votes %></span>
-    	  <%= link_to image_tag('arrow-down.png'), downvote_hack_path(hack) %>
-      </div>
+      <div class="row">
+        <div class="hack-voting">
+          <%= link_to image_tag('arrow-up.png'), upvote_hack_path(hack) %>
+      	  <span class="votes"><%= hack.votes %></span>
+      	  <%= link_to image_tag('arrow-down.png'), downvote_hack_path(hack) %>
+        </div>
 
-      <div class="hack-details">
-        <h3><%= link_to hack.title, hack %></h3>
-        <p><%= truncate(hack.description, :length => 140) %></p>
+        <div class="hack-details">
+          <h3><%= link_to hack.title, hack %>
+            <% if hack.group_number %>
+              <span class="display-group badge badge-info">Group <%= hack.group_number %></span>
+            <% end %>
+          </h3>
+          <span><%= truncate(hack.description, :length => 140) %></span>
+        </div>
       </div>
     <% elsif @view == 'presentation' %>
+      <div class="row">
       <div class="hack-voting">
         <%= link_to image_tag('arrow-up.png'), move_up_in_queue_hack_path(hack) %>
         <span class="votes"><%= hack.presentation_index %></span>
@@ -30,7 +37,16 @@
 
       <div class="hack-details">
         <span>
-          <h3 class="presentation-queue-title"><%= link_to hack.title, hack %></h3>
+          <h3 class="presentation-queue-title"><%= link_to hack.title, hack %>
+            <% if hack.group_number %>
+              <span class="display-group badge badge-info">Group <%= hack.group_number %></span>
+            <% end %>
+            <% if [0,1,2,3].include?(index) %>
+              <% notification_selector = {0 => 'important', 1 => 'warning', 2 => 'success', 3 => 'info'} %>
+              <% notification_texts = {0 => 'Presenting', 1 => 'Stand by', 2 => 'On deck', 3 => 'Please get on deck'} %>
+              <span class="display-group label label-<%= notification_selector[index] %>"><%= notification_texts[index] %></span>
+            <% end %>
+          </h3>
           <b>
             by 
             <% hack_submitter = hack.creator %>
@@ -42,11 +58,14 @@
             <%= hack_submitter.name %>
           </b>
         </span>
-        <p><%= truncate(hack.description, :length => 140) %></p>
+        <p>
+          <%= truncate(hack.description, :length => 140) %>
+        </p>
         <% if (current_user.mc? || current_user.admin?) && index == 0 %>
           <p><%= link_to "This presentation is done", leave_presentation_hack_path(hack, :no_activity => true), :class => "btn btn-small btn-primary" %></p>
         <% end %>
       </div>
+    </div>
     <% end %>
   <% end %>
 

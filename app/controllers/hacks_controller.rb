@@ -1,8 +1,9 @@
 class HacksController < ApplicationController
 
-  before_filter :get_hack, :only => [:upvote, :downvote, :show, :add_contribution, 
+  before_filter :get_hack, :only => [:upvote, :downvote, :show, :edit, :update, :destroy, :add_contribution, 
     :remove_contribution, :move_up_in_queue, :move_down_in_queue, :join_presentation, :leave_presentation]
   before_filter :verify_participation, :only => [:move_up_in_queue, :move_down_in_queue, :join_presentation, :leave_presentation]
+  before_filter :check_permission, :only => [:edit, :update, :destroy]
 
   def new
   end
@@ -36,6 +37,28 @@ class HacksController < ApplicationController
   def show
     @hack_comments = @hack.comments.where(:admin_comment => nil).order('created_at DESC').paginate(:page => params[:hack_comments_page] || 1, :per_page => 10)
     @hack_admin_comments = @hack.comments.where(:admin_comment => true).order('created_at DESC').paginate(:page => params[:hack_admin_comments_page] || 1, :per_page => 8)
+  end
+
+  def edit
+  end
+
+  def update
+    if @hack.update_attributes(params[:hack])
+      flash[:message] = "Update successful!"
+      redirect_to hack_path(@hack)
+    else
+      flash[:error] = @hack.errors.full_messages.join(", ")
+      redirect_to edit_hack_path(@hack)
+    end
+  end
+
+  def destroy
+    if @hack.destroy
+      flash[:message] = "Your hack has been destroyed."
+      redirect_to root_path
+    else
+      flash[:error] = @hack.errors.full_messages.join(", ")
+    end
   end
 
   def upvote
@@ -136,6 +159,13 @@ class HacksController < ApplicationController
   end
 
   private
+
+  def check_permission
+    unless current_user && current_user == @hack.creator
+      flash[:error] = "You don't have permission to perform this action."
+      return redirect_to root_path
+    end
+  end
 
   def get_hack
     @hack = Hack.find(params[:id])

@@ -5,7 +5,7 @@
     <%= link_to "Delete Hack", hack_path(@hack), :class => "show-edit-controls btn btn-small btn-danger", :confirm => "Are you sure you want to destroy your hack?", :method => :delete %>
   <% end %>
   <% if @hack.group_number %>
-    <span class="show-display-group badge badge-info">Group <%= @hack.group_number %></span>
+    <span class="show-display-group badge badge-info">Group #<%= @hack.group_number %></span>
   <% end %>
 </h2>
 <div class="hack-voting">

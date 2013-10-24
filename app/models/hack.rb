@@ -11,7 +11,7 @@
 #
 
 class Hack < ActiveRecord::Base
-  attr_accessible :description, :score, :title, :votes, :upvoted_by, :downvoted_by, :group_number
+  attr_accessible :creator_id, :description, :title, :votes, :upvoted_by, :downvoted_by, :group_number, :requested_hackers
 
   serialize :upvoted_by
   serialize :downvoted_by

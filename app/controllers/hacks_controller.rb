@@ -10,8 +10,8 @@ class HacksController < ApplicationController
 
   def create
     hack = Hack.create(params[:hack])
-    hack.update_attribute(:requested_hackers, params[:requested_hackers] || 1)
-    hack.update_attribute(:creator_id, current_user.id)
+    hack.update_attributes({:requested_hackers => params[:requested_hackers] || 1})
+    hack.update_attributes({:creator_id => current_user.id})
     if hack.errors.any?
       flash[:error] = hack.errors.full_messages.join(", ")
       redirect_to new_hack_path
@@ -40,13 +40,14 @@ class HacksController < ApplicationController
   end
 
   def update
-    if @hack.update_attributes(params[:hack])
+    @hack.update_attributes(params[:hack])
+    if @hack.errors.any?
+      flash[:error] = @hack.errors.full_messages.join(", ")
+      redirect_to edit_hack_path(@hack)
+    else
       flash[:message] = "Update successful!"
       Activity.create(:user_id => current_user.id, :hack_id => @hack.id, :action => 'edit')
       redirect_to hack_path(@hack)
-    else
-      flash[:error] = @hack.errors.full_messages.join(", ")
-      redirect_to edit_hack_path(@hack)
     end
   end
 

@@ -23,7 +23,9 @@ class Hack < ActiveRecord::Base
   belongs_to :creator, :class_name => 'User', :foreign_key => "creator_id"
 
   validates_presence_of :title, :description
-  validates_uniqueness_of :group_number
+
+  before_create :set_group_number
+  before_destroy :free_group_number
 
   def upvote(user)
     #self.votes += 1
@@ -69,6 +71,28 @@ class Hack < ActiveRecord::Base
   def remove_contribution(user)
     self.contributions.detect { |contribution| contribution.user_id == user.id }.destroy
     Activity.create(:user_id => user.id, :hack_id => self.id, :action => 'remove_contribution')
+  end
+
+  private
+  def set_group_number
+    config = GlobalConfiguration.get
+    if config.group_numbers.empty?
+      self.errors.add(:group_number, "Out of available group numbers. Go yell at Kane.")
+      return false
+    else
+      self.group_number = config.group_numbers.shift
+      config.save
+    end
+  end
+
+  def free_group_number
+    config = GlobalConfiguration.get
+    unless !self.group_number || config.group_numbers.include?(self.group_number)
+      config.group_numbers.unshift self.group_number
+      config.save
+    else
+      true
+    end
   end
 
 end

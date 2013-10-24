@@ -16,9 +16,9 @@ class Hack < ActiveRecord::Base
   serialize :upvoted_by
   serialize :downvoted_by
 
-  has_many :comments
-  has_many :contributions
-  has_many :activities
+  has_many :comments,      :dependent => :destroy
+  has_many :contributions, :dependent => :destroy
+  has_many :activities,    :dependent => :destroy
 
   belongs_to :creator, :class_name => 'User', :foreign_key => "creator_id"
 

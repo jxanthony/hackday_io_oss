@@ -42,6 +42,7 @@ class HacksController < ApplicationController
   def update
     if @hack.update_attributes(params[:hack])
       flash[:message] = "Update successful!"
+      Activity.create(:user_id => current_user.id, :hack_id => @hack.id, :action => 'edit')
       redirect_to hack_path(@hack)
     else
       flash[:error] = @hack.errors.full_messages.join(", ")

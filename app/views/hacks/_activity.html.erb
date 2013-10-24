@@ -77,6 +77,9 @@
           case 'move_down_in_queue':
             message = '<b>' + $user.attr('name') + '</b> moved <i><a href="/hacks/' + $hack.attr('id') + '">' + $hack.attr('title') + '</a></i> down in the presentation queue';
             break;
+          case 'edit':
+            message = '<b>' + $user.attr('name') + '</b> edited <i><a href="/hacks/' + $hack.attr('id') + '">' + $hack.attr('title') + '</a></i>';
+            break;
         }
         return '<li class="activity" id="activity ' + $activity.attr('id') + '">' +
                '<img src="' + $user.attr('mugshot_url') + '" data-tooltip title="' + $user.attr('name') + '" class="img-circle" />' +

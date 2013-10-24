@@ -28,35 +28,29 @@ class Hack < ActiveRecord::Base
   before_destroy :free_group_number
 
   def upvote(user)
-    #self.votes += 1
-    #user.bankroll -= 1
+    if self.upvoted_by.include? user.id
+      self.upvoted_by.delete user.id
+    else
+      self.upvoted_by << user.id
+    end
 
-    self.upvoted_by << user.id unless self.upvoted_by.include? user.id
     self.downvoted_by.delete(user.id) if self.downvoted_by.include? user.id
     self.votes = self.upvoted_by.size - self.downvoted_by.size
 
     self.save
-    #user.save
-
-   # YAMMER.create_message("#{user.name} has voted for #{self.title}", :group_id => 2032538)
-
-    #Activity.create(:user_id => user.id, :hack_id => self.id, :action => 'upvote')
   end
 
   def downvote(user)
-    #self.votes -= 1
-    #user.bankroll -= 1
+    if self.downvoted_by.include? user.id
+      self.downvoted_by.delete user.id
+    else
+      self.downvoted_by << user.id
+    end
 
-    self.downvoted_by << user.id unless self.downvoted_by.include? user.id
     self.upvoted_by.delete(user.id) if self.upvoted_by.include? user.id
     self.votes = self.upvoted_by.size - self.downvoted_by.size
 
     self.save
-    #user.save
-
-   # YAMMER.create_message("#{user.name} has DOWNVOTED for #{self.title}", :group_id => 2032538)
-
-    #Activity.create(:user_id => user.id, :hack_id => self.id, :action => 'downvote')
   end
 
   def has_contribution?(user)

@@ -65,10 +65,11 @@ class HacksController < ApplicationController
     end
 
     if @hack.upvoted_by.include? current_user.id
-      flash[:error] = "can't vote again!"
+      @hack.upvote(current_user)
+      flash[:message] = "You have removed your vote."
     else
       @hack.upvote(current_user)
-      flash[:message] = "you have cast your vote!"
+      flash[:message] = "You have cast your vote!"
     end
     redirect_to :back
   end
@@ -80,7 +81,8 @@ class HacksController < ApplicationController
     end
 
     if @hack.downvoted_by.include? current_user.id
-      flash[:error]   = "can't vote again!"
+      @hack.downvote(current_user)
+      flash[:message] = "You have removed your vote."
     else
       @hack.downvote(current_user)
       flash[:message] = "You just voted down someone's hard work. You are a terrible person!"

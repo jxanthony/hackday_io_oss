@@ -11,7 +11,7 @@
 #
 
 class Hack < ActiveRecord::Base
-  attr_accessible :description, :score, :title, :votes, :upvoted_by, :downvoted_by
+  attr_accessible :description, :score, :title, :votes, :upvoted_by, :downvoted_by, :group_number
 
   serialize :upvoted_by
   serialize :downvoted_by
@@ -23,6 +23,7 @@ class Hack < ActiveRecord::Base
   belongs_to :creator, :class_name => 'User', :foreign_key => "creator_id"
 
   validates_presence_of :title, :description
+  validates_uniqueness_of :group_number
 
   def upvote(user)
     #self.votes += 1

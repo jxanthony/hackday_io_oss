@@ -13,10 +13,7 @@ class HacksController < ApplicationController
     hack.update_attribute(:requested_hackers, params[:requested_hackers] || 1)
     hack.update_attribute(:creator_id, current_user.id)
     if hack.errors.any?
-      error_message = ""
-      error_message += "Please include a title. " if hack.errors.messages[:title]
-      error_message += "Please include a description." if hack.errors.messages[:description]
-      flash[:error] = error_message
+      flash[:error] = hack.errors.full_messages.join(", ")
       redirect_to new_hack_path
     else
       flash[:message] = "#{hack.title} has been created and added to the list."

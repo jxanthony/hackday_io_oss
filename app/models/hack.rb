@@ -24,7 +24,7 @@ class Hack < ActiveRecord::Base
 
   validates_presence_of :title, :description
 
-  before_create :set_group_number
+  before_create :set_group_number, :initialize_votes
   before_destroy :free_group_number
 
   def upvote(user)
@@ -87,6 +87,11 @@ class Hack < ActiveRecord::Base
     else
       true
     end
+  end
+
+  def initialize_votes
+    self.upvoted_by = [] unless self.upvoted_by == []
+    self.downvoted_by = [] unless self.downvoted_by == []
   end
 
 end

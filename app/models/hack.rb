@@ -28,6 +28,7 @@ class Hack < ActiveRecord::Base
   before_destroy :free_group_number
 
   def upvote(user)
+    self.lock!
     if self.upvoted_by.include? user.id
       self.upvoted_by.delete user.id
     else
@@ -37,10 +38,11 @@ class Hack < ActiveRecord::Base
     self.downvoted_by.delete(user.id) if self.downvoted_by.include? user.id
     self.votes = self.upvoted_by.size - self.downvoted_by.size
 
-    self.save
+    self.save!
   end
 
   def downvote(user)
+    self.lock!
     if self.downvoted_by.include? user.id
       self.downvoted_by.delete user.id
     else
@@ -50,7 +52,7 @@ class Hack < ActiveRecord::Base
     self.upvoted_by.delete(user.id) if self.upvoted_by.include? user.id
     self.votes = self.upvoted_by.size - self.downvoted_by.size
 
-    self.save
+    self.save!
   end
 
   def has_contribution?(user)

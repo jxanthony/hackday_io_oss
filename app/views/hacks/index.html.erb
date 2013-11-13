@@ -19,11 +19,7 @@
         </div>
 
         <div class="hack-details">
-          <h3><%= link_to hack.title, hack %>
-            <% if hack.group_number %>
-              <span class="display-group badge badge-info">Group #<%= hack.group_number %></span>
-            <% end %>
-          </h3>
+          <h3><%= link_to hack.title, hack %></h3>
           <span><%= truncate(hack.description, :length => 140) %></span>
         </div>
       </div>

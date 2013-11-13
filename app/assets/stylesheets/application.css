@@ -65,33 +65,19 @@ ul { list-style-type: none; margin: 0; padding: 0; }
   display:inline-block;
 }
 
-.yam-logo
+.hackday-logo
 {
-  -moz-border-radius: 70px/70px;
-  -webkit-border-radius: 70px 70px;
-  border-radius: 70px/70px;;
-  background-color:#48AEF1;
   width:70px;
   height:70px;
-  text-align:center;
   line-height:45px;
-  font-size:30px;
-  font-weight:bold;
   display:inline-block;
   margin-top:10px;
-}
-
-.yam-logo-img
-{
-  margin-top:16px;
-  margin-left:6px;
 }
 
 .yam-logo-text
 {
   display:inline-block;
   vertical-align: middle;
-  margin-left:10px;
 }
 
 .all_hackers

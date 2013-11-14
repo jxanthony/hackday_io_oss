@@ -7,12 +7,13 @@ class ApplicationController < ActionController::Base
   private
 
   def login_required
-    unless current_user && GlobalConfiguration.get.presentation_in_progress
+    unless current_user
       redirect_to welcome_path
     end
   end
 
   def current_user
+    return nil unless GlobalConfiguration.get.presentation_in_progress
     return User.first if Rails.env.development?
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end

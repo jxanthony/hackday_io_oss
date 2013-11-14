@@ -4,6 +4,8 @@ namespace :util do
   task :reset_votes => :environment do |t, args|
     Hack.all.each do |hack|
       hack.upvoted_by = []
+      hack.downvoted_by = []
+      hack.vote = 0
       hack.save
     end
 

@@ -5,7 +5,7 @@ namespace :util do
     Hack.all.each do |hack|
       hack.upvoted_by = []
       hack.downvoted_by = []
-      hack.vote = 0
+      hack.votes = 0
       hack.save
     end
 

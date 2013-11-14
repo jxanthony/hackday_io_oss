@@ -20,7 +20,6 @@
 <% end %>
 
 <% if @hack_admin_comments %>
-  <%= will_paginate @admin_comments, :param_name => 'hack_admin_comments_page' %>
 
   <div id="new_comment_form">
     <strong>How is this hack doing?</strong>
@@ -34,6 +33,5 @@
       <%= f.submit "Comment", :class => 'btn btn-success' %>
     <% end %>
   </div>
-<% else %>
-  <%= will_paginate @admin_comments, :param_name => 'admin_comments_page' %>
+
 <% end %>

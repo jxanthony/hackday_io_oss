@@ -25,9 +25,9 @@ class HacksController < ApplicationController
   def index
     @view = params[:view] || 'top'
     if @view == 'top'
-      @hacks = Hack.order("votes DESC").paginate(:page => params[:hacks_page] || 1, :per_page => 10)
+      @hacks = Hack.order("votes DESC")
     elsif @view == 'presentation'
-      @hacks = Hack.where("presentation_index IS NOT NULL").order("presentation_index ASC").paginate(:page => params[:hacks_page] || 1, :per_page => 10)
+      @hacks = Hack.where("presentation_index IS NOT NULL").order("presentation_index ASC")
     end
   end
 

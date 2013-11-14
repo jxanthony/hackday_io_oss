@@ -3,7 +3,7 @@ namespace :util do
   desc "reset all votes"
   task :reset_votes => :environment do |t, args|
     Hack.all.each do |hack|
-      hack.upvoated_by = []
+      hack.upvoted_by = []
       hack.save
     end
 

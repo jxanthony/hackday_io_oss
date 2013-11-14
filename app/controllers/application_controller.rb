@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   private
 
   def login_required
-    unless current_user
+    unless current_user && GlobalConfiguration.get.presentation_in_progress
       redirect_to welcome_path
     end
   end

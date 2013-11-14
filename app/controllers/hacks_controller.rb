@@ -16,7 +16,7 @@ class HacksController < ApplicationController
       flash[:error] = hack.errors.full_messages.join(", ")
       redirect_to new_hack_path
     else
-      flash[:message] = "#{hack.title} has been created. You are group number #{hack.group_number}, please get this number tag from the organizers."
+      flash[:message] = "#{hack.title} has been created."
       Activity.create(:user_id => current_user.id, :hack_id => hack.id, :action => 'create')
       return redirect_to root_path
     end

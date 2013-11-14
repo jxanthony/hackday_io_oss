@@ -34,9 +34,6 @@
       <div class="hack-details">
         <span>
           <h3 class="presentation-queue-title"><%= link_to hack.title, hack %>
-            <% if hack.group_number %>
-              <span class="display-group badge badge-info">Group #<%= hack.group_number %></span>
-            <% end %>
             <% if GlobalConfiguration.get.presentation_in_progress && [0,1,2,3].include?(hack.presentation_index - 1) %>
               <% notification_selector = {0 => 'important', 1 => 'warning', 2 => 'success', 3 => 'info'} %>
               <% notification_texts = {0 => 'Presenting', 1 => 'Stand by', 2 => 'On deck', 3 => 'Please get on deck'} %>

@@ -99,11 +99,6 @@ ul { list-style-type: none; margin: 0; padding: 0; }
   margin: auto;
 }
 
-.presentation-queue-title
-{
-  line-height:20px;
-}
-
 .presentation-info
 {
   width:130px;
@@ -133,10 +128,16 @@ ul { list-style-type: none; margin: 0; padding: 0; }
   top: -8px;
 }
 
+.hack 
+{
+  margin-bottom: 20px;
+}
+
 .hack-details h3
 {
   margin-bottom:5px;
-  line-height: 30px;
+  margin-top: 0;
+  line-height: 20px;
 }
 
 .hack-details p

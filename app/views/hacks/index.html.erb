@@ -30,9 +30,15 @@
     <% elsif @view == 'presentation' %>
       <div class="row">
       <div class="hack-voting">
-        <%= link_to image_tag('arrow-up.png'), move_up_in_queue_hack_path(hack) %>
-        <span class="votes"><%= hack.presentation_index %></span>
-        <%= link_to image_tag('arrow-down.png'), move_down_in_queue_hack_path(hack) %>
+        <% if current_user.mc? %>
+          <%= link_to image_tag('arrow-up.png'), move_up_in_queue_hack_path(hack) %>
+          <span class="votes"><%= hack.presentation_index %></span>
+          <%= link_to image_tag('arrow-down.png'), move_down_in_queue_hack_path(hack) %>
+        <% else %>
+          <%= link_to image_tag('arrow-up.png'), upvote_hack_path(hack) %>
+          <span class="votes"><%= hack.votes %></span>
+          <%= link_to image_tag('arrow-down.png'), downvote_hack_path(hack) %>
+        <% end %>
       </div>
 
       <div class="hack-details">

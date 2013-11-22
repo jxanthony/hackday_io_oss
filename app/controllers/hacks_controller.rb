@@ -2,7 +2,8 @@ class HacksController < ApplicationController
 
   before_filter :get_hack, :only => [:upvote, :downvote, :show, :edit, :update, :destroy, :add_contribution, 
     :remove_contribution, :move_up_in_queue, :move_down_in_queue, :join_presentation, :leave_presentation]
-  before_filter :verify_participation, :only => [:move_up_in_queue, :move_down_in_queue, :join_presentation, :leave_presentation]
+  before_filter :can_move_hacks_in_queue, :only => [:move_up_in_queue, :move_down_in_queue]
+  before_filter :verify_participation, :only => [:join_presentation, :leave_presentation]
   before_filter :check_permission, :only => [:edit, :update, :destroy]
 
   def new
@@ -160,6 +161,10 @@ class HacksController < ApplicationController
   end
 
   private
+
+  def can_move_hacks_in_queue
+    current_user.mc?
+  end
 
   def check_permission
     unless current_user && current_user == @hack.creator

@@ -1,4 +1,4 @@
-Hackday::Application.routes.draw do
+Hacktracker::Application.routes.draw do
 
   resources :admin_comments
   root :to => 'hacks#index'

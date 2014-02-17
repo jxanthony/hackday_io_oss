@@ -9,6 +9,7 @@ gem 'thin'
 gem 'yammer-client'
 gem 'will_paginate'
 gem 'unicorn'
+gem 'haml'
 
 group :production do
   gem "pg"
@@ -41,4 +42,14 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'annotate'
   gem 'simplecov'
+end
+
+group :test do
+  gem 'fabrication'
+  gem 'rspec'
+  gem 'shoulda-matchers'
+  gem 'shoulda-matchers'
+  gem 'capybara'
+  gem 'capybara-webkit'
+  gem 'database_cleaner'
 end

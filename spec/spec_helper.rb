@@ -8,6 +8,28 @@ require 'rspec/autorun'
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
+require 'capybara/rspec'
+require 'capybara/rails'
+Capybara.javascript_driver = :webkit
+
+require 'database_cleaner'
+require 'simplecov'
+SimpleCov.start 'rails'
+
+OmniAuth.config.test_mode = true
+OmniAuth.config.mock_auth[:yammer] = {
+    provider: 'yammer',
+    uid: '123',
+    info: { 
+            name: 'Kevin Davis', 
+            image: 'http://www.flickr.com/photos/kgdavis/5567410776/',
+            email: "kevin@builditforhumans.com"
+          },
+    extra: { raw_info: { network_id: '107' } },
+    credentials: { token: 'this_is_a_fake_token' }
+}
+
+
 RSpec.configure do |config|
   # ## Mock Framework
   #
@@ -35,4 +57,23 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = "random"
+
+  # == Clean up after integration tests
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
+
+  def test_sign_in
+    visit '/auth/yammer'
+  end
+
 end

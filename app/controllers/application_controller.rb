@@ -3,12 +3,13 @@ class ApplicationController < ActionController::Base
 
   before_filter :login_required
 
-
   private
 
   def login_required
-    unless current_user
-      redirect_to welcome_path
+    if Rails.env.production?
+      unless current_user
+        redirect_to welcome_path
+      end
     end
   end
 

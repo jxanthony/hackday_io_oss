@@ -26,22 +26,23 @@ class User < ActiveRecord::Base
   has_many :activities
 
   def self.from_omniauth(auth)
-    return false unless YAMMER_NETWORK_IDS.include?(auth.extra.raw_info.network_id)
-    user = self.where(:provider => auth.provider, :uid => auth.uid)
+    # TODO: YAMMER SPECIFIC
+    return false unless YAMMER_NETWORK_IDS.include?(auth[:extra][:raw_info][:network_id])
+    user = self.where(provider: auth[:provider], uid: auth[:uid])
     if user.empty?
       user = User.new
-      user.provider = auth.provider
-      user.uid = auth.uid
-      user.name = auth.info.name
-      user.email = auth.info.email
-      user.mugshot_url = auth.info.image
-      user.oauth_token = auth.credentials.token
+      user.provider = auth[:provider]
+      user.uid = auth[:uid]
+      user.name = auth[:info][:name]
+      user.email = auth[:info][:email]
+      user.mugshot_url = auth[:info][:image]
+      user.oauth_token = auth[:credentials][:token]
       user.save!
     else
       user = user.first
-      user.name = auth.info.name unless user.name == auth.info.name
-      user.email = auth.info.email unless user.email == auth.info.email
-      user.mugshot_url = auth.info.image unless user.mugshot_url == auth.info.image
+      user.name = auth[:info][:name] unless user.name == auth[:info][:name]
+      user.email = auth[:info][:email] unless user.email == auth[:info][:email]
+      user.mugshot_url = auth[:info][:image] unless user.mugshot_url == auth[:info][:image]
       user.save!
     end
     user

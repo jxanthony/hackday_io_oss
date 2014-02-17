@@ -1,9 +1,12 @@
 Hacktracker::Application.routes.draw do
 
   resources :admin_comments
-  root :to => 'hacks#index'
+  root :to => 'hackdays#index'
 
-  resources :hacks do
+  resources :hackdays do
+    resources :hacks, only: [:index, :new, :create]
+  end
+  resources :hacks, only: [:show, :edit, :update, :destroy] do
     member do
       get :move_up_in_queue, :move_down_in_queue, :join_presentation, :leave_presentation, :downvote, :upvote
       post :add_contribution, :as => 'ihelped'

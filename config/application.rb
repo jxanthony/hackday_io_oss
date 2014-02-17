@@ -9,7 +9,8 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
-YAMMER_NETWORK_IDS = [107,62]
+# TODO: YAMMER SPECIFIC
+YAMMER_NETWORK_IDS = ['107','62']
 
 module Hacktracker
   class Application < Rails::Application
@@ -62,5 +63,11 @@ module Hacktracker
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    config.generators do |g|
+      g.test_framework      :rspec, fixture: true
+      g.fixture_replacement :fabrication
+    end
+    
   end
 end

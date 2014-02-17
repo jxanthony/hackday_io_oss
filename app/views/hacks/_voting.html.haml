@@ -1,0 +1,6 @@
+.hack-voting
+  = link_to upvote_hack_path(hack) do
+    = image_tag('arrow-up.png')
+  %span.votes= hack.votes
+  = link_to downvote_hack_path(hack) do
+    = image_tag('arrow-down.png')

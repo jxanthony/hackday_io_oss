@@ -18,8 +18,7 @@
 #  hackday_id         :integer
 #
 
-require 'spec_helper'
-
-describe Hack do
-  pending "add some examples to (or delete) #{__FILE__}"
+Fabricator(:hack) do
+  title "Test Hack"
+  description "test description that is so testy it hurts"
 end

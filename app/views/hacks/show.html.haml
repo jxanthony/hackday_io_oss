@@ -1,0 +1,33 @@
+%h2= @hack.title
+= render partial: 'voting', locals: { hack: @hack }
+.hack-details
+  %p= @hack.description
+  - unless @hack.url.blank?
+    = link_to "Learn more here!", hack.url
+
+  %strong Team
+  = render partial: 'mugshot', collection: @hack.contributions
+  / TODO: make sure @hack.creator is included
+
+%h3 Comments
+- unless @hack.comments.empty?
+  %ul
+    - @hack.comments.each do |comment|
+      %li.comment
+        = render partial: 'mugshot', locals: { user: comment.user }
+        %p
+          %em= comment.user.name + " says.."
+        %p= comment.body
+        %abbr.timeago{title: comment.created_at.getutc.iso8601 }
+          = comment.created_at.to_s
+- else 
+  %p Sadly no one has commented yet!
+
+#new_comment_form
+  %strong Add your thoughts!
+  = form_for @hack.comments.new do |f|
+    %fieldset.input
+      = f.text_area :body
+      = hidden_field_tag 'hack_id', @hack.id
+
+    = f.submit "Post Comment", class: 'btn btn-success'

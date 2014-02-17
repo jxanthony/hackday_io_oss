@@ -1,13 +1,3 @@
-<ul class="nav nav-pills">
-  <% if @view == 'top' %>
-    <li class="active"><a href="#">Top Hacks</a></li>
-    <li><%= link_to "Presentation Queue", hacks_path(:view => :presentation) %></li>
-  <% elsif @view == 'presentation' %>
-    <li><%= link_to "Top Hacks", hacks_path(:view => :top) %></li>
-    <li class="active"><a href="#">Presentation Queue</a></li>
-  <% end %>
-</ul>
-
 <% if @hacks %>
   <% @hacks.each_with_index do |hack, index| %>
     <% if @view == 'top' %>
@@ -23,9 +13,10 @@
           <span><%= truncate(hack.description, :length => 140) %></span>
         </div>
       </div>
+
     <% elsif @view == 'presentation' %>
       <div class="row hack">
-        
+
         <div class="hack-voting">
           <%= link_to image_tag('arrow-up.png'), move_up_in_queue_hack_path(hack), title:  "move up in the queue" %>
           <%= link_to image_tag('arrow-down.png'), move_down_in_queue_hack_path(hack), title: "move back in the queue" %>
@@ -34,7 +25,7 @@
         <div class="hack-details">
           <span>
             <h3><%= link_to hack.title, hack %>
-              <% if GlobalConfiguration.get.presentation_in_progress && [0,1,2,3].include?(hack.presentation_index - 1) %>
+              <% if hack.hackday.presentation_in_progress && [0,1,2,3].include?(hack.presentation_index - 1) %>
                 <% notification_selector = {0 => 'important', 1 => 'warning', 2 => 'success', 3 => 'info'} %>
                 <% notification_texts = {0 => 'Presenting', 1 => 'Stand by', 2 => 'On deck', 3 => 'Please get on deck'} %>
                 <span class="display-group label label-<%= notification_selector[hack.presentation_index - 1] %>">
@@ -56,7 +47,7 @@
           <p>
             <%= truncate(hack.description, :length => 140) %>
           </p>
-          <% if GlobalConfiguration.get.presentation_in_progress && (current_user.mc? || current_user.admin?) && (hack.presentation_index == 1) %>
+          <% if hack.hackday.get.presentation_in_progress && (current_user.mc? || current_user.admin?) && (hack.presentation_index == 1) %>
             <p><%= link_to "This presentation is done", leave_presentation_hack_path(hack, :no_activity => true), :class => "btn btn-small btn-primary" %></p>
           <% end %>
         </div>

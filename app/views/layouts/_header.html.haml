@@ -1,0 +1,9 @@
+.span4.yam-logo-text
+  %h1
+    = link_to "Hack Tracker", root_path
+
+.span4#user-block
+  - if current_user
+    = render partial: 'users/mugshot', locals: { user: current_user, large: true, placement: 'bottom' }
+  - else
+    = link_to "Sign In With Yammer", '/auth/yammer', id: 'sign_in'

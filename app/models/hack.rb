@@ -15,6 +15,7 @@
 #  upvoted_by         :text             default("'--- []\n'")
 #  downvoted_by       :text             default("'--- []\n'")
 #  group_number       :integer
+#  hackday_id         :integer
 #
 
 class Hack < ActiveRecord::Base
@@ -28,6 +29,7 @@ class Hack < ActiveRecord::Base
   has_many :activities,    :dependent => :destroy
 
   belongs_to :creator, :class_name => 'User', :foreign_key => "creator_id"
+  belongs_to :hackday
 
   validates_presence_of :title, :description
 
@@ -78,21 +80,19 @@ class Hack < ActiveRecord::Base
 
   private
   def set_group_number
-    config = GlobalConfiguration.get
-    if config.group_numbers.empty?
+    if self.hackday.group_numbers.empty?
       self.errors.add(:group_number, "Out of available group numbers. Go yell at Kane.")
       return false
     else
-      self.group_number = config.group_numbers.shift
-      config.save
+      self.group_number = self.hackday.group_numbers.shift
+      self.hackday.save
     end
   end
 
   def free_group_number
-    config = GlobalConfiguration.get
-    unless !self.group_number || config.group_numbers.include?(self.group_number)
-      config.group_numbers.unshift self.group_number
-      config.save
+    unless !self.group_number || self.hackday.group_numbers.include?(self.group_number)
+      self.hackday.group_numbers.unshift self.group_number
+      self.hackday.save
     else
       true
     end

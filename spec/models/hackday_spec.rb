@@ -19,8 +19,8 @@ describe Hackday do
     Fabricate(:hackday).should be_valid
   end
 
-  it "has a title"
-  it "has a date"
+  it "requires a title"
+  it "requires a date"
 
   it "has a set of group numbers" do
     hackday = Fabricate(:hackday)

@@ -10,6 +10,7 @@ gem 'yammer-client'
 gem 'will_paginate'
 gem 'unicorn'
 gem 'haml'
+gem 'bootstrap3-rails'
 
 group :production do
   gem "pg"
@@ -47,7 +48,6 @@ end
 group :test do
   gem 'fabrication'
   gem 'rspec'
-  gem 'shoulda-matchers'
   gem 'shoulda-matchers'
   gem 'capybara'
   gem 'capybara-webkit'

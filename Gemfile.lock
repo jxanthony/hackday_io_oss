@@ -33,6 +33,8 @@ GEM
       activerecord (>= 2.3.0)
       rake (>= 0.8.7)
     arel (3.0.3)
+    bootstrap3-rails (3.0.0)
+      rails (~> 3.2.13)
     builder (3.0.4)
     capybara (2.2.1)
       mime-types (>= 1.16)
@@ -210,6 +212,7 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
+  bootstrap3-rails
   capybara
   capybara-webkit
   coffee-rails (~> 3.2.1)

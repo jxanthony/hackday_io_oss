@@ -2,4 +2,4 @@
   - if local_assigns[:user].present? && local_assigns[:user].respond_to?(:mugshot_url)
     / TODO: YAMMER SPECIFIC
     - url = local_assigns[:large] ? user.mugshot_url.gsub("48x48", "95x95") : user.mugshot_url
-    = image_tag url, title: user.name, 'data-placement' => local_assigns[:placement] || top, class: 'img-circle'
+    = image_tag url, title: user.name, 'data-placement' => local_assigns[:placement] || 'top', class: 'img-circle'

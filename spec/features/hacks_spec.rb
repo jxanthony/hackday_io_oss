@@ -21,7 +21,6 @@ describe "watching a hack" do
 
   it "should let signed-in people comment" do
     test_sign_in
-
     visit hack_path(@hack)
     fill_in('comment_body', with: "ur hack sux")
     click_on("Post Comment")
@@ -32,6 +31,19 @@ describe "watching a hack" do
   it "should indicate comments made by contributors"
   it "should indicate comments made by admins"
 
-  it "should let non-contributors vote"
+  it "should require sign-in for voting" do
+    visit hack_path(@hack)
+    find(:xpath, "//a/img[@alt='Vote Up']/..").click
+    
+    page.should have_content("You have to sign in") 
+  end
+
+  it "should let signed-in, non-contributors vote" do
+    test_sign_in
+    visit hack_path(@hack)
+    find(:xpath, "//a/img[@alt='Vote Up']/..").click
+
+    find('.votes').should have_content("1")
+  end
   it "should not let contributors vote"
 end

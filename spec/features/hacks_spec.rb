@@ -8,7 +8,11 @@ describe "watching a hack" do
     @hack = Fabricate(:hack, hackday: @hackday)
   end
 
-  it "should display the contributors"
+  it "should display the contributors" do
+    visit hack_path(@hack)
+    find('#team').should have_css('.user-mugshot', count: 3)
+  end
+
   it "should let contributors add others"
   it "should indicate that you're a contributor"
   it "should let contributors edit the hack details"
@@ -24,6 +28,7 @@ describe "watching a hack" do
 
     page.should have_content("ur hack sux")
   end
+
   it "should indicate comments made by contributors"
   it "should indicate comments made by admins"
 

@@ -21,4 +21,7 @@
 Fabricator(:hack) do
   title "Test Hack"
   description "test description that is so testy it hurts"
+  contributions(count: 3) do |attrs, i| 
+    Fabricate(:contribution, user: Fabricate(:user, name: "Person #{i}"))
+  end
 end

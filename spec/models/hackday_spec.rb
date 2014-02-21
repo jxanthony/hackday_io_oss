@@ -24,6 +24,6 @@ describe Hackday do
 
   it "has a set of group numbers" do
     hackday = Fabricate(:hackday)
-    hackday.group_numbers have(50).items
+    hackday.group_numbers.should have(50).items
   end
 end

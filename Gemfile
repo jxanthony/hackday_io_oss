@@ -10,7 +10,7 @@ gem 'yammer-client'
 gem 'will_paginate'
 gem 'unicorn'
 gem 'haml'
-gem 'bootstrap3-rails'
+gem 'bootstrap-sass'
 
 group :production do
   gem "pg"

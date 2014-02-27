@@ -1,19 +1,21 @@
-.row
+= content_for :title do
+  = raw("&raquo;") + ' ' + @hack.hackday.title
+
+.col-md-8
   %h2= @hack.title
 
-.row
-  .col-xs-3
-    = render partial: 'voting', locals: { hack: @hack }
-  .col-xs-9
-    .hack-details
-      %p= @hack.description
-      - unless @hack.url.blank?
-        = link_to "Learn more here!", hack.url
-
-.col-xs-12#team
-  %strong Team
-  = render partial: 'users/mugshot', collection: @hack.contributions
-  / TODO: make sure @hack.creator is included
+  .row
+    .col-xs-2.col-sm-1
+      = render partial: 'voting', locals: { hack: @hack }
+    .col-xs-10.col-sm-11
+      .hack-details
+        %p= @hack.description
+        - unless @hack.url.blank?
+          = link_to "Learn more here!", hack.url
+      #team
+        %strong Team
+        = render partial: 'users/mugshot', collection: @hack.contributions
+        / TODO: make sure @hack.creator is included
 
   %h3 Comments
   - unless @hack.comments.empty?
@@ -33,7 +35,7 @@
     %strong Add your thoughts!
     = form_for @hack.comments.new do |f|
       %fieldset.input
-        = f.text_area :body
+        = f.text_area :body, class: 'form-control', rows: 3
         = hidden_field_tag 'hack_id', @hack.id
 
       = f.submit "Post Comment", class: 'btn btn-success'

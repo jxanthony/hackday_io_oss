@@ -20,11 +20,6 @@
 {
 	margin-top: 30px;
 	clear: both;
-	textarea 
-	{ 
-		width: 400px; 
-		height: 100px;
-	}
 }
 
 .votes 
@@ -32,20 +27,18 @@
 	font-size: 2em; 
 	vertical-align: middle;
 	margin: 7px;
+	line-height: 1em;
 }
 .hack-voting 
 { 
 	width: 60px;
-	height:70px;
 	text-align: center; 
 	float: left;
-}
-.hack-details
-{
-	margin-left: 60px;
+	overflow: auto;
 }
 
-#current-contributor
-{
-  margin-bottom: 10px;
+#new_comment_form .btn 
+{ 
+	float: right;
+	margin-top: 10px;
 }

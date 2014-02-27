@@ -6,14 +6,37 @@
     = javascript_include_tag 'application'
     = csrf_meta_tags
     = favicon_link_tag 'http://www.google.com/s2/favicons?domain=www.yammer.com'
-    %meta{name: 'viewport', content: 'width=device-width; initial-scale=1.0; maximum-scale=1.0;'}
+    %meta{name: 'viewport', content: 'width=device-width, initial-scale=1'}
 
 
   %body
-    .container
-      .row
-        = render 'layouts/header'
+    .navbar.navbar-default.navbar-fixed-top{role: 'navigation'}
+      .container
+        .navbar-header
+          %button.navbar-toggle{type: 'button', 'data-toggle' => 'collapse', 'data-target' => ".navbar-collapse"}
+            %span.sr-only Toggle Navigation
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          = link_to "Yammer Hack Days", root_path, class: 'navbar-brand'
+        
+        .navbar-collapse.collapse
+          - if current_user
+            %ul.nav.navbar-nav.navbar-right
+              %li
+                = link_to signout_path do
+                  %span.visible-xs 
+                    %span.glyphicon.glyphicon-off
+                    Sign Out
+                  %span.glyphicon.glyphicon-off.hidden-xs
+            .navbar-text.navbar-right= current_user.name
+          - else 
+            %ul
+              %li
+                / TODO: Yammer specific
+                = link_to "Sign In", "/auth/yammer"
 
+    .container
       .row
         - if flash[:error]
           .alert.alert-error

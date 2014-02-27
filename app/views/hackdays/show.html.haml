@@ -1,11 +1,13 @@
-%ul.nav.nav-pills
-  %li.active
-    = link_to "Top Hacks", '#'
-  %li 
-    = link_to "Presentation Queue", '#'
+.col-md-6
+  %h2= @hackday.title
+  %ul.nav.nav-pills
+    %li.active
+      = link_to "Top Hacks", '#'
+    %li 
+      = link_to "Presentation Queue", '#'
 
-- if @hacks
   #hacks
-    = render @hacks
-- else
-  %p "no hacks submitted yet :(" 
+    - if @hacks
+      = render @hacks
+    - else
+      %p "no hacks submitted yet :(" 

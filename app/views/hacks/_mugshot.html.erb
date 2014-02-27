@@ -1,6 +1,0 @@
-<% if local_assigns[:user].present? && local_assigns[:user].respond_to?(:mugshot_url) %>
-  <% url = local_assigns[:large] ? user.mugshot_url.gsub("48x48", "95x95") : user.mugshot_url %>
-  <img src="<%= url %>" data-tooltip title="<%= user.name %>" data-placement=<%= local_assigns[:placement] || 'top' %> class="img-circle" />
-<% else %>
-  Who's the user??!!??
-<% end %>

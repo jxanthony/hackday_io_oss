@@ -14,15 +14,14 @@
           = link_to "Learn more here!", hack.url
       #team
         %strong Team
-        = render partial: 'users/mugshot', collection: @hack.contributions
-        / TODO: make sure @hack.creator is included
+        = render @hack.contributions.map { |c| c.user }
 
   %h3 Comments
   - unless @hack.comments.empty?
     %ul
       - @hack.comments.each do |comment|
         %li.comment
-          = render partial: 'users/mugshot', locals: { user: comment.user }
+          = render comment.user
           %p
             %em= comment.user.name + " says.."
           %p= comment.body

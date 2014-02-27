@@ -18,15 +18,7 @@
 
   %h3 Comments
   - unless @hack.comments.empty?
-    %ul
-      - @hack.comments.each do |comment|
-        %li.comment
-          = render comment.user
-          %p
-            %em= comment.user.name + " says.."
-          %p= comment.body
-          %abbr.timeago{title: comment.created_at.getutc.iso8601 }
-            = comment.created_at.to_s
+    = render @hack.comments
   - else 
     %p Sadly no one has commented yet!
 

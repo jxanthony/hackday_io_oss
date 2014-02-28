@@ -2,6 +2,7 @@
   = raw("&raquo;") + ' ' + @hack.hackday.title
 
 .col-md-8
+  = link_to raw("&laquo;") + ' ' + @hack.hackday.title, @hack.hackday
   %h2= @hack.title
 
   .row
@@ -14,6 +15,7 @@
           = link_to "Learn more here!", hack.url
       #team
         %strong Team
+        %br
         = render @hack.contributions.map { |c| c.user }
 
   %h3 Comments

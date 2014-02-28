@@ -4,6 +4,17 @@
 .col-md-8
   = link_to raw("&laquo;") + ' ' + @hack.hackday.title, @hack.hackday
   %h2#hack-title= @hack.title
+  - if is_current_contributor
+    .btn-group.btn-group-xs
+      = link_to @hack, method: :delete,                             |
+                       type: 'button',                              |
+                       class: 'btn btn-danger', id: 'hack-delete',  |
+                       confirm: "YOU WANT TO DELETE YOUR HACK?!" do |
+        %span.glyphicon.glyphicon-trash
+      = link_to edit_hack_path(@hack),      |
+                type: 'button',             |
+                class: 'btn btn-default' do |
+        %span.glyphicon.glyphicon-edit
 
   .row
     .col-xs-2.col-sm-1
@@ -16,7 +27,7 @@
       #team
         %strong Team
         %br
-        = render @hack.contributions.map { |c| c.user }
+        = render @hack.contributors
 
   %h3 Comments
   - unless @hack.comments.empty?
@@ -32,3 +43,6 @@
         = hidden_field_tag 'hack_id', @hack.id
 
       = f.submit "Post Comment", class: 'btn btn-success'
+
+
+  / # = render partial: 'hacks/form', locals: { hack: @hack }

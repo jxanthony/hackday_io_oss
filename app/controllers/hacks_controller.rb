@@ -55,7 +55,7 @@ class HacksController < ApplicationController
   def destroy
     if @hack.destroy
       flash[:message] = "Your hack has been destroyed. Please return your group number tag #{@hack.group_number} to the organizers."
-      redirect_to root_path
+      redirect_to @hack.hackday
     else
       flash[:error] = @hack.errors.full_messages.join(", ")
     end
@@ -163,7 +163,7 @@ class HacksController < ApplicationController
   private
 
   def check_permission
-    unless current_user && current_user == @hack.creator
+    unless current_user && @hack.contributions
       flash[:error] = "You don't have permission to perform this action."
       return redirect_to root_path
     end

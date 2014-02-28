@@ -13,12 +13,6 @@ describe "watching a hack" do
     find('#team').should have_css('.user-mugshot', count: 3)
   end
 
-  it "should let contributors add others"
-  it "should indicate that you're a contributor"
-  it "should let contributors edit the hack details"
-  it "should let contributors mark as ready to be presented"
-  it "should not let non-contributors mark as ready to be presented"
-
   it "should let signed-in people comment" do
     test_sign_in
     visit hack_path(@hack)
@@ -48,8 +42,8 @@ describe "watching a hack" do
   it "should not let contributors vote"
 end
 
-# These tests make sure adding a hack works properly
-describe "adding a hack" do
+# These tests make sure adding / editing and deleting a hack works properly
+describe "owning a hack" do
 
   before(:each) do
     @hackday = Fabricate(:hackday)
@@ -72,8 +66,26 @@ describe "adding a hack" do
     page.should have_css('.hack-details a[href="http://yammer.com"]')
   end
   it "should not let signed-in people add hacks"
+
+  it "should let contributors add others"
+  it "should indicate that you're a contributor"
+
+  it "should let contributors edit the hack details"
+  it "should let contributors delete the hack" do
+    test_sign_in
+    # FIXME: clean this up - there must be a better way to do current_user
+    current_user = User.first
+    @hack = Fabricate(:hack, hackday: @hackday)
+    @hack.contributors << current_user
+
+    visit hack_path(@hack)
+    find('#hack-delete').click
+
+    current_path.should == hackday_path(@hackday)
+    find('.alert.alert-success').text.should have_content("Your hack has been destroyed")
+  end
+  it "should let contributors mark as ready to be presented"
+  it "should not let non-contributors mark as ready to be presented"
+
 end
-
-
-
 

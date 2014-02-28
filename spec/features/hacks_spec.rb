@@ -42,8 +42,8 @@ describe "watching a hack" do
   it "should not let contributors vote"
 end
 
-# These tests make sure adding / editing and deleting a hack works properly
-describe "owning a hack" do
+# These tests make sure adding a hack works properly
+describe "adding a hack" do
 
   before(:each) do
     @hackday = Fabricate(:hackday)
@@ -67,23 +67,34 @@ describe "owning a hack" do
   end
   it "should not let signed-in people add hacks"
 
+end
+
+# These tests make sure the stuff you can do as a contributor work
+# eg. editing, deleting, adding contributors
+describe "owning a hack" do
+
+  before(:each) do
+    test_sign_in
+    # FIXME: clean this up - there must be a better way to do current_user
+    @current_user = User.first
+    @hackday = Fabricate(:hackday)
+    @hack = Fabricate(:hack, hackday: @hackday)
+    @hack.contributors << @current_user  
+  end
+
   it "should let contributors add others"
   it "should indicate that you're a contributor"
 
   it "should let contributors edit the hack details"
-  it "should let contributors delete the hack" do
-    test_sign_in
-    # FIXME: clean this up - there must be a better way to do current_user
-    current_user = User.first
-    @hack = Fabricate(:hack, hackday: @hackday)
-    @hack.contributors << current_user
 
+  it "should let contributors delete the hack" do
     visit hack_path(@hack)
     find('#hack-delete').click
 
     current_path.should == hackday_path(@hackday)
     find('.alert.alert-success').text.should have_content("Your hack has been destroyed")
   end
+
   it "should let contributors mark as ready to be presented"
   it "should not let non-contributors mark as ready to be presented"
 

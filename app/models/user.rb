@@ -19,7 +19,7 @@
 
 class User < ActiveRecord::Base
 
-  attr_accessible :name, :oauth_expires_at, :oauth_token, :provider, :uid, :bankroll
+  attr_accessible :name, :oauth_expires_at, :oauth_token, :provider, :uid, :bankroll, :mugshot_url
 
   has_many :contributions
   has_many :comments

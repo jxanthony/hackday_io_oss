@@ -9,16 +9,17 @@ class HacksController < ApplicationController
   end
 
   def create
-    hack = Hack.create(params[:hack])
-    hack.update_attributes({:requested_hackers => params[:requested_hackers] || 1})
-    hack.update_attributes({:creator_id => current_user.id})
-    if hack.errors.any?
-      flash[:error] = hack.errors.full_messages.join(", ")
-      redirect_to new_hack_path
+    # FIXME: gross
+    hack = Hack.new(params[:hack])
+    contribution = Contribution.new
+    contribution.user = current_user
+    hack.contributions << contribution
+    hack.hackday = Hackday.find(params[:hackday_id])
+
+    if hack.save
+      redirect_to hack
     else
-      flash[:message] = "#{hack.title} has been created."
-      Activity.create(:user_id => current_user.id, :hack_id => hack.id, :action => 'create')
-      return redirect_to root_path
+      flash[:error] = hack.errors.full_messages.join(", ")
     end
   end
 

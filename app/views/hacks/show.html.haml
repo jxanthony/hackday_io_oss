@@ -3,7 +3,7 @@
 
 .col-md-8
   = link_to raw("&laquo;") + ' ' + @hack.hackday.title, @hack.hackday
-  %h2= @hack.title
+  %h2#hack-title= @hack.title
 
   .row
     .col-xs-2.col-sm-1
@@ -12,7 +12,7 @@
       .hack-details
         %p= @hack.description
         - unless @hack.url.blank?
-          = link_to "Learn more here!", hack.url
+          = link_to "Learn more here!", @hack.url
       #team
         %strong Team
         %br

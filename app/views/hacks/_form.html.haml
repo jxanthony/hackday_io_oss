@@ -1,0 +1,25 @@
+.modal.fade#hack-form
+  .modal-dialog{role: 'dialog'}
+    .modal-content
+      = form_for [hack.hackday, hack] do |f|
+        .modal-header
+          %button.close{type: 'button', 'data-dismiss' => 'modal', 'aria-hidden' => 'true'} &times;
+          %h4.modal-title      
+            - if hack.new_record?
+              = "Create a new hack!"
+            - else
+              = "Edit " + hack.title
+        .modal-body
+          .form-group
+            = f.label :title
+            = f.text_field :title, class: 'form-control'
+          .form-group
+            = f.label :description
+            = f.text_area :description, class: 'form-control', rows: 6
+          .form-group
+            = f.label :url
+            = f.text_field :url, class: 'form-control', placeholder: "(optional)"
+
+        .modal-footer
+          %button.btn.btn-default{type: "button", 'data-dismiss'=>"modal"} Cancel
+          = f.submit "Create your hack!", class: 'btn btn-primary btn-success'

@@ -19,7 +19,7 @@
 #
 
 class Hack < ActiveRecord::Base
-  attr_accessible :creator_id, :description, :title, :votes, :upvoted_by, :downvoted_by, :group_number, :requested_hackers
+  attr_accessible :creator_id, :description, :title, :votes, :upvoted_by, :downvoted_by, :group_number, :requested_hackers, :url
 
   serialize :upvoted_by
   serialize :downvoted_by
@@ -35,6 +35,8 @@ class Hack < ActiveRecord::Base
 
   before_create :set_group_number, :initialize_votes
   before_destroy :free_group_number
+
+  after_create :create_activity
 
   def upvote(user)
     self.lock!
@@ -101,6 +103,14 @@ class Hack < ActiveRecord::Base
   def initialize_votes
     self.upvoted_by = [] unless self.upvoted_by == []
     self.downvoted_by = [] unless self.downvoted_by == []
+  end
+
+  def create_activity
+    # FIXME: gross
+    activity = Activity.new(action: 'create')
+    activity.user = self.contributions.first.user
+    activity.hack = self
+    activity.save
   end
 
 end

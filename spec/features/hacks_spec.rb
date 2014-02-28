@@ -47,3 +47,33 @@ describe "watching a hack" do
   end
   it "should not let contributors vote"
 end
+
+# These tests make sure adding a hack works properly
+describe "adding a hack" do
+
+  before(:each) do
+    @hackday = Fabricate(:hackday)
+  end  
+
+  it "should let signed-in people add hacks" do
+    test_sign_in
+    visit hackday_path(@hackday)
+    click_on("Add Hack")
+    fill_in('hack_title', with: "BEST HACK OF ALL TIME")
+    fill_in('hack_description', with: "self explanatory")
+    fill_in('hack_url', with: "http://yammer.com")
+    click_on("Create your hack!")
+
+    current_path.should == hack_path(Hack.first)
+    page.should have_content(@hackday.title)
+    page.should have_css('#team img[title="Kevin Davis"]') # name from the auth hash
+    find('#hack-title').text.should == "BEST HACK OF ALL TIME"
+    find('.hack-details p').text.should == "self explanatory"
+    page.should have_css('.hack-details a[href="http://yammer.com"]')
+  end
+  it "should not let signed-in people add hacks"
+end
+
+
+
+

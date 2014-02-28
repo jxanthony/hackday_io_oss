@@ -85,7 +85,19 @@ describe "owning a hack" do
   it "should let contributors add others"
   it "should indicate that you're a contributor"
 
-  it "should let contributors edit the hack details"
+  it "should let contributors edit the hack details" do
+    visit hack_path(@hack)
+    find('#hack-edit').click
+    fill_in('hack_title', with: "MOST EDITED HACK OF ALL TIME")
+    fill_in('hack_description', with: "description v2")
+    fill_in('hack_url', with: "http://cotap.com")
+    click_on("Update your hack!")
+
+    current_path.should == hack_path(@hack)
+    find('#hack-title').text.should == "MOST EDITED HACK OF ALL TIME"
+    find('.hack-details p').text.should == "description v2"
+    page.should have_css('.hack-details a[href="http://cotap.com"]')
+  end
 
   it "should let contributors delete the hack" do
     visit hack_path(@hack)

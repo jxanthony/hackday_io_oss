@@ -11,9 +11,11 @@
                        class: 'btn btn-danger', id: 'hack-delete',  |
                        confirm: "YOU WANT TO DELETE YOUR HACK?!" do |
         %span.glyphicon.glyphicon-trash
-      = link_to edit_hack_path(@hack),      |
-                type: 'button',             |
-                class: 'btn btn-default' do |
+      = link_to '#',                                       |
+                type: 'button',                            |
+                class: 'btn btn-default', id: 'hack-edit', |
+                'data-toggle' => 'modal',                  |
+                'data-target' => '#hack-form' do           |
         %span.glyphicon.glyphicon-edit
 
   .row
@@ -45,4 +47,4 @@
       = f.submit "Post Comment", class: 'btn btn-success'
 
 
-  / # = render partial: 'hacks/form', locals: { hack: @hack }
+= render partial: 'hacks/form', locals: { hack: @hack }

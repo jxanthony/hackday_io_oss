@@ -11,9 +11,7 @@ class HacksController < ApplicationController
   def create
     # FIXME: gross
     hack = Hack.new(params[:hack])
-    contribution = Contribution.new
-    contribution.user = current_user
-    hack.contributions << contribution
+    hack.contributors << current_user
     hack.hackday = Hackday.find(params[:hackday_id])
 
     if hack.save
@@ -163,7 +161,7 @@ class HacksController < ApplicationController
   private
 
   def check_permission
-    unless current_user && @hack.contributions
+    unless current_user && (@hack.contributors.include? current_user)
       flash[:error] = "You don't have permission to perform this action."
       return redirect_to root_path
     end

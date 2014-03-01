@@ -31,9 +31,10 @@
         %br
         = render @hack.contributors
         - if current_user and not @hack.has_contributor?(current_user)
-          = link_to "Join", add_contribution_hack_path(@hack), |
-                    method: :post,                             |
-                    id: 'hack-join'                            |
+          = link_to "Join", add_contribution_hack_path(@hack),          |
+                    confirm: "Did you really contribute to this hack?", |
+                    method: :post,                                      |
+                    id: 'hack-join'                                     |
 
   %h3 Comments
   - unless @hack.comments.empty?

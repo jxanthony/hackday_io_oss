@@ -16,12 +16,6 @@
 	}
 }
 
-#new_comment_form 
-{
-	margin-top: 30px;
-	clear: both;
-}
-
 .votes 
 { 
 	font-size: 2em; 
@@ -37,8 +31,41 @@
 	overflow: auto;
 }
 
+#new_comment_form 
+{
+	margin-top: 30px;
+	clear: both;
+}
 #new_comment_form .btn 
 { 
 	float: right;
 	margin-top: 10px;
 }
+
+#team img 
+{
+	float: left;
+	display: block;
+	margin-right: 5px;
+}
+#hack-join
+{
+	border: 2px dashed #666;
+	background-color: #ddd;
+	color: #666;
+	border-radius: 45px;
+	text-align: center;
+	padding-top: 10px;
+	display: block;
+	float: left;
+	height: 45px; width: 45px;
+}
+#hack-join:hover
+{
+	border: 2px solid #666;
+	text-decoration: none;
+	color: #333;
+}
+
+
+

@@ -4,7 +4,7 @@
 .col-md-8
   = link_to raw("&laquo;") + ' ' + @hack.hackday.title, @hack.hackday
   %h2#hack-title= @hack.title
-  - if is_current_contributor
+  - if is_contributor?
     .btn-group.btn-group-xs
       = link_to @hack, method: :delete,                             |
                        type: 'button',                              |
@@ -30,6 +30,10 @@
         %strong Team
         %br
         = render @hack.contributors
+        - unless is_contributor?
+          = link_to "Join", add_contribution_hack_path(@hack), |
+                    method: :post,                             |
+                    id: 'hack-join'                            |
 
   %h3 Comments
   - unless @hack.comments.empty?

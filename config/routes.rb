@@ -9,8 +9,8 @@ Hacktracker::Application.routes.draw do
   resources :hacks, only: [:show, :edit, :update, :destroy] do
     member do
       get :move_up_in_queue, :move_down_in_queue, :join_presentation, :leave_presentation, :downvote, :upvote
-      post :add_contribution, :as => 'ihelped'
-      post :remove_contribution, :as => 'ilied'
+      post :add_contribution
+      post :remove_contribution
     end
   end
 

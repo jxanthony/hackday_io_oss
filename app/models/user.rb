@@ -33,19 +33,16 @@ class User < ActiveRecord::Base
       user = User.new
       user.provider = auth[:provider]
       user.uid = auth[:uid]
-      user.name = auth[:info][:name]
-      user.email = auth[:info][:email]
-      user.mugshot_url = auth[:info][:image]
       user.oauth_token = auth[:credentials][:token]
-      user.save!
-    else
+    else 
       user = user.first
-      user.name = auth[:info][:name] unless user.name == auth[:info][:name]
-      user.email = auth[:info][:email] unless user.email == auth[:info][:email]
-      user.mugshot_url = auth[:info][:image] unless user.mugshot_url == auth[:info][:image]
-      user.save!
     end
+    user.name = auth[:info][:name]
+    user.email = auth[:info][:email]
+    user.mugshot_url = auth[:info][:image]
+    user.save!
+
     user
   end
-
+  
 end

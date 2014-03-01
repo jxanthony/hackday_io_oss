@@ -92,12 +92,7 @@ class HacksController < ApplicationController
   end
 
   def add_contribution
-    unless current_user
-      flash[:error] = "You have to sign in before you can claim a hack."
-      return redirect_to hack_path(@hack)
-    end
-
-    if @hack.has_contribution?(current_user)
+    if @hack.has_contributor?(current_user)
       flash[:error] = "You're already a contributor!"
     else
       @hack.add_contribution(current_user)
@@ -107,7 +102,7 @@ class HacksController < ApplicationController
   end
 
   def remove_contribution
-    if !@hack.has_contribution?(current_user)
+    unless @hack.has_contributor?(current_user)
       flash[:error] = "what are you doing? you aren't a contributor!"
     else
       @hack.remove_contribution(current_user)

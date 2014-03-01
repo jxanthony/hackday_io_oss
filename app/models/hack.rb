@@ -67,8 +67,8 @@ class Hack < ActiveRecord::Base
     self.save!
   end
 
-  def has_contribution?(user)
-    self.contributions.detect { |contribution| contribution.user_id == user.id }
+  def has_contributor?(user)
+    self.contributors.include? user
   end
 
   def add_contribution(user)

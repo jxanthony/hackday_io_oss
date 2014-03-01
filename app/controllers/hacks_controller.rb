@@ -1,9 +1,13 @@
 class HacksController < ApplicationController
 
-  before_filter :get_hack, :only => [:upvote, :downvote, :show, :edit, :update, :destroy, :add_contribution, 
-    :remove_contribution, :move_up_in_queue, :move_down_in_queue, :join_presentation, :leave_presentation]
-  before_filter :verify_participation, :only => [:move_up_in_queue, :move_down_in_queue, :join_presentation, :leave_presentation]
-  before_filter :check_permission, :only => [:edit, :update, :destroy]
+  before_filter :get_hack,         except: [:new, :create, :index]
+  before_filter :check_permission, only:   [:edit, 
+                                            :update, 
+                                            :destroy, 
+                                            :move_up_in_queue, 
+                                            :move_down_in_queue, 
+                                            :join_presentation, 
+                                            :leave_presentation]
 
   def new
   end
@@ -21,14 +25,14 @@ class HacksController < ApplicationController
     end
   end
 
-  def index
-    @view = params[:view] || 'top'
-    if @view == 'top'
-      @hacks = Hack.order("votes DESC")
-    elsif @view == 'presentation'
-      @hacks = Hack.where("presentation_index IS NOT NULL").order("presentation_index ASC")
-    end
-  end
+  # def index
+  #   @view = params[:view] || 'top'
+  #   if @view == 'top'
+  #     @hacks = Hack.order("votes DESC")
+  #   elsif @view == 'presentation'
+  #     @hacks = Hack.where("presentation_index IS NOT NULL").order("presentation_index ASC")
+  #   end
+  # end
 
   def show
     @hack_comments = @hack.comments.where(:admin_comment => nil).order('created_at DESC').paginate(:page => params[:hack_comments_page] || 1, :per_page => 10)
@@ -156,9 +160,9 @@ class HacksController < ApplicationController
   private
 
   def check_permission
-    unless current_user && (@hack.contributors.include? current_user)
+    unless @hack.has_contributor?(current_user)
       flash[:error] = "You don't have permission to perform this action."
-      return redirect_to root_path
+      return redirect_to @hack.hackday
     end
   end
 
@@ -170,13 +174,6 @@ class HacksController < ApplicationController
     hacks = Hack.where("hacks.presentation_index IS NOT NULL").order("presentation_index ASC")
     hacks.each_with_index do |hack, index|
       hack.update_attribute(:presentation_index, index + 1)
-    end
-  end
-
-  def verify_participation
-    unless current_user.admin? || current_user.mc? || (@hack.creator == current_user) || @hack.contributions.detect {|c| c.user.id == current_user.id}
-      flash[:error] = "What are you doing? That's not your hack!"
-      return redirect_to :back
     end
   end
 

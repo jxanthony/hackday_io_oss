@@ -29,7 +29,7 @@ describe "watching a hack" do
     visit hack_path(@hack)
     find(:xpath, "//a/img[@alt='Vote Up']/..").click
     
-    page.should have_content("You have to sign in") 
+    page.should have_content("You need to be signed in") 
   end
 
   it "should let signed-in, non-contributors vote" do
@@ -65,7 +65,12 @@ describe "adding a hack" do
     find('.hack-details p').text.should == "self explanatory"
     page.should have_css('.hack-details a[href="http://yammer.com"]')
   end
-  it "should not let signed-in people add hacks"
+  
+  it "should not let signed-out people add hacks" do
+    visit hackday_path(@hackday)
+
+    page.should_not have_content("Add Hack")
+  end
 
 end
 

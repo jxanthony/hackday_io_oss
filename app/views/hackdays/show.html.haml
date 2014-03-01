@@ -7,10 +7,11 @@
           = link_to "Top Hacks", '#'
         %li 
           = link_to "Presentation Queue", '#'
-    .col-md-4.pull-right
-      %button.btn.btn-success.btn-lg{'data-toggle' => 'modal', 'data-target' => '#hack-form'}
-        %span.glyphicon-plus.glyphicon
-        Add Hack
+    - if current_user
+      .col-md-4.pull-right
+        %button.btn.btn-success.btn-lg{'data-toggle' => 'modal', 'data-target' => '#hack-form'}
+          %span.glyphicon-plus.glyphicon
+          Add Hack
 
   #hacks
     - if @hacks

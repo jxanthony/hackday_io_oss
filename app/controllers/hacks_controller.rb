@@ -1,6 +1,7 @@
 class HacksController < ApplicationController
 
-  before_filter :get_hack,         except: [:new, :create, :index]
+  before_filter :get_hack,         except: [:create, :index]
+  before_filter :check_signed_in,  only:   [:upvote, :downvote]
   before_filter :check_permission, only:   [:edit, 
                                             :update, 
                                             :destroy, 
@@ -8,9 +9,6 @@ class HacksController < ApplicationController
                                             :move_down_in_queue, 
                                             :join_presentation, 
                                             :leave_presentation]
-
-  def new
-  end
 
   def create
     # FIXME: gross
@@ -64,11 +62,6 @@ class HacksController < ApplicationController
   end
 
   def upvote
-    unless current_user
-      flash[:error] = "You have to sign in before you can vote."
-      return redirect_to hack_path(@hack)
-    end
-
     if @hack.upvoted_by.include? current_user.id
       @hack.upvote(current_user)
       flash[:message] = "You have removed your vote."
@@ -80,11 +73,6 @@ class HacksController < ApplicationController
   end
 
   def downvote
-    unless current_user
-      flash[:error] = "You have to sign in before you can vote."
-      return redirect_to hack_path(@hack)
-    end
-
     if @hack.downvoted_by.include? current_user.id
       @hack.downvote(current_user)
       flash[:message] = "You have removed your vote."
@@ -159,6 +147,17 @@ class HacksController < ApplicationController
 
   private
 
+  def get_hack
+    @hack = Hack.find(params[:id])
+  end
+
+  def check_signed_in
+    unless current_user
+      flash[:error] = "You need to be signed in first!"
+      return redirect_to :back
+    end
+  end
+
   def check_permission
     unless @hack.has_contributor?(current_user)
       flash[:error] = "You don't have permission to perform this action."
@@ -166,9 +165,6 @@ class HacksController < ApplicationController
     end
   end
 
-  def get_hack
-    @hack = Hack.find(params[:id])
-  end
 
   def reorder_presentation_queue
     hacks = Hack.where("hacks.presentation_index IS NOT NULL").order("presentation_index ASC")

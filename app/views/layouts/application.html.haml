@@ -41,9 +41,9 @@
                 = link_to "Sign In", "/auth/yammer"
 
     .container
-      .row
+      .row#alerts
         - if flash[:error]
-          .alert.alert-error
+          .alert.alert-warning
             = flash[:error]
             = link_to "&times;".html_safe, '', class: 'close', 'data-dismiss' => 'alert'
         - if flash[:message]

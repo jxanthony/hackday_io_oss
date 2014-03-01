@@ -14,11 +14,9 @@
  */
 
 body { padding-top: 50px; }
+#alerts { margin-top: 10px; }
 
- .timeago
- {
-  font-size:0.8em;
- }
+.timeago { font-size: 0.8em; }
  
 .activity
 {
@@ -30,37 +28,10 @@ body { padding-top: 50px; }
 	height: 50px;
 }
 
-#user-points { float: left; padding-top:10px; }
-#user-points .bankroll { font-size: 5em; line-height: 1; }
-
 #user-profile
 {
 	float: left;
 	span { text-align: center; }
-}
-
-.unfulfilled_hacker_slot
-{
-  -moz-border-radius: 45px/45px;
-  -webkit-border-radius: 45px 45px;
-  border-radius: 45px/45px;;
-  border:solid 2px #000; 
-  width:45px;
-  height:45px;
-  text-align:center;
-  line-height:45px;
-  font-size:30px;
-  font-weight:bold;
-  display:inline-block;
-}
-
-.hackday-logo
-{
-  width:70px;
-  height:70px;
-  line-height:45px;
-  display:inline-block;
-  margin-top:10px;
 }
 
 .signin-yammer
@@ -80,12 +51,6 @@ body { padding-top: 50px; }
 .presentation-info
 {
   width:130px;
-}
-
-.show-edit-controls
-{
-  position: relative;
-  top: -4px;
 }
 
 .display-group

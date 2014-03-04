@@ -54,8 +54,29 @@ describe Hackday do
       @hackday.queue.should == [@hack2]
     end
 
-    it "moves hacks up in the queue properly"
-    it "moves hacks down in the queue properly"
+    it "moves hacks up in the queue properly" do
+      @hackday.join_queue(@hack)
+      @hackday.join_queue(@hack2)
+      @hackday.move_up_in_queue(@hack2)
+
+      @hackday.queue.should == [@hack2, @hack]
+    end
+
+    it "moves hacks down in the queue properly" do
+      @hackday.join_queue(@hack)
+      @hackday.join_queue(@hack2)
+      @hackday.move_down_in_queue(@hack)
+
+      @hackday.queue.should == [@hack2, @hack]
+    end
+
+    it "should handle moving hacks at the top and bottom of the queue properly" do
+      @hackday.join_queue(@hack)
+      @hackday.join_queue(@hack2)
+
+      @hackday.move_up_in_queue(@hack).should == false
+      @hackday.move_down_in_queue(@hack2).should == false
+    end
 
   end
 

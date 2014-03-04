@@ -95,28 +95,24 @@ class HacksController < ApplicationController
   end
 
   def move_up_in_queue
-    unless @hack.presentation_index == 1
-      swap_target = Hack.where(:presentation_index => @hack.presentation_index - 1).first
-      swap_target.update_attribute(:presentation_index, @hack.presentation_index) if swap_target
-      @hack.update_attribute(:presentation_index, @hack.presentation_index - 1)
-      Activity.create(:user_id => current_user.id, :hack_id => @hack.id, :action => 'move_up_in_queue')
+    if @hack.hackday.move_up_in_queue(@hack)
       flash[:message] = "Your hack has been moved up in the presentation queue."
+      Activity.create(user_id: current_user.id, hack_id: @hack.id, action: 'move_up_in_queue')
     else
       flash[:error] = "Your hack is already at the top of the queue."
     end
+
     redirect_to :back
   end
 
   def move_down_in_queue
-    unless @hack.presentation_index + 1 > Hack.where("hacks.presentation_index IS NOT NULL").size
-      swap_target = Hack.where(:presentation_index => @hack.presentation_index + 1).first
-      swap_target.update_attribute(:presentation_index, @hack.presentation_index) if swap_target
-      @hack.update_attribute(:presentation_index, @hack.presentation_index + 1)
-      Activity.create(:user_id => current_user.id, :hack_id => @hack.id, :action => 'move_down_in_queue')
+    if @hack.hackday.move_down_in_queue(@hack)
+      Activity.create(user_id: current_user.id, hack_id: @hack.id, action: 'move_down_in_queue')
       flash[:message] = "Your hack has been moved down in the presentation queue."
     else
       flash[:error] = "Your hack is already the last one in the queue."
     end
+
     redirect_to :back
   end
 

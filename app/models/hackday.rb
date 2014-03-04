@@ -32,6 +32,22 @@ class Hackday < ActiveRecord::Base
     bump_queue(former_index)
   end
 
+  def move_up_in_queue(hack)
+    return false if hack.presentation_index == 1
+
+    swap_target = hacks.find_by_presentation_index(hack.presentation_index - 1)
+    swap_target.update_attribute(:presentation_index, hack.presentation_index) if swap_target
+    hack.update_attribute(:presentation_index, hack.presentation_index - 1)
+  end
+
+  def move_down_in_queue(hack)
+    return false if hack.presentation_index + 1 > queue.size
+
+    swap_target = hacks.find_by_presentation_index(hack.presentation_index + 1)
+    swap_target.update_attribute(:presentation_index, hack.presentation_index) if swap_target
+    hack.update_attribute(:presentation_index, hack.presentation_index + 1)
+  end
+
   private
 
   def setup_group_numbers

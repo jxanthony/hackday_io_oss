@@ -40,6 +40,14 @@ describe "watching a hack" do
     find('.votes').should have_content("1")
   end
   it "should not let contributors vote"
+
+  it "should not let non-contributors muck with a hack" do
+    visit hack_path(@hack)
+
+    page.should_not have_css('#hack-enqueue')
+    page.should_not have_css('#hack-edit')
+  end
+
 end
 
 # These tests make sure adding a hack works properly
@@ -146,7 +154,32 @@ describe "owning a hack" do
     page.should_not have_content(@hack.title)
   end
 
-  it "should not let non-contributors add a hack to the presentation queue"
+  it "should let contributors move their hack up in the presentation queue" do
+    hack2 = Fabricate(:hack, hackday: @hackday, presentation_index: 1)
+    @hack.update_attribute(:presentation_index, 2)
+    visit queue_hackday_path(@hackday)
+    within('#hack_' + @hack.id.to_s) do
+      click_on "Move Up"
+    end
+
+    find('.alert.alert-success').text.should have_content("Your hack has been moved up")
+    page.should have_css('#hacks>:first-child h3', text: @hack.title)
+  end
+
+  it "should let contributors move their hack down in the presentation queue" do
+    hack2 = Fabricate(:hack, hackday: @hackday, presentation_index: 2)
+    @hack.update_attribute(:presentation_index, 1)
+    visit queue_hackday_path(@hackday)
+    within('#hack_' + @hack.id.to_s) do
+      click_on "Move Down"
+    end
+
+    find('.alert.alert-success').text.should have_content("Your hack has been moved down")
+    page.should have_css('#hacks>:last-child h3', text: @hack.title)
+  end
+
+  it "should let admins move hacks up in the presentation queue"
+  it "should let admins move hacks down in the presentation queue"
 
 end
 

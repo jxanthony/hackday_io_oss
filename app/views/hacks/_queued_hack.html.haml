@@ -1,0 +1,14 @@
+- hack = queued_hack
+.hack.row{id: ["hack", hack.id]}
+  .col-xs-12
+    %h3
+      = link_to hack.title, hack
+    .hack-description= truncate(hack.description, length: 140)
+    - if hack.has_contributor?(current_user)
+      .queue-buttons
+        = link_to move_up_in_queue_hack_path(hack), class: 'btn btn-xs btn-default' do
+          %span.glyphicon.glyphicon-arrow-up
+          %span Move Up
+        = link_to move_down_in_queue_hack_path(hack), class: 'btn btn-xs btn-default' do
+          %span.glyphicon.glyphicon-arrow-down
+          %span Move Down

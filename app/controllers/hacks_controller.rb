@@ -94,6 +94,12 @@ class HacksController < ApplicationController
     redirect_to :back
   end
 
+  def finish_presentation
+    @hack.hackday.leave_queue(@hack)
+    flash[:message] = "This hack has been presented - congrats!"
+    redirect_to :back
+  end
+
   def move_up_in_queue
     if @hack.hackday.move_up_in_queue(@hack)
       flash[:message] = "Your hack has been moved up in the presentation queue."

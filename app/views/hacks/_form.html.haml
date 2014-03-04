@@ -20,6 +20,11 @@
             = f.text_field :url, class: 'form-control', placeholder: "(optional)"
 
         .modal-footer
+          - unless hack.new_record? 
+            = link_to "Delete Hack", @hack,                     |
+                      method: :delete,                          |
+                      id: 'hack-delete',                        |
+                      confirm: "YOU WANT TO DELETE YOUR HACK?!" |
           %button.btn.btn-default{type: "button", 'data-dismiss'=>"modal"} Cancel
           - hack.new_record? ? submit_text = "Create your hack!" : submit_text = "Update your hack!"
           = f.submit submit_text, class: 'btn btn-primary btn-success'

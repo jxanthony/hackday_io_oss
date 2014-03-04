@@ -81,6 +81,10 @@ class Hack < ActiveRecord::Base
     Activity.create(:user_id => user.id, :hack_id => self.id, :action => 'remove_contribution')
   end
 
+  def presenting?
+    presentation_index.present?
+  end
+
   private
   def set_group_number
     if self.hackday.group_numbers.empty?

@@ -26,4 +26,37 @@ describe Hackday do
     hackday = Fabricate(:hackday)
     hackday.group_numbers.should have(50).items
   end
+
+  describe "queue behavior" do
+
+    before(:each) do
+      @hackday = Fabricate(:hackday)
+      @hack = Fabricate(:hack, hackday: @hackday)
+      @hack2 = Fabricate(:hack, hackday: @hackday)
+    end
+
+    it "enqueues hacks properly" do
+      @hackday.join_queue(@hack)
+      @hackday.join_queue(@hack2)
+
+      @hack.presentation_index.should == 1
+      @hack2.presentation_index.should == 2
+      @hackday.queue.should == [@hack, @hack2]
+    end
+
+    it "dequeues hacks properly" do
+      @hackday.join_queue(@hack)
+      @hackday.join_queue(@hack2)
+      @hackday.leave_queue(@hack)
+
+      @hack.presentation_index.should == nil
+      @hack2.reload.presentation_index.should == 1 # FIXME: not sure why this needs reloading
+      @hackday.queue.should == [@hack2]
+    end
+
+    it "moves hacks up in the queue properly"
+    it "moves hacks down in the queue properly"
+
+  end
+
 end

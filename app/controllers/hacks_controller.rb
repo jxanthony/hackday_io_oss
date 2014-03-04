@@ -23,15 +23,6 @@ class HacksController < ApplicationController
     end
   end
 
-  # def index
-  #   @view = params[:view] || 'top'
-  #   if @view == 'top'
-  #     @hacks = Hack.order("votes DESC")
-  #   elsif @view == 'presentation'
-  #     @hacks = Hack.where("presentation_index IS NOT NULL").order("presentation_index ASC")
-  #   end
-  # end
-
   def show
     @hack_comments = @hack.comments.where(:admin_comment => nil).order('created_at DESC').paginate(:page => params[:hack_comments_page] || 1, :per_page => 10)
     @hack_admin_comments = @hack.comments.where(:admin_comment => true).order('created_at DESC').paginate(:page => params[:hack_admin_comments_page] || 1, :per_page => 8)
@@ -129,19 +120,15 @@ class HacksController < ApplicationController
     redirect_to :back
   end
 
-  def join_presentation
-    new_index = Hack.where("hacks.presentation_index IS NOT NULL").size + 1
-    @hack.update_attribute(:presentation_index, new_index)
-    Activity.create(:user_id => current_user.id, :hack_id => @hack.id, :action => 'join_presentation')
-    flash[:message] = "Woohoo! Let's show the judges your hard work!"
-    redirect_to hacks_path(:view => :presentation)
+  def join_queue
+    @hack.hackday.join_queue(@hack)
+    flash[:message] = "You have signed up to present your hack"
+    redirect_to :back
   end
 
-  def leave_presentation
-    @hack.update_attribute(:presentation_index, nil)
-    Activity.create(:user_id => current_user.id, :hack_id => @hack.id, :action => 'leave_presentation') unless params[:no_activity]
-    reorder_presentation_queue
-    flash[:message] = "You are no longer presenting your hack." unless params[:no_activity]
+  def leave_queue
+    @hack.hackday.leave_queue(@hack)
+    flash[:message] = "You will no longer presenting your hack."
     redirect_to :back
   end
 
@@ -162,14 +149,6 @@ class HacksController < ApplicationController
     unless @hack.has_contributor?(current_user)
       flash[:error] = "You don't have permission to perform this action."
       return redirect_to @hack.hackday
-    end
-  end
-
-
-  def reorder_presentation_queue
-    hacks = Hack.where("hacks.presentation_index IS NOT NULL").order("presentation_index ASC")
-    hacks.each_with_index do |hack, index|
-      hack.update_attribute(:presentation_index, index + 1)
     end
   end
 

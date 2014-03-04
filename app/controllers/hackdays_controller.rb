@@ -9,4 +9,8 @@ class HackdaysController < ApplicationController
     @hackdays = Hackday.all
   end
 
+  def queue
+    @hackday = Hackday.find(params[:id])
+  end
+
 end

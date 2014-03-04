@@ -4,11 +4,14 @@ Hacktracker::Application.routes.draw do
   root :to => 'hackdays#index'
 
   resources :hackdays do
-    resources :hacks, only: [:index, :new, :create]
+    member do
+      get :queue
+    end
+    resources :hacks, only: [:index, :create]
   end
   resources :hacks, only: [:show, :edit, :update, :destroy] do
     member do
-      get :move_up_in_queue, :move_down_in_queue, :join_presentation, :leave_presentation, :downvote, :upvote
+      get :move_up_in_queue, :move_down_in_queue, :join_queue, :leave_queue, :downvote, :upvote
       post :add_contribution
       post :remove_contribution
     end

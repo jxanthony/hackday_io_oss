@@ -3,9 +3,9 @@
   .row
     .col-md-6
       %ul.nav.nav-pills
-        %li.active
+        %li
           = link_to "Top Hacks", hackday_path(@hackday)
-        %li 
+        %li.active 
           = link_to "Presentation Queue", queue_hackday_path(@hackday)
     - if current_user
       .col-md-4.pull-right
@@ -14,10 +14,10 @@
           Add Hack
 
   #hacks
-    - if @hacks
-      = render @hacks
+    - if @hackday.queue
+      = render @hackday.queue
     - else
-      %p no hacks submitted yet :(
+      %p "no hacks submitted yet :("
 
 
 = render partial: 'hacks/form', locals: { hack: @hackday.hacks.new }

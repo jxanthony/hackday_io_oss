@@ -114,14 +114,39 @@ describe "owning a hack" do
 
   it "should let contributors delete the hack" do
     visit hack_path(@hack)
+    find('#hack-edit').click
     find('#hack-delete').click
 
     current_path.should == hackday_path(@hackday)
     find('.alert.alert-success').text.should have_content("Your hack has been destroyed")
   end
 
-  it "should let contributors mark as ready to be presented"
-  it "should not let non-contributors mark as ready to be presented"
+  it "should let contributors add their hack to the presentation queue" do
+    visit hack_path(@hack)
+    find('#hack-enqueue').click
+
+    current_path.should == hack_path(@hack)
+    find('.alert.alert-success').text.should have_content("You have signed up to present your hack")
+    
+    visit queue_hackday_path(@hackday)
+
+    page.should have_content(@hack.title)  
+  end
+
+  it "should let contributors leave the presentation queue" do
+    @hack.update_attribute(:presentation_index, 2)
+    visit hack_path(@hack)
+    find('#hack-dequeue').click
+
+    current_path.should == hack_path(@hack)
+    find('.alert.alert-success').text.should have_content("You will no longer presenting your hack.")
+
+    visit queue_hackday_path(@hackday)
+
+    page.should_not have_content(@hack.title)
+  end
+
+  it "should not let non-contributors add a hack to the presentation queue"
 
 end
 

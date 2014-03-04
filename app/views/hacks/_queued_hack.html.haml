@@ -3,12 +3,31 @@
   .col-xs-12
     %h3
       = link_to hack.title, hack
+    
+    - if hack.hackday.presentation_in_progress    
+      - if hack.presentation_index == 1
+        .label.label-success Presenting now! 
+      - if hack.presentation_index == 2
+        .label.label-warning Stand By!
+      - if hack.presentation_index == 3
+        .label.label-default On Deck!
+      - if hack.presentation_index == 4
+        .label.label-default Please Get Ready
+
     .hack-description= truncate(hack.description, length: 140)
+    = render hack.contributors
+    
     - if hack.has_contributor?(current_user)
       .queue-buttons
-        = link_to move_up_in_queue_hack_path(hack), class: 'btn btn-xs btn-default' do
-          %span.glyphicon.glyphicon-arrow-up
-          %span Move Up
-        = link_to move_down_in_queue_hack_path(hack), class: 'btn btn-xs btn-default' do
-          %span.glyphicon.glyphicon-arrow-down
-          %span Move Down
+        - if hack.presentation_index != 1
+          = link_to move_up_in_queue_hack_path(hack), class: 'btn btn-xs btn-default' do
+            %span.glyphicon.glyphicon-arrow-up
+            %span Move Up
+        - if hack.presentation_index != hack.hackday.queue.size
+          = link_to move_down_in_queue_hack_path(hack), class: 'btn btn-xs btn-default' do
+            %span.glyphicon.glyphicon-arrow-down
+            %span Move Down
+        - if hack.presentation_index == 1
+          = link_to finish_presentation_hack_path(hack), class: 'btn btn-xs btn-default' do
+            %span.glyphicon.glyphicon-ok
+            %span Presentation Completed

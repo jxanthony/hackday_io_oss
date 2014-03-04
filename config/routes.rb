@@ -11,7 +11,7 @@ Hacktracker::Application.routes.draw do
   end
   resources :hacks, only: [:show, :edit, :update, :destroy] do
     member do
-      get :move_up_in_queue, :move_down_in_queue, :join_queue, :leave_queue, :downvote, :upvote
+      get :move_up_in_queue, :move_down_in_queue, :finish_presentation, :join_queue, :leave_queue, :downvote, :upvote
       post :add_contribution
       post :remove_contribution
     end

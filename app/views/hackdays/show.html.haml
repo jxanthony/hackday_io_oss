@@ -19,5 +19,6 @@
     - else
       %p no hacks submitted yet :(
 
+= render partial: 'activities/stream', locals: { scope: @hackday }
 
 = render partial: 'hacks/form', locals: { hack: @hackday.hacks.new }

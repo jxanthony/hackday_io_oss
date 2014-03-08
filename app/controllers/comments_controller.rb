@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   
   def create
-    hack = Hack.find_by_id params[:hack_id]
+    hack = Hack.find(params[:hack_id])
     unless hack
       flash[:error] = "no hack found!"
       redirect_to root_path
@@ -16,7 +16,6 @@ class CommentsController < ApplicationController
       flash[:error] = error_message
       return redirect_to :back
     else
-      Activity.create(:user_id => current_user.id, :hack_id => hack.id, :action => 'comment') unless params[:admin_comment]
       return redirect_to hack_path(hack)
     end
   end

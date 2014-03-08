@@ -59,5 +59,6 @@
 
       = f.submit "Post Comment", class: 'btn btn-success'
 
+= render partial: 'activities/stream', locals: { scope: @hack }
 
 = render partial: 'hacks/form', locals: { hack: @hack }

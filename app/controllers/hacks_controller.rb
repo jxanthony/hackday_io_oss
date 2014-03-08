@@ -9,6 +9,7 @@ class HacksController < ApplicationController
                                             :move_down_in_queue, 
                                             :join_presentation, 
                                             :leave_presentation]
+  has_mobile_fu
 
   def create
     # FIXME: gross
@@ -38,7 +39,6 @@ class HacksController < ApplicationController
       redirect_to edit_hack_path(@hack)
     else
       flash[:message] = "Update successful!"
-      Activity.create(:user_id => current_user.id, :hack_id => @hack.id, :action => 'edit')
       redirect_to hack_path(@hack)
     end
   end
@@ -103,7 +103,6 @@ class HacksController < ApplicationController
   def move_up_in_queue
     if @hack.hackday.move_up_in_queue(@hack)
       flash[:message] = "Your hack has been moved up in the presentation queue."
-      Activity.create(user_id: current_user.id, hack_id: @hack.id, action: 'move_up_in_queue')
     else
       flash[:error] = "Your hack is already at the top of the queue."
     end
@@ -113,7 +112,6 @@ class HacksController < ApplicationController
 
   def move_down_in_queue
     if @hack.hackday.move_down_in_queue(@hack)
-      Activity.create(user_id: current_user.id, hack_id: @hack.id, action: 'move_down_in_queue')
       flash[:message] = "Your hack has been moved down in the presentation queue."
     else
       flash[:error] = "Your hack is already the last one in the queue."

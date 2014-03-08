@@ -21,5 +21,8 @@
 require 'spec_helper'
 
 describe Hack do
-  pending "add some examples to (or delete) #{__FILE__}"
+  
+  it "should require a title and description"
+  it "should handle voting with dignity and grace"
+
 end

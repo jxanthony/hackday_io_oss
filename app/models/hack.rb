@@ -37,7 +37,8 @@ class Hack < ActiveRecord::Base
   before_create :set_group_number, :initialize_votes
   before_destroy :free_group_number
 
-  after_create :create_activity
+  after_create :activity_for_create
+  after_update :activity_for_update
 
   def upvote(user)
     self.lock!
@@ -51,6 +52,7 @@ class Hack < ActiveRecord::Base
     self.votes = self.upvoted_by.size - self.downvoted_by.size
 
     self.save!
+    create_activity('upvote')
   end
 
   def downvote(user)
@@ -65,6 +67,7 @@ class Hack < ActiveRecord::Base
     self.votes = self.upvoted_by.size - self.downvoted_by.size
 
     self.save!
+    create_activity('downvote')
   end
 
   def has_contributor?(user)
@@ -73,12 +76,13 @@ class Hack < ActiveRecord::Base
 
   def add_contribution(user)
     Contribution.create(:user_id => user.id, :hack_id => self.id)
-    Activity.create(:user_id => user.id, :hack_id => self.id, :action => 'add_contribution')
+    create_activity('add_contribution')
   end
 
   def remove_contribution(user)
-    self.contributions.detect { |contribution| contribution.user_id == user.id }.destroy
-    Activity.create(:user_id => user.id, :hack_id => self.id, :action => 'remove_contribution')
+    return false if self.contributors.empty? or not has_contributor?(user)
+    contributions.where(user_id: user.id).delete_all
+    create_activity('remove_contribution')
   end
 
   def presenting?
@@ -110,12 +114,16 @@ class Hack < ActiveRecord::Base
     self.downvoted_by = [] unless self.downvoted_by == []
   end
 
-  def create_activity
-    # FIXME: gross
-    activity = Activity.new(action: 'create')
-    activity.user = self.contributions.first.user
-    activity.hack = self
-    activity.save
+  def activity_for_create
+    create_activity('create')
+  end
+
+  def activity_for_update
+    create_activity('edit')
+  end
+
+  def create_activity(action)
+    activities.create(action: action, user_id: User.current.id) if User.current
   end
 
 end

@@ -13,7 +13,8 @@
 
 class Hackday < ActiveRecord::Base
   attr_accessible :date, :title
-  has_many :hacks
+  has_many :hacks, :dependent => :destroy
+  has_many :activities, through: :hacks
 
   serialize :group_numbers
   before_create :setup_group_numbers
@@ -33,19 +34,23 @@ class Hackday < ActiveRecord::Base
   end
 
   def move_up_in_queue(hack)
-    return false if hack.presentation_index == 1
+    return false if hack.presentation_index.nil? or hack.presentation_index == 1
 
     swap_target = hacks.find_by_presentation_index(hack.presentation_index - 1)
     swap_target.update_attribute(:presentation_index, hack.presentation_index) if swap_target
     hack.update_attribute(:presentation_index, hack.presentation_index - 1)
+
+    create_activity(hack, 'move_up_in_queue')
   end
 
   def move_down_in_queue(hack)
-    return false if hack.presentation_index + 1 > queue.size
+    return false if hack.presentation_index.nil? or hack.presentation_index + 1 > queue.size
 
     swap_target = hacks.find_by_presentation_index(hack.presentation_index + 1)
     swap_target.update_attribute(:presentation_index, hack.presentation_index) if swap_target
     hack.update_attribute(:presentation_index, hack.presentation_index + 1)
+
+    create_activity(hack, 'move_down_in_queue')
   end
 
   private
@@ -61,5 +66,10 @@ class Hackday < ActiveRecord::Base
       hack.update_attribute(:presentation_index, former_index - 1)
     end
   end
+
+  def create_activity(hack, action)
+    hack.activities.create(action: action, user_id: User.current.id) if User.current
+  end
+
 
 end

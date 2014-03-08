@@ -11,6 +11,7 @@ gem 'will_paginate'
 gem 'unicorn'
 gem 'haml'
 gem 'bootstrap-sass'
+gem 'mobile-fu'
 
 group :production do
   gem "pg"

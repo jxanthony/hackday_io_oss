@@ -17,7 +17,8 @@
     - if @hackday.queue
       = render partial: 'hacks/queued_hack', collection: @hackday.queue
     - else
-      %p "no hacks submitted yet :("
+      %p Nothing queued up to present :(
 
+= render partial: 'activities/stream', locals: { scope: @hackday }
 
 = render partial: 'hacks/form', locals: { hack: @hackday.hacks.new }

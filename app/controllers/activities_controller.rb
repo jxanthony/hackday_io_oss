@@ -1,7 +1,11 @@
 class ActivitiesController < ApplicationController
   def index
-    results = Activity.where("id > #{params[:cursor] || 0}").order("created_at DESC").limit(12).reverse!
+    if params[:hack_id]
+      scope = Hack.find(params[:hack_id])
+    elsif params[:hackday_id]
+      scope = Hackday.find(params[:hackday_id])
+    end
 
-    render :json => results.to_json(:include => [:user, :hack]), :status => :ok
+    render scope.activities.where("activities.id > #{params[:cursor] || 0}")
   end
 end

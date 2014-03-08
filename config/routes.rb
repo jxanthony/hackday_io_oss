@@ -8,6 +8,7 @@ Hacktracker::Application.routes.draw do
       get :queue
     end
     resources :hacks, only: [:index, :create]
+    resources :activities, only: [:index]
   end
   resources :hacks, only: [:show, :edit, :update, :destroy] do
     member do
@@ -15,6 +16,7 @@ Hacktracker::Application.routes.draw do
       post :add_contribution
       post :remove_contribution
     end
+    resources :activities, only: [:index]
   end
 
   match 'welcome/index' => 'welcome#index', :as => 'welcome'
@@ -23,7 +25,7 @@ Hacktracker::Application.routes.draw do
   match 'signout', to: 'sessions#destroy', as: 'signout'
 
   resources :comments
-  resources :activities
+  # resources :activities
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

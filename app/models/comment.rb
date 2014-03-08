@@ -18,4 +18,13 @@ class Comment < ActiveRecord::Base
   belongs_to :user
 
   validates_presence_of :body, :hack_id, :user_id
+
+  after_save :create_activity
+
+
+  private
+
+  def create_activity
+    hack.activities.create(action: 'comment', user_id: User.current.id) unless admin_comment?
+  end
 end

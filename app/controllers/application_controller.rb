@@ -6,10 +6,10 @@ class ApplicationController < ActionController::Base
   private
 
   def login_required
-    if Rails.env.production?
-      unless current_user
-        redirect_to welcome_path
-      end
+    if Rails.env.production? and not current_user
+      redirect_to welcome_path
+    else
+      User.current = current_user
     end
   end
 

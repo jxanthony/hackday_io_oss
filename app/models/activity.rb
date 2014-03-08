@@ -15,4 +15,6 @@ class Activity < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :hack
+
+  default_scope order('created_at DESC')
 end

@@ -17,9 +17,29 @@ describe "watching a hack" do
     test_sign_in
     visit hack_path(@hack)
     fill_in('comment_body', with: "ur hack sux")
-    click_on("Post Comment")
+    click_on("Post")
 
     page.should have_content("ur hack sux")
+  end
+
+  it "should let admins make private comments" do
+    test_sign_in
+    @hackday.admins << User.last
+    visit hack_path(@hack)
+    fill_in('comment_body', with: "this hack is the wurst")
+    check('comment_private')
+    click_on("Post")
+
+    page.should have_content("this hack is the wurst")
+    page.should have_css('.private-notice')
+  end
+
+  it "should not show private comments to non-admins" do
+    test_sign_in
+    comment = Fabricate(:comment, hack: @hack, user: User.last, private: true)
+    visit hack_path(@hack)
+
+    page.should_not have_content(comment.body)
   end
 
   it "should indicate comments made by contributors"

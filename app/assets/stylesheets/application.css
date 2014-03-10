@@ -16,7 +16,13 @@
 body { padding-top: 50px; }
 #alerts { margin-top: 10px; }
 
-.timeago { font-size: 0.8em; }
+abbr.timeago 
+{ 
+  font-size: 0.8em; 
+  color: #aaa;
+  text-decoration: none;
+  border-bottom: none;
+}
  
 .activity
 {

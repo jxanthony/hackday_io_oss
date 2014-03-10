@@ -1,6 +1,5 @@
 Hacktracker::Application.routes.draw do
 
-  resources :admin_comments
   root :to => 'hackdays#index'
 
   resources :hackdays do

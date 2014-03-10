@@ -50,14 +50,21 @@
   - else 
     %p Sadly no one has commented yet!
 
-  #new_comment_form
-    %strong Add your thoughts!
+  .row#new_comment_form
     = form_for @hack.comments.new do |f|
-      %fieldset.input
-        = f.text_area :body, class: 'form-control', rows: 3
+      .col-xs-9.col-md-10
+        %fieldset.input
+          = f.text_area :body, class: 'form-control', rows: 1, |
+                        placeholder: "Write a comment.."       |
+        - if @hack.hackday.has_admin?(current_user)
+          .checkbox
+            %label
+              = f.check_box :private
+              = "Make this comment private?"
         = hidden_field_tag 'hack_id', @hack.id
 
-      = f.submit "Post Comment", class: 'btn btn-success'
+      .col-xs-3.col-md-2
+        = f.submit "Post", class: 'btn btn-success'
 
 = render partial: 'activities/stream', locals: { scope: @hack }
 

@@ -2,17 +2,17 @@
 #
 # Table name: comments
 #
-#  id            :integer          not null, primary key
-#  hack_id       :integer
-#  body          :text
-#  user_id       :integer
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  admin_comment :boolean
+#  id         :integer          not null, primary key
+#  hack_id    :integer
+#  body       :text
+#  user_id    :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  private    :boolean
 #
 
 class Comment < ActiveRecord::Base
-  attr_accessible :body, :hack_id, :user_id, :admin_comment
+  attr_accessible :body, :hack_id, :user_id, :private
 
   belongs_to :hack
   belongs_to :user
@@ -25,6 +25,6 @@ class Comment < ActiveRecord::Base
   private
 
   def create_activity
-    hack.activities.create(action: 'comment', user_id: User.current.id) unless admin_comment?
+    hack.activities.create(action: 'comment', user_id: User.current.id) unless private?
   end
 end

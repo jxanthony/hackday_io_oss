@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140217083742) do
+ActiveRecord::Schema.define(:version => 20140309003518) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -21,20 +21,13 @@ ActiveRecord::Schema.define(:version => 20140217083742) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "admin_comments", :force => true do |t|
-    t.integer  "user_id"
-    t.text     "body"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "comments", :force => true do |t|
     t.integer  "hack_id"
     t.text     "body"
     t.integer  "user_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-    t.boolean  "admin_comment"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.boolean  "private",    :default => false
   end
 
   create_table "contributions", :force => true do |t|
@@ -58,6 +51,11 @@ ActiveRecord::Schema.define(:version => 20140217083742) do
     t.text     "group_numbers"
   end
 
+  create_table "hackdays_users", :force => true do |t|
+    t.integer "hackday_id"
+    t.integer "user_id"
+  end
+
   create_table "hacks", :force => true do |t|
     t.string   "title"
     t.text     "description",        :limit => 255
@@ -79,14 +77,11 @@ ActiveRecord::Schema.define(:version => 20140217083742) do
     t.string   "name"
     t.string   "oauth_token"
     t.datetime "oauth_expires_at"
-    t.integer  "bankroll",         :default => 10
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
-    t.boolean  "admin"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
     t.integer  "uid"
     t.string   "email"
     t.string   "mugshot_url"
-    t.boolean  "mc"
   end
 
 end

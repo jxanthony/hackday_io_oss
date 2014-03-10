@@ -15,9 +15,14 @@ class Hackday < ActiveRecord::Base
   attr_accessible :date, :title
   has_many :hacks, :dependent => :destroy
   has_many :activities, through: :hacks
+  has_and_belongs_to_many :admins, class_name: 'User'
 
   serialize :group_numbers
   before_create :setup_group_numbers
+
+  def has_admin?(user)
+    self.admins.include? user
+  end
 
   def queue
     hacks.where("presentation_index IS NOT NULL").order("presentation_index ASC")

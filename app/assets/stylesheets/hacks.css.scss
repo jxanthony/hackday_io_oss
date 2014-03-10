@@ -6,13 +6,14 @@
 .comment 
 {	
 	clear: both;
-	margin-top: 15px;
 	display: block;
+	margin-bottom: 10px;
+	padding: 10px;
+
 	img 
 	{ 
 		float: left; 
 		margin-right: 10px;
-		margin-bottom: 50px;
 	}
 }
 
@@ -35,11 +36,22 @@
 {
 	margin-top: 30px;
 	clear: both;
+
+	.checkbox { color: #aaa; }
+	.btn { width: 100%;	}
+	.col-xs-3 { padding-left: 5px; }
+	.col-xs-9 { padding-right: 0; }
 }
-#new_comment_form .btn 
+.private
+{
+	background-color: #eee;
+	border-radius: 5px;
+}
+.private-notice 
 { 
-	float: right;
-	margin-top: 10px;
+	color: #aaa;
+	font-size: 0.8em;
+	margin-left: 10px;
 }
 
 #team img 

@@ -25,8 +25,9 @@ class HacksController < ApplicationController
   end
 
   def show
-    @hack_comments = @hack.comments.where(:admin_comment => nil).order('created_at DESC').paginate(:page => params[:hack_comments_page] || 1, :per_page => 10)
-    @hack_admin_comments = @hack.comments.where(:admin_comment => true).order('created_at DESC').paginate(:page => params[:hack_admin_comments_page] || 1, :per_page => 8)
+    unless @hack.hackday.has_admin?(current_user)
+      @hack.comments = @hack.comments.where(private: false)
+    end
   end
 
   def edit
@@ -146,7 +147,7 @@ class HacksController < ApplicationController
   end
 
   def check_permission
-    unless @hack.has_contributor?(current_user)
+    unless @hack.has_contributor?(current_user) or @hack.hackday.has_admin?(current_user)
       flash[:error] = "You don't have permission to perform this action."
       return redirect_to @hack.hackday
     end

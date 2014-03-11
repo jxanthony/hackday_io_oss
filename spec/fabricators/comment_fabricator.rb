@@ -8,7 +8,7 @@
 #  user_id    :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  private    :boolean
+#  private    :boolean          default(FALSE)
 #
 
 Fabricator(:comment) do

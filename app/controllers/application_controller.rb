@@ -1,8 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  has_mobile_fu
-
   before_filter :login_required
 
   private
@@ -19,7 +17,11 @@ class ApplicationController < ActionController::Base
     return User.first if Rails.env.development?
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
-
   helper_method :current_user
 
+  def is_mobile_device?
+    request.user_agent =~ /Mobile|webOS|iPhone/
+  end
+  helper_method :is_mobile_device?
+  
 end

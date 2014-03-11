@@ -6,10 +6,10 @@
         %li.active
           = link_to "Top Hacks", hackday_path(@hackday)
         %li 
-          = link_to "Presentation Queue", queue_hackday_path(@hackday)
-    - if current_user
+          = link_to "Queue", queue_hackday_path(@hackday)
+    - if current_user and not is_mobile_device?
       .col-md-4.pull-right
-        %button.btn.btn-success.btn-lg{'data-toggle' => 'modal', 'data-target' => '#hack-form'}
+        %button.btn.btn-success.btn-sm{'data-toggle' => 'modal', 'data-target' => '#hack-form'}
           %span.glyphicon-plus.glyphicon
           Add Hack
 
@@ -19,6 +19,7 @@
     - else
       %p no hacks submitted yet :(
 
-= render partial: 'activities/stream', locals: { scope: @hackday }
+- unless is_mobile_device?
+  = render partial: 'activities/stream', locals: { scope: @hackday }
 
 = render partial: 'hacks/form', locals: { hack: @hackday.hacks.new }

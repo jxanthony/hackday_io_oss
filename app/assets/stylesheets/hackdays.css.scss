@@ -14,3 +14,19 @@
 
 // Presentation Queue
 .queue-buttons { margin-top: 5px; }
+
+// Main nav
+.nav-pills li a { padding: 5px; }
+
+.add-hack
+{
+  text-align: center;
+
+  button
+  {
+    width: 75px; height: 75px;
+    border-radius: 75px;
+    font-size: 3em;
+    text-align: center;
+  }
+}

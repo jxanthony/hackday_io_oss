@@ -17,7 +17,7 @@
     .hack-description= truncate(hack.description, length: 140)
     = render hack.contributors
     
-    - if hack.has_contributor?(current_user)
+    - if hack.hackday.has_admin?(current_user) # only admin/mc should be allowed to move hacks around in presentation queue
       .queue-buttons
         - if hack.presentation_index != 1
           = link_to move_up_in_queue_hack_path(hack), class: 'btn btn-xs btn-default' do

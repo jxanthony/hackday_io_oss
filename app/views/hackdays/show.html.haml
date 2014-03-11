@@ -7,6 +7,10 @@
           = link_to "Top Hacks", hackday_path(@hackday)
         %li 
           = link_to "Queue", queue_hackday_path(@hackday)
+        - if @hackday.has_admin?(current_user)
+          %li
+            = link_to "Judges Comments", judges_hackday_path(@hackday)
+
     - if current_user and not is_mobile_device?
       .col-md-4.pull-right
         %button.btn.btn-success.btn-sm{'data-toggle' => 'modal', 'data-target' => '#hack-form'}

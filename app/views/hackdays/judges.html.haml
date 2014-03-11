@@ -5,11 +5,10 @@
       %ul.nav.nav-pills
         %li
           = link_to "Top Hacks", hackday_path(@hackday)
-        %li.active 
+        %li 
           = link_to "Queue", queue_hackday_path(@hackday)
-        - if @hackday.has_admin?(current_user)
-          %li
-            = link_to "Judges Comments", judges_hackday_path(@hackday)
+        %li.active
+          = link_to "Judges Comments", judges_hackday_path(@hackday)
 
     - if current_user and not is_mobile_device?
       .col-md-4.pull-right
@@ -18,10 +17,10 @@
           Add Hack
 
   #hacks
-    - if @hackday.queue
-      = render partial: 'hacks/queued_hack', collection: @hackday.queue
+    - if @judges_comments
+      = render @judges_comments, judges: true
     - else
-      %p Nothing queued up to present :(
+      %p No private comments yet - this is probably for the best
 
   - if is_mobile_device?
     .add-hack

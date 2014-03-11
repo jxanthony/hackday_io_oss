@@ -5,6 +5,7 @@ Hacktracker::Application.routes.draw do
   resources :hackdays do
     member do
       get :queue
+      get :judges
     end
     resources :hacks, only: [:index, :create]
     resources :activities, only: [:index]

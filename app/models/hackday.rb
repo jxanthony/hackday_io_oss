@@ -15,6 +15,7 @@ class Hackday < ActiveRecord::Base
   attr_accessible :date, :title
   has_many :hacks, :dependent => :destroy
   has_many :activities, through: :hacks
+  has_many :comments, through: :hacks
   has_and_belongs_to_many :admins, class_name: 'User'
 
   serialize :group_numbers

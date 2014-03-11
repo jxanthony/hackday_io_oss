@@ -13,4 +13,15 @@ class HackdaysController < ApplicationController
     @hackday = Hackday.find(params[:id])
   end
 
+  def judges
+    @hackday = Hackday.find(params[:id])
+
+    unless @hackday.has_admin?(current_user)
+      flash[:error] = "You're not a judge!"
+      return redirect_to :back
+    end
+
+    @judges_comments = @hackday.comments.where(private: true).order("created_at DESC")
+  end
+
 end

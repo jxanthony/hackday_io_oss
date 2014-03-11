@@ -4,6 +4,11 @@
   .col-xs-10.col-sm-11.comment-body
     %p
       %strong= comment.user.name
+      - if local_assigns[:judges].present? and judges == true
+        = " posted on " 
+        %strong= link_to(comment.hack.title, comment.hack)
+        = ".."
+        %br
       = comment.body
     %abbr.timeago{ title: comment.created_at.getutc.iso8601 }
       = comment.created_at.to_s

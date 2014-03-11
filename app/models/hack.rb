@@ -70,6 +70,22 @@ class Hack < ActiveRecord::Base
     create_activity('downvote')
   end
 
+  def upvoted_by?(user)
+    if user
+      self.upvoted_by.include? user.id
+    else 
+      false
+    end
+  end
+
+  def downvoted_by?(user)
+    if user
+      self.downvoted_by.include? user.id
+    else
+      false
+    end
+  end
+
   def has_contributor?(user)
     self.contributors.include? user
   end

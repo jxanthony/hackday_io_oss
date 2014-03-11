@@ -52,13 +52,30 @@ describe "watching a hack" do
     page.should have_content("You need to be signed in") 
   end
 
-  it "should let signed-in, non-contributors vote" do
+  it "should let signed-in, non-contributors vote hacks up" do
     test_sign_in
     visit hack_path(@hack)
     find(:xpath, "//a/img[@alt='Vote Up']/..").click
 
     find('.votes').should have_content("1")
   end
+
+  it "should let signed-in, non-contributors vote hacks down" do
+    test_sign_in
+    visit hack_path(@hack)
+    find(:xpath, "//a/img[@alt='Vote Down']/..").click
+
+    find('.votes').should have_content("-1")
+  end
+
+  it "should indicate the user's vote" do
+    test_sign_in
+    visit hack_path(@hack)
+    find(:xpath, "//a/img[@alt='Vote Up']/..").click
+
+    page.should have_css('.voted-up')
+  end
+
   it "should not let contributors vote"
 
   it "should not let non-contributors muck with a hack" do

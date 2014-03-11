@@ -59,7 +59,7 @@
         - if @hack.hackday.has_admin?(current_user)
           .checkbox
             %label
-              = f.check_box :private
+              = f.check_box :private, :checked => true
               = "Make this comment private?"
         = hidden_field_tag 'hack_id', @hack.id
 

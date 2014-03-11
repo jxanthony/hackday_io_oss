@@ -66,6 +66,7 @@
       .col-xs-3.col-md-2
         = f.submit "Post", class: 'btn btn-success'
 
-= render partial: 'activities/stream', locals: { scope: @hack }
+- unless is_mobile_device?
+  = render partial: 'activities/stream', locals: { scope: @hack }
 
 = render partial: 'hacks/form', locals: { hack: @hack }

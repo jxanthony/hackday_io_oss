@@ -21,3 +21,5 @@
 
 
 config/app_config.yml
+
+/coverage/

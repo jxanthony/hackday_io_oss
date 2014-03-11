@@ -1,0 +1,23 @@
+.col-md-8
+  %h2= @hackday.title
+  .row
+    .col-md-6
+      %ul.nav.nav-pills
+        %li
+          = link_to "Top Hacks", hackday_path(@hackday)
+        %li.active 
+          = link_to "Presentation Queue", queue_hackday_path(@hackday)
+    - if current_user
+      .col-md-4.pull-right
+        %button.btn.btn-success.btn-lg{'data-toggle' => 'modal', 'data-target' => '#hack-form'}
+          %span.glyphicon-plus.glyphicon
+          Add Hack
+        = render partial: 'hacks/form', locals: { hack: @hackday.hacks.new }
+
+  #hacks
+    - if @hackday.queue
+      = render @hackday.queue
+    - else
+      %p no hacks submitted yet :(
+
+

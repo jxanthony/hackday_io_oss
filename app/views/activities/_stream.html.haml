@@ -1,0 +1,26 @@
+.col-md-4
+  %h3 Activity
+  #activities
+
+:javascript
+  $(function(){
+
+    var interval = 10000;
+    var cursor = 0;
+    getActivities();
+    // TODO: should back off exponentially (use setTimeout recursively?)
+    setInterval(function(){ getActivities(); }, interval);
+
+    function getActivities(){
+      $.get("#{url_for(scope)+'/activities'}", { cursor: cursor })
+      .success(function(data){
+        if(data != " ")
+        {
+          cursor = $(data).first().attr('data-activity');
+          $('#activities').prepend(data);
+          $('abbr.timeago').timeago();
+        }
+      });
+    }
+  
+  });

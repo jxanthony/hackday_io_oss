@@ -1,0 +1,30 @@
+.modal.fade#hack-form
+  .modal-dialog{role: 'dialog'}
+    .modal-content
+      / FIXME: there must be a cleaner way than a bunch of conditionals.. 
+      - hack.new_record? ? form_object = [hack.hackday, hack] : form_object = hack
+      = form_for form_object do |f|
+        .modal-header
+          %button.close{type: 'button', 'data-dismiss' => 'modal', 'aria-hidden' => 'true'} &times;
+          %h4.modal-title      
+            = hack.new_record? ? "Create a new hack!" : "Edit " + hack.title
+        .modal-body
+          .form-group
+            = f.label :title
+            = f.text_field :title, class: 'form-control'
+          .form-group
+            = f.label :description
+            = f.text_area :description, class: 'form-control', rows: 6
+          .form-group
+            = f.label :url
+            = f.text_field :url, class: 'form-control', placeholder: "(optional)"
+
+        .modal-footer
+          - unless hack.new_record? 
+            = link_to "Delete Hack", @hack,                     |
+                      method: :delete,                          |
+                      id: 'hack-delete',                        |
+                      confirm: "YOU WANT TO DELETE YOUR HACK?!" |
+          %button.btn.btn-default{type: "button", 'data-dismiss'=>"modal"} Cancel
+          - hack.new_record? ? submit_text = "Create your hack!" : submit_text = "Update your hack!"
+          = f.submit submit_text, class: 'btn btn-primary btn-success'

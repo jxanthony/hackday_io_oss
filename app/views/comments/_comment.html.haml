@@ -1,0 +1,18 @@
+.row.comment{class: ('private' if comment.private?)}
+  .col-xs-2.col-sm-1
+    = render comment.user
+  .col-xs-10.col-sm-11.comment-body
+    %p
+      %strong= comment.user.name
+      - if local_assigns[:judges].present? and judges == true
+        = " posted on " 
+        %strong= link_to(comment.hack.title, comment.hack)
+        = ".."
+        %br
+      = comment.body
+    %abbr.timeago{ title: comment.created_at.getutc.iso8601 }
+      = comment.created_at.to_s
+    - if comment.private?
+      %abbr.private-notice{title: "Private comments are only visible to hackday admins"}
+        Private
+        %span.glyphicon.glyphicon-lock

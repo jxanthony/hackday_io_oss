@@ -21,4 +21,4 @@ CONNECTION             = Net::HTTP.new('yammer.com', 443)
 CONNECTION.use_ssl     = true
 
 # Initialize the rails application
-Hackday::Application.initialize!
+Hacktracker::Application.initialize!

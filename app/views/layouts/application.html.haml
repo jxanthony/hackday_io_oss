@@ -1,0 +1,63 @@
+!!!
+%html
+  %head
+    / TODO: Yammer specific
+    %title 
+      = "Yammer Hack Days"
+      = yield :title
+    = stylesheet_link_tag 'application', media: 'all'
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
+    = favicon_link_tag 'http://www.google.com/s2/favicons?domain=www.yammer.com'
+    %meta{name: 'viewport', content: 'width=device-width, initial-scale=1'}
+
+
+  %body
+    .navbar.navbar-default.navbar-fixed-top{role: 'navigation'}
+      .container
+        .navbar-header
+          %button.navbar-toggle{type: 'button', 'data-toggle' => 'collapse', 'data-target' => ".navbar-collapse"}
+            %span.sr-only Toggle Navigation
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          / TODO: Yammer specific
+          = link_to "Yammer Hack Days", root_path, class: 'navbar-brand'
+        
+        .navbar-collapse.collapse
+          - if current_user
+            %ul.nav.navbar-nav.navbar-right
+              %li
+                = link_to signout_path do
+                  %span.visible-xs 
+                    %span.glyphicon.glyphicon-off
+                    Sign Out
+                  %span.glyphicon.glyphicon-off.hidden-xs
+            .navbar-text.navbar-right= current_user.name
+          - else 
+            %ul.nav.navbar-nav.navbar-right
+              %li
+                / TODO: Yammer specific
+                = link_to "Sign In", "/auth/yammer"
+
+    .container
+      .row#alerts
+        - if flash[:error]
+          .alert.alert-warning
+            = flash[:error]
+            = link_to "&times;".html_safe, '', class: 'close', 'data-dismiss' => 'alert'
+        - if flash[:message]
+          .alert.alert-success
+            = flash[:message]
+            = link_to "&times;".html_safe, '', class: 'close', 'data-dismiss' => 'alert'
+
+      .row
+        = yield
+
+      .row
+        = render 'layouts/footer'
+
+      :javascript
+        $(function(){
+          $('abbr.timeago').timeago();
+        });

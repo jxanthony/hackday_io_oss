@@ -1,0 +1,7 @@
+.hack.row
+  .col-xs-2.col-sm-1
+    = render partial: 'hacks/voting', locals: { hack: hack }
+  .hack-details.col-xs-10.col-sm-11
+    %h3
+      = link_to hack.title, hack
+    .hack-description= truncate(hack.description, length: 140)

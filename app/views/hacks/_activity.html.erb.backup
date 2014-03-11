@@ -1,0 +1,97 @@
+<!-- FIXME: SO GROSS -->
+
+<ul id="activities">
+</ul>
+
+
+<script type="text/javascript">
+(function(){
+  var cursor = 0;
+
+  var activityDisplay = {
+      run: function() {
+        var self = this;
+        self.request();
+        setInterval(function(){
+          self.request();
+        }, 15000);
+      }
+    , request: function() {
+        var self = this;
+        // do the ajax thing
+        $.ajax({
+          type: "GET"
+        , url: "<%= activities_path %>"
+        , data: { cursor: cursor }
+        , success: function(data) { self.success(data); }
+        });
+      }
+    , success: function(results) {
+        var self = this;
+        _.each(results, function(item) {
+          $activities = $('#activities');
+          $item = $(item);
+          if ($item.attr('id') > cursor) {
+            var markup = self.generateActivityMessage(item);
+            $activities.prepend($(markup));
+            cursor = $item.attr('id');
+          }
+          // generate dom node, prepend
+        });
+        $('[data-tooltip]').tooltip();
+      }
+    , error: function(error) {
+        // this is not important for now
+      }
+    , generateActivityMessage: function(activity) {
+        $activity = $(activity);
+        $user = $($activity.attr('user'));
+        $hack = $($activity.attr('hack'));
+        var message = '';
+        switch($activity.attr('action')) {
+          case 'upvote':
+            message = '<b>' + $user.attr('name') + '</b> voted up <i><a href="/hacks/' + $hack.attr('id') + '">' + $hack.attr('title') + '</a></i>';
+            break;
+          case 'downvote':
+            message = '<b>' + $user.attr('name') + '</b> voted down <i><a href="/hacks/' + $hack.attr('id') + '">' + $hack.attr('title') + '</a></i>';
+            break;
+          case 'comment':
+            message = '<b>' + $user.attr('name') + '</b> commented on <i><a href="/hacks/' + $hack.attr('id') + '">' + $hack.attr('title') + '</a></i>';
+            break;
+          case 'add_contribution':
+            message = '<b>' + $user.attr('name') + '</b> was a contributor on <i><a href="/hacks/' + $hack.attr('id') + '">' + $hack.attr('title') + '</a></i>';
+            break;
+          case 'remove_contribution':
+            message = '<b>' + $user.attr('name') + '</b> was no longer a contributor on <i><a href="/hacks/' + $hack.attr('id') + '">' + $hack.attr('title') + '</a></i>';
+            break;
+          case 'create':
+            message = '<b>' + $user.attr('name') + '</b> created an entry for <i><a href="/hacks/' + $hack.attr('id') + '">' + $hack.attr('title') + '</a></i>';
+            break;
+          case 'join_presentation':
+            message = '<b>' + $user.attr('name') + '</b> will be presenting <i><a href="/hacks/' + $hack.attr('id') + '">' + $hack.attr('title') + '</a></i>';
+            break;
+          case 'leave_presentation':
+            message = '<b>' + $user.attr('name') + '</b> is no longer presenting <i><a href="/hacks/' + $hack.attr('id') + '">' + $hack.attr('title') + '</a></i>';
+            break;
+          case 'move_up_in_queue':
+            message = '<b>' + $user.attr('name') + '</b> moved <i><a href="/hacks/' + $hack.attr('id') + '">' + $hack.attr('title') + '</a></i> up in the presentation queue';
+            break;
+          case 'move_down_in_queue':
+            message = '<b>' + $user.attr('name') + '</b> moved <i><a href="/hacks/' + $hack.attr('id') + '">' + $hack.attr('title') + '</a></i> down in the presentation queue';
+            break;
+          case 'edit':
+            message = '<b>' + $user.attr('name') + '</b> edited <i><a href="/hacks/' + $hack.attr('id') + '">' + $hack.attr('title') + '</a></i>';
+            break;
+        }
+        return '<li class="activity" id="activity ' + $activity.attr('id') + '">' +
+               '<img src="' + $user.attr('mugshot_url') + '" data-tooltip title="' + $user.attr('name') + '" class="img-circle" />' +
+               '<div class="activity-body">' + message + '</div>'
+               '</li>';
+      }
+  };
+
+  $(document).ready(function(){
+    activityDisplay.run();
+  });
+})();
+</script>

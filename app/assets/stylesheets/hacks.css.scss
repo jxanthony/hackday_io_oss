@@ -3,49 +3,82 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
+#team { margin-top: 15px; }
+
 .comment 
 {	
-	clear: both;
-	margin-top: 15px;
-	display: block;
-	img 
-	{ 
-		float: left; 
-		margin-right: 10px;
-		margin-bottom: 50px;
-	}
-}
+	padding: 10px; 
+	margin: 0 0 15px 0;
 
-#new_comment_form 
-{
-	margin-top: 30px;
-	clear: both;
-	textarea 
-	{ 
-		width: 400px; 
-		height: 100px;
-	}
+	div	{ padding: 0; }
+	img { margin-right: 10px; }
 }
+.comment-body { padding-left: 10px; }
 
 .votes 
 { 
 	font-size: 2em; 
 	vertical-align: middle;
 	margin: 7px;
+	line-height: 1em;
 }
 .hack-voting 
 { 
 	width: 60px;
-	height:70px;
 	text-align: center; 
-	float: left;
-}
-.hack-details
-{
-	margin-left: 60px;
 }
 
-#current-contributor
+#new_comment_form 
 {
-  margin-bottom: 10px;
+	margin-top: 30px;
+	clear: both;
+
+	.checkbox { color: #aaa; }
+	.btn { width: 100%;	}
+	.col-xs-3 { padding-left: 5px; }
+	.col-xs-9 { padding-right: 0; }
 }
+.private
+{
+	background-color: #eee;
+	border-radius: 5px;
+}
+.private-notice 
+{ 
+	color: #aaa;
+	font-size: 0.8em;
+	margin-left: 10px;
+}
+
+#team img 
+{
+	float: left;
+	display: block;
+	margin-right: 5px;
+}
+#hack-join
+{
+	border: 2px dashed #666;
+	background-color: #ddd;
+	color: #666;
+	border-radius: 45px;
+	text-align: center;
+	padding-top: 10px;
+	display: block;
+	float: left;
+	height: 45px; width: 45px;
+}
+#hack-join:hover
+{
+	border: 2px solid #666;
+	text-decoration: none;
+	color: #333;
+}
+
+#hack-edit { float: right; }
+#hack-delete
+{
+	color: #aaa;
+	float: left;
+}
+

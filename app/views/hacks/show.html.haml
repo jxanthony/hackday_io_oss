@@ -1,0 +1,72 @@
+= content_for :title do
+  = raw("&raquo;") + ' ' + @hack.hackday.title
+
+.col-md-8
+  = link_to raw("&laquo;") + ' ' + @hack.hackday.title, @hack.hackday
+  %h2#hack-title= @hack.title
+  - if @hack.has_contributor?(current_user)
+    .alert.alert-info
+      - unless @hack.presenting?
+        = "This hack will not be presented."
+        = link_to join_queue_hack_path(@hack), type: 'button',  |
+                  class: 'btn btn-success btn-xs',              |
+                  id: 'hack-enqueue' do                         |
+          %span= "Queue for presentation"
+      - else
+        = "This hack will be presented " + @hack.presentation_index.ordinalize + "."
+        = link_to leave_queue_hack_path(@hack), type: 'button', |
+                  class: 'btn btn-danger btn-xs',               |
+                  id: 'hack-dequeue' do                         |
+          %span= "Not Ready!"
+
+      = link_to '#',                                       |
+                type: 'button',                            |
+                class: 'btn btn-xs', id: 'hack-edit',      |
+                'data-toggle' => 'modal',                  |
+                'data-target' => '#hack-form' do           |
+        %span Edit Hack
+
+  .row
+    .col-xs-2.col-sm-1
+      = render partial: 'voting', locals: { hack: @hack }
+    .col-xs-10.col-sm-11
+      .hack-details
+        %p= @hack.description
+        - unless @hack.url.blank?
+          = link_to "Learn more here!", @hack.url
+      #team
+        %strong Team
+        %br
+        = render @hack.contributors
+        - if current_user and not @hack.has_contributor?(current_user)
+          = link_to "Join", add_contribution_hack_path(@hack),          |
+                    confirm: "Did you really contribute to this hack?", |
+                    method: :post,                                      |
+                    id: 'hack-join'                                     |
+
+  %h3 Comments
+  - unless @hack.comments.empty?
+    = render @hack.comments
+  - else 
+    %p Sadly no one has commented yet!
+
+  .row#new_comment_form
+    = form_for @hack.comments.new do |f|
+      .col-xs-9.col-md-10
+        %fieldset.input
+          = f.text_area :body, class: 'form-control', rows: 1, |
+                        placeholder: "Write a comment.."       |
+        - if @hack.hackday.has_admin?(current_user)
+          .checkbox
+            %label
+              = f.check_box :private
+              = "Make this comment private?"
+        = hidden_field_tag 'hack_id', @hack.id
+
+      .col-xs-3.col-md-2
+        = f.submit "Post", class: 'btn btn-success'
+
+- unless is_mobile_device?
+  = render partial: 'activities/stream', locals: { scope: @hack }
+
+= render partial: 'hacks/form', locals: { hack: @hack }

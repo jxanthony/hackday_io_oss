@@ -1,14 +1,22 @@
-Hackday::Application.routes.draw do
+Hacktracker::Application.routes.draw do
 
-  resources :admin_comments
-  root :to => 'hacks#index'
+  root :to => 'hackdays#index'
 
-  resources :hacks do
+  resources :hackdays do
     member do
-      get :move_up_in_queue, :move_down_in_queue, :join_presentation, :leave_presentation, :downvote, :upvote
-      post :add_contribution, :as => 'ihelped'
-      post :remove_contribution, :as => 'ilied'
+      get :queue
+      get :judges
     end
+    resources :hacks, only: [:index, :create]
+    resources :activities, only: [:index]
+  end
+  resources :hacks, only: [:show, :edit, :update, :destroy] do
+    member do
+      get :move_up_in_queue, :move_down_in_queue, :finish_presentation, :join_queue, :leave_queue, :downvote, :upvote
+      post :add_contribution
+      post :remove_contribution
+    end
+    resources :activities, only: [:index]
   end
 
   match 'welcome/index' => 'welcome#index', :as => 'welcome'
@@ -17,7 +25,7 @@ Hackday::Application.routes.draw do
   match 'signout', to: 'sessions#destroy', as: 'signout'
 
   resources :comments
-  resources :activities
+  # resources :activities
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

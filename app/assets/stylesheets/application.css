@@ -8,18 +8,22 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
+ *= require bootstrap
  *= require_self
  *= require_tree .
  */
 
- .timeago
- {
-  font-size:0.8em;
- }
+body { padding-top: 50px; }
+#alerts { margin-top: 10px; }
 
-ul { list-style-type: none; margin: 0; padding: 0; }
-#nav-hacks .inline-list { display: inline; }
-
+abbr.timeago 
+{ 
+  font-size: 0.8em; 
+  color: #aaa;
+  text-decoration: none;
+  border-bottom: none;
+}
+ 
 .activity
 {
 	margin-top: 15px;
@@ -30,73 +34,10 @@ ul { list-style-type: none; margin: 0; padding: 0; }
 	height: 50px;
 }
 
-#user-points { float: left; padding-top:10px; }
-#user-points .bankroll { font-size: 5em; line-height: 1; }
-
 #user-profile
 {
 	float: left;
 	span { text-align: center; }
-}
-
-.nav
-{
-  margin-top:13px;
-  margin-left:20px;
-}
-
-.user-mugshot
-{
-  padding-top:10px;
-}
-
-.unfulfilled_hacker_slot
-{
-  -moz-border-radius: 45px/45px;
-  -webkit-border-radius: 45px 45px;
-  border-radius: 45px/45px;;
-  border:solid 2px #000; 
-  width:45px;
-  height:45px;
-  text-align:center;
-  line-height:45px;
-  font-size:30px;
-  font-weight:bold;
-  display:inline-block;
-}
-
-.yam-logo
-{
-  -moz-border-radius: 70px/70px;
-  -webkit-border-radius: 70px 70px;
-  border-radius: 70px/70px;;
-  background-color:#48AEF1;
-  width:70px;
-  height:70px;
-  text-align:center;
-  line-height:45px;
-  font-size:30px;
-  font-weight:bold;
-  display:inline-block;
-  margin-top:10px;
-}
-
-.yam-logo-img
-{
-  margin-top:16px;
-  margin-left:6px;
-}
-
-.yam-logo-text
-{
-  display:inline-block;
-  vertical-align: middle;
-  margin-left:10px;
-}
-
-.all_hackers
-{
-  width:500px;
 }
 
 .signin-yammer
@@ -111,49 +52,4 @@ ul { list-style-type: none; margin: 0; padding: 0; }
   right: 0;
 
   margin: auto;
-}
-
-.presentation-queue-title
-{
-  line-height:20px;
-}
-
-.presentation-info
-{
-  width:130px;
-}
-
-.row 
-{
-  clear: both;
-}
-
-.show-edit-controls
-{
-  position: relative;
-  top: -4px;
-}
-
-.display-group
-{
-  margin-left:15px;
-  position: relative;
-  top: -4px;
-}
-
-.show-display-group
-{
-  position: relative;
-  top: -8px;
-}
-
-.hack-details h3
-{
-  margin-bottom:5px;
-  line-height: 30px;
-}
-
-.hack-details p
-{
-  margin-bottom:5px;
 }

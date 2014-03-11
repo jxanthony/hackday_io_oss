@@ -1,0 +1,24 @@
+.row.activity{'data-activity' => activity.id.to_s}
+  .col-md-12
+    %strong= activity.user.name
+    - case activity.action
+    - when 'create'
+      = h(" created ") + link_to(activity.hack.title, activity.hack)
+    - when 'edit'
+      = h(" edited ") + link_to(activity.hack.title, activity.hack)
+    - when 'comment'
+      = h(" commented on ") + link_to(activity.hack.title, activity.hack)
+    - when 'upvote'
+      = h(" voted up ") + link_to(activity.hack.title, activity.hack)
+    - when 'downvote'
+      = h(" voted down ") + link_to(activity.hack.title, activity.hack)
+    - when 'add_contribution'
+      = h(" joined the ") + link_to(activity.hack.title, activity.hack) + h(" team")
+    - when 'remove_contribution'
+      = h(" left the ") + link_to(activity.hack.title, activity.hack) + h("team")
+    - when 'move_up_in_queue'
+      = h(" moved ") + link_to(activity.hack.title, activity.hack) + h(" up in the queue")
+    - when 'move_down_in_queue'
+      = h(" moved ") + link_to(activity.hack.title, activity.hack) + h(" down in the queue")
+    %br
+    %abbr.timeago{ title: activity.created_at.getutc.iso8601 }

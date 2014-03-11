@@ -3,27 +3,25 @@ class ApplicationController < ActionController::Base
 
   before_filter :login_required
 
-
   private
 
   def login_required
-    unless current_user
+    if Rails.env.production? and not current_user
       redirect_to welcome_path
+    else
+      User.current = current_user
     end
   end
 
   def current_user
-    return nil unless GlobalConfiguration.get.presentation_in_progress
     return User.first if Rails.env.development?
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
-
-  def admin_comments
-    Comment.where(:admin_comment => true).order('created_at DESC').paginate(:page => params[:admin_comments_page] || 1, :per_page => 7)
-    #AdminComment.order("created_at DESC").paginate(:page => params[:admin_comments_page] || 1, :per_page => 8)
-  end
-
   helper_method :current_user
-  helper_method :admin_comments
 
+  def is_mobile_device?
+    request.user_agent =~ /Mobile|webOS|iPhone/
+  end
+  helper_method :is_mobile_device?
+  
 end

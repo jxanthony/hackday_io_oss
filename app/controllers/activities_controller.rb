@@ -6,6 +6,6 @@ class ActivitiesController < ApplicationController
       scope = Hackday.find(params[:hackday_id])
     end
 
-    render scope.activities.where("activities.id > #{params[:cursor] || 0}").order("created_at DESC").limit(12).reverse!
+    render scope.activities.where("activities.id > #{params[:cursor] || 0}").order("created_at DESC").limit(20)
   end
 end

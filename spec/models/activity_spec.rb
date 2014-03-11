@@ -96,4 +96,11 @@ describe Activity do
     Activity.first.user.should == @user
   end
 
+  it "is not created for editing when a hack is voted on" do
+    @hack.downvote(@user)
+
+    Activity.where(action: 'edited').should == []
+  end
+
+
 end

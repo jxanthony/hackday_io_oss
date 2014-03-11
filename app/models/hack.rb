@@ -119,7 +119,9 @@ class Hack < ActiveRecord::Base
   end
 
   def activity_for_update
-    create_activity('edit')
+    if title_changed? or description_changed? or url_changed?
+      create_activity('edit')
+    end
   end
 
   def create_activity(action)

@@ -9,7 +9,6 @@ class HacksController < ApplicationController
                                             :move_down_in_queue, 
                                             :join_presentation, 
                                             :leave_presentation]
-  has_mobile_fu
 
   def create
     # FIXME: gross

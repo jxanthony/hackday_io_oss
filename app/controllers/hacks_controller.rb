@@ -24,9 +24,7 @@ class HacksController < ApplicationController
   end
 
   def show
-    unless @hack.hackday.has_admin?(current_user)
-      @hack.comments = @hack.comments.where(private: false)
-    end
+    @hack_comments = @hack.hackday.has_admin?(current_user) ? @hack.comments : @hack.comments.public
   end
 
   def edit

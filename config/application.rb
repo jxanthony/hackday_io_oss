@@ -9,9 +9,6 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
-# TODO: YAMMER SPECIFIC
-YAMMER_NETWORK_IDS = ['107','62']
-
 module Hacktracker
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.

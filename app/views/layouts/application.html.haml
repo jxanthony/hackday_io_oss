@@ -1,9 +1,8 @@
 !!!
 %html
   %head
-    / TODO: Yammer specific
     %title 
-      = "Yammer Hack Days"
+      = "HackDay.io"
       = yield :title
     = stylesheet_link_tag 'application', media: 'all'
     = javascript_include_tag 'application'
@@ -21,8 +20,7 @@
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-          / TODO: Yammer specific
-          = link_to "Yammer Hack Days", root_path, class: 'navbar-brand'
+          = link_to "HackDay.io", root_path, class: 'navbar-brand'
         
         .navbar-collapse.collapse
           - if current_user
@@ -37,8 +35,7 @@
           - else 
             %ul.nav.navbar-nav.navbar-right
               %li
-                / TODO: Yammer specific
-                = link_to "Sign In", "/auth/yammer"
+                = link_to "Sign In", "/auth/github"
 
     .container
       .row#alerts

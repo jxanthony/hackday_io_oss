@@ -34,8 +34,8 @@ end
 gem 'jquery-rails'
 
 gem 'omniauth'
-gem 'omniauth-facebook'
 gem 'omniauth-yammer'
+gem 'omniauth-github'
 
 group :development, :test do
   gem 'debugger' 

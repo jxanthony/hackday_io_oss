@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.13'
+gem 'rails', '3.2.17'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -11,6 +11,7 @@ gem 'will_paginate'
 gem 'unicorn'
 gem 'haml'
 gem 'bootstrap-sass'
+gem 'rails-timeago'
 
 group :production do
   gem "pg"

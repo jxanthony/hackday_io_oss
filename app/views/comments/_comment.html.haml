@@ -10,8 +10,7 @@
         = ".."
         %br
       = comment.body
-    %abbr.timeago{ title: comment.created_at.getutc.iso8601 }
-      = comment.created_at.to_s
+    = timeago_tag comment.created_at
     - if comment.private?
       %abbr.private-notice{title: "Private comments are only visible to hackday admins"}
         Private

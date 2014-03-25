@@ -21,4 +21,4 @@
     - when 'move_down_in_queue'
       = h(" moved ") + link_to(activity.hack.title, activity.hack) + h(" down in the queue")
     %br
-    %abbr.timeago{ title: activity.created_at.getutc.iso8601 }
+    = timeago_tag activity.created_at

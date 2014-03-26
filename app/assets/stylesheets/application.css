@@ -16,7 +16,7 @@
 body { padding-top: 50px; }
 #alerts { margin-top: 10px; }
 
-time
+time, .time
 { 
   font-size: 0.8em; 
   color: #aaa;

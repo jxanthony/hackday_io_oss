@@ -1,4 +1,13 @@
-%ul 
-  - @hackdays.each do |hackday|
-    %li 
-      = link_to hackday.title, hackday
+.col-md-6
+  - unless @upcoming_hackdays.empty?
+    %h2 Upcoming Hack Days
+    #hackdays
+      - @upcoming_hackdays.each do |hackday|
+        %h3= link_to hackday.title, hackday
+        %span.time= (distance_of_time_in_words_to_now hackday.date) + " from now"
+
+.col-md-4.col-md-offset-2
+  .well
+    %p HackDay.io is a free, public way to help organize hack days.
+    %p Originally forged for the epic hack days at Yammer.
+    %p Get hacking!

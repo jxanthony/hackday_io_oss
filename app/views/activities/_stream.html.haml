@@ -1,5 +1,7 @@
 .col-md-4
   %h3 Activity
+  .no-activities.blank-slate
+    No activity to show.. yet!
   #activities
 
 :javascript
@@ -19,6 +21,8 @@
           cursor = $(data).first().attr('data-activity');
           $('#activities').prepend(data);
           $('time').timeago();
+        } else if($('#activities .activity').length == 0) {
+          $('.no-activities').show();
         }
       });
     }

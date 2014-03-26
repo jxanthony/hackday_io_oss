@@ -18,6 +18,7 @@
         {
           cursor = $(data).first().attr('data-activity');
           $('#activities').prepend(data);
+          $('.timeago').timeago();
         }
       });
     }

@@ -11,8 +11,10 @@
             = f.label :title
             = f.text_field :title, class: 'form-control', placeholder: "something cool like \"Hackapalooza\" or \"Hackoween\""
           .form-group
-            = f.label :date
-            = f.text_field :date, class: 'form-control', placeholder: "when will you be judging hacks?"
+            = f.label :date, "Demo Day"
+            = f.text_field :date,                                                       |
+                           class: 'form-control',                                       |
+                           placeholder: "when will people be showing off their hacks?"  |
 
         .modal-footer
           - unless hackday.new_record? 

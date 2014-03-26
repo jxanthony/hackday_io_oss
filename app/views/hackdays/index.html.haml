@@ -10,4 +10,8 @@
   .well
     %p HackDay.io is a free, public way to help organize hack days.
     %p Originally forged for the epic hack days at Yammer.
-    %p Get hacking!
+    %br
+
+    %button.btn.btn-success.btn-lg{'data-toggle' => 'modal', 'data-target' => '#hackday-form'} Create A Hack Day
+
+= render partial: 'hackdays/form', locals: { hackday: Hackday.new }

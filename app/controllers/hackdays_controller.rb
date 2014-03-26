@@ -1,5 +1,16 @@
 class HackdaysController < ApplicationController
   
+  def create
+    hackday = Hackday.new(params[:hackday])
+    hackday.admins << current_user
+
+    if hackday.save
+      redirect_to hackday
+    else
+      flash[:error] = hackday.errors.full_messages.join(", ")
+    end
+  end
+
   def show
     @hackday = Hackday.find(params[:id])
     @hacks = @hackday.hacks.order("votes DESC")

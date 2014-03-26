@@ -103,7 +103,8 @@ GEM
     omniauth (1.2.1)
       hashie (>= 1.2, < 3)
       rack (~> 1.0)
-    omniauth-facebook (1.6.0)
+    omniauth-github (1.1.1)
+      omniauth (~> 1.0)
       omniauth-oauth2 (~> 1.1)
     omniauth-oauth2 (1.1.2)
       faraday (>= 0.8, < 0.10)
@@ -166,7 +167,7 @@ GEM
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
-    sass (3.3.4)
+    sass (3.2.18)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
@@ -218,7 +219,7 @@ DEPENDENCIES
   bootstrap-sass
   capybara
   capybara-webkit
-  coffee-rails (~> 3.2.1)
+  coffee-rails
   database_cleaner
   debugger
   fabrication
@@ -226,7 +227,7 @@ DEPENDENCIES
   jquery-rails
   newrelic_rpm
   omniauth
-  omniauth-facebook
+  omniauth-github
   omniauth-yammer
   pg
   rails (= 3.2.17)
@@ -234,7 +235,8 @@ DEPENDENCIES
   rails_12factor
   rspec
   rspec-rails
-  sass-rails (~> 3.2.3)
+  sass (~> 3.2.5)
+  sass-rails
   shoulda-matchers
   simplecov
   sqlite3

@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+ruby '2.0.0'
 gem 'rails', '3.2.17'
 
 # Bundle edge Rails instead:
@@ -22,20 +23,17 @@ end
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
-
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
-
+  gem 'sass', "~> 3.2.5" # FIX: set to previous version to avoid heroku warnings
+  gem 'sass-rails'
+  gem 'coffee-rails'
   gem 'uglifier', '>= 1.0.3'
 end
 
 gem 'jquery-rails'
 
 gem 'omniauth'
-gem 'omniauth-facebook'
 gem 'omniauth-yammer'
+gem 'omniauth-github'
 
 group :development, :test do
   gem 'debugger' 

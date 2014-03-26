@@ -1,10 +1,27 @@
 .col-md-6
+  - unless @ongoing_hackdays.empty?
+    .hackdays
+      %h2 Hack Days going on right now!
+      - @ongoing_hackdays.each do |hackday|
+        .hackday
+          %h3= link_to hackday.title, hackday
+          %span.time= (distance_of_time_in_words_to_now hackday.date) + " from now"
+
   - unless @upcoming_hackdays.empty?
-    %h2 Upcoming Hack Days
-    #hackdays
+    .hackdays
+      %h2 Upcoming Hack Days
       - @upcoming_hackdays.each do |hackday|
-        %h3= link_to hackday.title, hackday
-        %span.time= (distance_of_time_in_words_to_now hackday.date) + " from now"
+        .hackday
+          %h3= link_to hackday.title, hackday
+          %span.time= (distance_of_time_in_words_to_now hackday.date) + " from now"
+
+  - unless @past_hackdays.empty?
+    .hackdays
+      %h2 Hack Days Gone By
+      - @past_hackdays.each do |hackday|
+        .hackday
+          %h3= link_to hackday.title, hackday
+          %span.time= (distance_of_time_in_words_to_now hackday.date) + " from now"
 
 .col-md-4.col-md-offset-2
   .well

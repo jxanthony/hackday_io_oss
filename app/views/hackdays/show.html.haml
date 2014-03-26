@@ -1,5 +1,11 @@
 .col-md-8
-  %h2= @hackday.title
+  - if @hackday.has_admin?(current_user)
+    %h2
+      = @hackday.title
+      = link_to '#', class: 'edit-hackday', 'data-toggle' => 'modal', 'data-target' => '#hackday-form' do
+        %span.glyphicon.glyphicon-cog
+  - else
+    %h2= @hackday.title
   .row
     .col-md-6
       %ul.nav.nav-pills
@@ -32,3 +38,4 @@
   = render partial: 'activities/stream', locals: { scope: @hackday }
 
 = render partial: 'hacks/form', locals: { hack: @hackday.hacks.new }
+= render partial: 'hackdays/form', locals: { hackday: @hackday }

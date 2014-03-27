@@ -8,7 +8,6 @@
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  presentation_in_progress :boolean
-#  group_numbers            :text
 #
 
 class Hackday < ActiveRecord::Base
@@ -17,9 +16,6 @@ class Hackday < ActiveRecord::Base
   has_many :activities, through: :hacks
   has_many :comments, through: :hacks
   has_and_belongs_to_many :admins, class_name: 'User'
-
-  serialize :group_numbers
-  before_create :setup_group_numbers
 
   def has_admin?(user)
     self.admins.include? user
@@ -60,10 +56,6 @@ class Hackday < ActiveRecord::Base
   end
 
   private
-
-  def setup_group_numbers
-    self.group_numbers = (1..50).to_a
-  end
 
   def bump_queue(index)
     # FIXME: this is absolutely disgusting

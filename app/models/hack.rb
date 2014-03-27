@@ -9,17 +9,14 @@
 #  url                :string(255)
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
-#  requested_hackers  :integer
 #  presentation_index :integer
-#  creator_id         :integer
-#  upvoted_by         :text             default("'--- []\n'")
-#  downvoted_by       :text             default("'--- []\n'")
-#  group_number       :integer
+#  upvoted_by         :text             default("'")
+#  downvoted_by       :text             default("'")
 #  hackday_id         :integer
 #
 
 class Hack < ActiveRecord::Base
-  attr_accessible :creator_id, :description, :title, :votes, :upvoted_by, :downvoted_by, :group_number, :requested_hackers, :url
+  attr_accessible :creator_id, :description, :title, :url
 
   serialize :upvoted_by
   serialize :downvoted_by
@@ -34,8 +31,7 @@ class Hack < ActiveRecord::Base
 
   validates_presence_of :title, :description
 
-  before_create :set_group_number, :initialize_votes
-  before_destroy :free_group_number
+  before_create :initialize_votes
 
   after_create :activity_for_create
   after_update :activity_for_update
@@ -106,24 +102,6 @@ class Hack < ActiveRecord::Base
   end
 
   private
-  def set_group_number
-    if self.hackday.group_numbers.empty?
-      self.errors.add(:group_number, "Out of available group numbers. Go yell at Kane.")
-      return false
-    else
-      self.group_number = self.hackday.group_numbers.shift
-      self.hackday.save
-    end
-  end
-
-  def free_group_number
-    unless !self.group_number || self.hackday.group_numbers.include?(self.group_number)
-      self.hackday.group_numbers.unshift self.group_number
-      self.hackday.save
-    else
-      true
-    end
-  end
 
   def initialize_votes
     self.upvoted_by = [] unless self.upvoted_by == []

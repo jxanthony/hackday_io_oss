@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
       redirect_to root_url
     else
       flash[:error] = "Sorry it doesn't look like you have access."
-      redirect_to welcome_path
+      redirect_to root_url
     end
   end
 

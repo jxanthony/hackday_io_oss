@@ -178,7 +178,7 @@ describe "owning a hack" do
     page.should have_content(@hack.title)  
   end
 
-  it "should let contributors leave the presentation queue" do
+  it "should let contributors remove their hacks from the presentation queue" do
     @hack.update_attribute(:presentation_index, 2)
     visit hack_path(@hack)
     find('#hack-dequeue').click
@@ -190,8 +190,19 @@ describe "owning a hack" do
 
     page.should_not have_content(@hack.title)
   end
+end
 
-  it "should let contributors move their hack up in the presentation queue" do
+describe "admins have super powers" do
+
+  before(:each) do
+    test_sign_in
+    @current_user = User.first
+    @hackday = Fabricate(:hackday)
+    @hack = Fabricate(:hack, hackday: @hackday)
+    @hackday.admins << @current_user     
+  end
+
+  it "should let admins move hacks up in the presentation queue" do
     hack2 = Fabricate(:hack, hackday: @hackday, presentation_index: 1)
     @hack.update_attribute(:presentation_index, 2)
     visit queue_hackday_path(@hackday)
@@ -199,11 +210,11 @@ describe "owning a hack" do
       click_on "Move Up"
     end
 
-    find('.alert.alert-success').text.should have_content("Your hack has been moved up")
+    find('.alert.alert-success').text.should have_content("has been moved up")
     page.should have_css('#hacks>:first-child h3', text: @hack.title)
   end
 
-  it "should let contributors move their hack down in the presentation queue" do
+  it "should let admins move hacks down in the presentation queue" do
     hack2 = Fabricate(:hack, hackday: @hackday, presentation_index: 2)
     @hack.update_attribute(:presentation_index, 1)
     visit queue_hackday_path(@hackday)
@@ -211,11 +222,11 @@ describe "owning a hack" do
       click_on "Move Down"
     end
 
-    find('.alert.alert-success').text.should have_content("Your hack has been moved down")
+    find('.alert.alert-success').text.should have_content("has been moved down")
     page.should have_css('#hacks>:last-child h3', text: @hack.title)
   end
 
-  it "should let contributors mark their hack as having been presented" do
+  it "should let admins mark hacks as having been presented" do
     @hack.update_attribute(:presentation_index, 1)
     visit queue_hackday_path(@hackday)
     within('#hack_' + @hack.id.to_s) do
@@ -225,9 +236,6 @@ describe "owning a hack" do
     find('.alert.alert-success').text.should have_content("This hack has been presented")
     page.should_not have_content(@hack.title)
   end
-
-  it "should let admins move hacks up in the presentation queue"
-  it "should let admins move hacks down in the presentation queue"
 
 end
 

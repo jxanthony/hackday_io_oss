@@ -43,7 +43,7 @@ class HacksController < ApplicationController
 
   def destroy
     if @hack.destroy
-      flash[:message] = "Your hack has been destroyed. Please return your group number tag #{@hack.group_number} to the organizers."
+      flash[:message] = "Your hack has been destroyed. Sad."
       redirect_to @hack.hackday
     else
       flash[:error] = @hack.errors.full_messages.join(", ")

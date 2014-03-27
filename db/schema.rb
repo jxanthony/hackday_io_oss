@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140309003518) do
+ActiveRecord::Schema.define(:version => 20140327043648) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -37,18 +37,12 @@ ActiveRecord::Schema.define(:version => 20140309003518) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "global_configurations", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "hackdays", :force => true do |t|
     t.string   "title"
     t.date     "date"
     t.datetime "created_at",               :null => false
     t.datetime "updated_at",               :null => false
     t.boolean  "presentation_in_progress"
-    t.text     "group_numbers"
   end
 
   create_table "hackdays_users", :force => true do |t|
@@ -61,14 +55,11 @@ ActiveRecord::Schema.define(:version => 20140309003518) do
     t.text     "description",        :limit => 255
     t.integer  "votes",                             :default => 0
     t.string   "url"
-    t.datetime "created_at",                                                  :null => false
-    t.datetime "updated_at",                                                  :null => false
-    t.integer  "requested_hackers"
+    t.datetime "created_at",                                         :null => false
+    t.datetime "updated_at",                                         :null => false
     t.integer  "presentation_index"
-    t.integer  "creator_id"
-    t.text     "upvoted_by",                        :default => "'--- []\n'"
-    t.text     "downvoted_by",                      :default => "'--- []\n'"
-    t.integer  "group_number"
+    t.text     "upvoted_by",                        :default => "'"
+    t.text     "downvoted_by",                      :default => "'"
     t.integer  "hackday_id"
   end
 

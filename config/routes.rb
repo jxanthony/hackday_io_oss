@@ -19,7 +19,6 @@ Hacktracker::Application.routes.draw do
     resources :activities, only: [:index]
   end
 
-  match 'welcome/index' => 'welcome#index', :as => 'welcome'
   match 'auth/:provider/callback', to: 'sessions#create'
   match 'auth/failure', to: redirect('/')
   match 'signout', to: 'sessions#destroy', as: 'signout'

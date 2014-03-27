@@ -1,14 +1,12 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  before_filter :login_required
+  before_filter :set_current_user
 
   private
 
-  def login_required
-    if Rails.env.production? and not current_user
-      redirect_to welcome_path
-    else
+  def set_current_user
+    if current_user
       User.current = current_user
     end
   end

@@ -7,12 +7,11 @@ gem 'rails', '3.2.17'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'thin'
-gem 'yammer-client'
-gem 'will_paginate'
 gem 'unicorn'
 gem 'haml'
 gem 'bootstrap-sass'
 gem 'rails-timeago'
+gem "rails_config"
 
 group :production do
   gem "pg"

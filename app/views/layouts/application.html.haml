@@ -35,7 +35,10 @@
           - else 
             %ul.nav.navbar-nav.navbar-right
               %li
-                = link_to "Sign In", "/auth/github"
+                - if Settings.auth_method == 'github'
+                  = link_to "Sign In With Github", '/auth/github'
+                - elsif Settings.auth_method == 'yammer'
+                  = link_to "Sign In With Yammer", '/auth/yammer'
 
     .container
       .row#alerts

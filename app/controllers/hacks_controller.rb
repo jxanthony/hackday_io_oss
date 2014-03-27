@@ -94,13 +94,13 @@ class HacksController < ApplicationController
 
   def finish_presentation
     @hack.hackday.leave_queue(@hack)
-    flash[:message] = "This hack has been presented - congrats!"
+    flash[:message] = "This hack has been presented - boom!"
     redirect_to :back
   end
 
   def move_up_in_queue
     if @hack.hackday.move_up_in_queue(@hack)
-      flash[:message] = "Your hack has been moved up in the presentation queue."
+      flash[:message] = "#{@hack.title} has been moved up in the presentation queue."
     else
       flash[:error] = "Your hack is already at the top of the queue."
     end
@@ -110,7 +110,7 @@ class HacksController < ApplicationController
 
   def move_down_in_queue
     if @hack.hackday.move_down_in_queue(@hack)
-      flash[:message] = "Your hack has been moved down in the presentation queue."
+      flash[:message] = "#{@hack.title} has been moved down in the presentation queue."
     else
       flash[:error] = "Your hack is already the last one in the queue."
     end

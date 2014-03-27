@@ -1,4 +1,33 @@
-%ul 
-  - @hackdays.each do |hackday|
-    %li 
-      = link_to hackday.title, hackday
+.col-md-6
+  - unless @ongoing_hackdays.empty?
+    .hackdays
+      %h2 Hack Days going on right now!
+      - @ongoing_hackdays.each do |hackday|
+        .hackday
+          %h3= link_to hackday.title, hackday
+
+  - unless @upcoming_hackdays.empty?
+    .hackdays
+      %h2 Upcoming Hack Days
+      - @upcoming_hackdays.each do |hackday|
+        .hackday
+          %h3= link_to hackday.title, hackday
+          %span.time= (distance_of_time_in_words_to_now hackday.date) + " from now"
+
+  - unless @past_hackdays.empty?
+    .hackdays
+      %h2 Hack Days Gone By
+      - @past_hackdays.each do |hackday|
+        .hackday
+          %h3= link_to hackday.title, hackday
+          %span.time= (distance_of_time_in_words_to_now hackday.date) + " ago"
+
+.col-md-4.col-md-offset-2
+  .well
+    %p HackDay.io is a free, public way to help organize hack days.
+    %p Originally forged for the epic hack days at Yammer.
+    %br
+
+    %button.btn.btn-success.btn-lg{'data-toggle' => 'modal', 'data-target' => '#hackday-form'} Create A Hack Day
+
+= render partial: 'hackdays/form', locals: { hackday: Hackday.new }

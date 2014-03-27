@@ -1,5 +1,11 @@
 .col-md-8
-  %h2= @hackday.title
+  - if @hackday.has_admin?(current_user)
+    %h2
+      = @hackday.title
+      = link_to '#', class: 'edit-hackday', 'data-toggle' => 'modal', 'data-target' => '#hackday-form' do
+        %span.glyphicon.glyphicon-cog
+  - else
+    %h2= @hackday.title
   .row
     .col-md-6
       %ul.nav.nav-pills
@@ -12,18 +18,24 @@
             = link_to "Judges Comments", judges_hackday_path(@hackday)
 
     - if current_user and not is_mobile_device?
-      .col-md-4.pull-right
+      .col-md-4.pull-right.add-hack
         %button.btn.btn-success.btn-sm{'data-toggle' => 'modal', 'data-target' => '#hack-form'}
           %span.glyphicon-plus.glyphicon
           Add Hack
 
   #hacks
-    - if @hacks
+    - unless @hacks.empty?
       = render @hacks
     - else
-      %p no hacks submitted yet :(
+      %p.blank-slate No hacks have been submitted yet.. you should add one right now!
+
+  - if is_mobile_device?
+    .add-hack-mobile
+      %button.btn.btn-success.btn-sm{'data-toggle' => 'modal', 'data-target' => '#hack-form'}
+        %span.glyphicon-plus.glyphicon
 
 - unless is_mobile_device?
   = render partial: 'activities/stream', locals: { scope: @hackday }
 
 = render partial: 'hacks/form', locals: { hack: @hackday.hacks.new }
+= render partial: 'hackdays/form', locals: { hackday: @hackday }

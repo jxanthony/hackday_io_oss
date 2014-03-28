@@ -1,14 +1,12 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  before_filter :login_required
+  before_filter :set_current_user
 
   private
 
-  def login_required
-    if Rails.env.production? and not current_user
-      redirect_to welcome_path
-    else
+  def set_current_user
+    if current_user
       User.current = current_user
     end
   end
@@ -23,5 +21,12 @@ class ApplicationController < ActionController::Base
     request.user_agent =~ /Mobile|webOS|iPhone/
   end
   helper_method :is_mobile_device?
+
+  def check_signed_in
+    unless current_user
+      flash[:error] = "You need to be signed in first!"
+      return redirect_to :back
+    end
+  end
   
 end

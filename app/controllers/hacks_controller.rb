@@ -43,7 +43,7 @@ class HacksController < ApplicationController
 
   def destroy
     if @hack.destroy
-      flash[:message] = "Your hack has been destroyed. Please return your group number tag #{@hack.group_number} to the organizers."
+      flash[:message] = "Your hack has been destroyed. Sad."
       redirect_to @hack.hackday
     else
       flash[:error] = @hack.errors.full_messages.join(", ")
@@ -94,13 +94,13 @@ class HacksController < ApplicationController
 
   def finish_presentation
     @hack.hackday.leave_queue(@hack)
-    flash[:message] = "This hack has been presented - congrats!"
+    flash[:message] = "This hack has been presented - boom!"
     redirect_to :back
   end
 
   def move_up_in_queue
     if @hack.hackday.move_up_in_queue(@hack)
-      flash[:message] = "Your hack has been moved up in the presentation queue."
+      flash[:message] = "#{@hack.title} has been moved up in the presentation queue."
     else
       flash[:error] = "Your hack is already at the top of the queue."
     end
@@ -110,7 +110,7 @@ class HacksController < ApplicationController
 
   def move_down_in_queue
     if @hack.hackday.move_down_in_queue(@hack)
-      flash[:message] = "Your hack has been moved down in the presentation queue."
+      flash[:message] = "#{@hack.title} has been moved down in the presentation queue."
     else
       flash[:error] = "Your hack is already the last one in the queue."
     end
@@ -134,13 +134,6 @@ class HacksController < ApplicationController
 
   def get_hack
     @hack = Hack.find(params[:id])
-  end
-
-  def check_signed_in
-    unless current_user
-      flash[:error] = "You need to be signed in first!"
-      return redirect_to :back
-    end
   end
 
   def check_permission

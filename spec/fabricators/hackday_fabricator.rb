@@ -8,7 +8,6 @@
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  presentation_in_progress :boolean
-#  group_numbers            :text
 #
 
 Fabricator(:hackday) do

@@ -9,12 +9,9 @@
 #  url                :string(255)
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
-#  requested_hackers  :integer
 #  presentation_index :integer
-#  creator_id         :integer
-#  upvoted_by         :text             default("'--- []\n'")
-#  downvoted_by       :text             default("'--- []\n'")
-#  group_number       :integer
+#  upvoted_by         :text             default("'")
+#  downvoted_by       :text             default("'")
 #  hackday_id         :integer
 #
 

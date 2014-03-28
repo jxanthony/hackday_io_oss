@@ -1,4 +1,6 @@
 class HackdaysController < ApplicationController
+
+  before_filter :check_signed_in, only: [:create, :update, :destroy]
   
   def create
     hackday = Hackday.new(params[:hackday])

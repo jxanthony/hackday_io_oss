@@ -136,13 +136,6 @@ class HacksController < ApplicationController
     @hack = Hack.find(params[:id])
   end
 
-  def check_signed_in
-    unless current_user
-      flash[:error] = "You need to be signed in first!"
-      return redirect_to :back
-    end
-  end
-
   def check_permission
     unless @hack.has_contributor?(current_user) or @hack.hackday.has_admin?(current_user)
       flash[:error] = "You don't have permission to perform this action."

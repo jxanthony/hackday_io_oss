@@ -21,5 +21,12 @@ class ApplicationController < ActionController::Base
     request.user_agent =~ /Mobile|webOS|iPhone/
   end
   helper_method :is_mobile_device?
+
+  def check_signed_in
+    unless current_user
+      flash[:error] = "You need to be signed in first!"
+      return redirect_to :back
+    end
+  end
   
 end

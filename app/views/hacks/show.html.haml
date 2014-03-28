@@ -50,21 +50,22 @@
   - else 
     %p Sadly no one has commented yet!
 
-  .row#new_comment_form
-    = form_for @hack.comments.new do |f|
-      .col-xs-9.col-md-10
-        %fieldset.input
-          = f.text_area :body, class: 'form-control', rows: 1, |
-                        placeholder: "Write a comment.."       |
-        - if @hack.hackday.has_admin?(current_user)
-          .checkbox
-            %label
-              = f.check_box :private, :checked => true
-              = "Make this comment private?"
-        = hidden_field_tag 'hack_id', @hack.id
+  - if current_user
+    .row#new_comment_form
+      = form_for @hack.comments.new do |f|
+        .col-xs-9.col-md-10
+          %fieldset.input
+            = f.text_area :body, class: 'form-control', rows: 1, |
+                          placeholder: "Write a comment.."       |
+          - if @hack.hackday.has_admin?(current_user)
+            .checkbox
+              %label
+                = f.check_box :private, :checked => true
+                = "Make this comment private?"
+          = hidden_field_tag 'hack_id', @hack.id
 
-      .col-xs-3.col-md-2
-        = f.submit "Post", class: 'btn btn-success'
+        .col-xs-3.col-md-2
+          = f.submit "Post", class: 'btn btn-success'
 
 - unless is_mobile_device?
   = render partial: 'activities/stream', locals: { scope: @hack }

@@ -1,5 +1,7 @@
 class CommentsController < ApplicationController
   
+  before_filter :check_signed_in
+
   def create
     # FIXME: this is gross
     hack = Hack.find(params[:hack_id])

@@ -20,14 +20,14 @@
     - if hack.hackday.has_admin?(current_user) # only admin/mc should be allowed to move hacks around in presentation queue
       .queue-buttons
         - if hack.presentation_index != 1
-          = link_to move_up_in_queue_hack_path(hack), class: 'btn btn-xs btn-default' do
+          = link_to move_up_in_queue_hack_path(hack), method: 'post', class: 'btn btn-xs btn-default' do
             %span.glyphicon.glyphicon-arrow-up
             %span Move Up
         - if hack.presentation_index != hack.hackday.queue.size
-          = link_to move_down_in_queue_hack_path(hack), class: 'btn btn-xs btn-default' do
+          = link_to move_down_in_queue_hack_path(hack), method: 'post', class: 'btn btn-xs btn-default' do
             %span.glyphicon.glyphicon-arrow-down
             %span Move Down
         - if hack.presentation_index == 1
-          = link_to finish_presentation_hack_path(hack), class: 'btn btn-xs btn-default' do
+          = link_to finish_presentation_hack_path(hack), method: 'post', class: 'btn btn-xs btn-default' do
             %span.glyphicon.glyphicon-ok
             %span Presentation Completed

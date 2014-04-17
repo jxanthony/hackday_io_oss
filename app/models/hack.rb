@@ -42,13 +42,13 @@ class Hack < ActiveRecord::Base
       self.upvoted_by.delete user.id
     else
       self.upvoted_by << user.id
+      create_activity('upvote')
     end
 
     self.downvoted_by.delete(user.id) if self.downvoted_by.include? user.id
     self.votes = self.upvoted_by.size - self.downvoted_by.size
 
     self.save!
-    create_activity('upvote')
   end
 
   def downvote(user)
@@ -57,13 +57,13 @@ class Hack < ActiveRecord::Base
       self.downvoted_by.delete user.id
     else
       self.downvoted_by << user.id
+      create_activity('downvote')
     end
 
     self.upvoted_by.delete(user.id) if self.upvoted_by.include? user.id
     self.votes = self.upvoted_by.size - self.downvoted_by.size
 
     self.save!
-    create_activity('downvote')
   end
 
   def upvoted_by?(user)

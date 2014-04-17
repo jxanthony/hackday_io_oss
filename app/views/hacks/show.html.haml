@@ -8,15 +8,15 @@
     .alert.alert-info
       - unless @hack.presenting?
         = "This hack will not be presented."
-        = link_to join_queue_hack_path(@hack), type: 'button',  |
-                  class: 'btn btn-success btn-xs',              |
-                  id: 'hack-enqueue' do                         |
+        = link_to join_queue_hack_path(@hack), method: 'post', type: 'button',  |
+                  class: 'btn btn-success btn-xs',                              |
+                  id: 'hack-enqueue' do                                         |
           %span= "Queue for presentation"
       - else
         = "This hack will be presented " + @hack.presentation_index.ordinalize + "."
-        = link_to leave_queue_hack_path(@hack), type: 'button', |
-                  class: 'btn btn-danger btn-xs',               |
-                  id: 'hack-dequeue' do                         |
+        = link_to leave_queue_hack_path(@hack), method: 'post', type: 'button', |
+                  class: 'btn btn-danger btn-xs',                               |
+                  id: 'hack-dequeue' do                                         |
           %span= "Not Ready!"
 
       = link_to '#',                                       |

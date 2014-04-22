@@ -12,6 +12,7 @@ class HacksController < ApplicationController
 
   def create
     # FIXME: gross
+    params[:hack].delete('url') unless /^http/.match(params[:hack][:url].to_s)
     hack = Hack.new(params[:hack])
     hack.contributors << current_user
     hack.hackday = Hackday.find(params[:hackday_id])
@@ -31,6 +32,7 @@ class HacksController < ApplicationController
   end
 
   def update
+    params[:hack].delete('url') unless /^http/.match(params[:hack][:url])
     @hack.update_attributes(params[:hack])
     if @hack.errors.any?
       flash[:error] = @hack.errors.full_messages.join(", ")

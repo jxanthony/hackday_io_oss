@@ -16,7 +16,7 @@
 #
 
 class Hack < ActiveRecord::Base
-  attr_accessible :creator_id, :description, :title, :url
+  attr_accessible :description, :title, :url
 
   serialize :upvoted_by
   serialize :downvoted_by

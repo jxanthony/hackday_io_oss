@@ -2,16 +2,17 @@
   %h1
     = "Search results"
   - @hacks.each do |hack|
-    .hack-result
-      .hack.row{id: ["hack", hack.id]}
-        .col-xs-12
-          %h3
-            = link_to hack.title, hack
-          %h4
-            = "Created at: " + hack.hackday.title
-          %p
-            = hack.hackday.date
-
-          .hack-description= truncate(hack.description, length: 140)
-          .hack-contributors
-            = render hack.contributors
+    .hacks
+      .col-xs-2.col-sm-1.hack-score
+        %h2
+          = hack.votes
+      .hack-details.col-xs-10.col-sm-11
+        %h3
+          = link_to hack.title, hack
+        %h4
+          = "Created at: " + hack.hackday.title
+        %p
+          = hack.hackday.date
+        .hack-description= truncate(hack.description, length: 140)
+        .hack-contributors
+          = render hack.contributors

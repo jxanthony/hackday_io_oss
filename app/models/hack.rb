@@ -17,7 +17,11 @@
 
 class Hack < ActiveRecord::Base
   searchable do
-    text :title,:description
+    text :title, :boost => 5
+    text :description
+    integer :votes
+
+    #winning
   end
   attr_accessible :description, :title, :url
 

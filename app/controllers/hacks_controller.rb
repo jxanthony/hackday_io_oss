@@ -31,6 +31,7 @@ class HacksController < ApplicationController
   def index
     @search = Hack.search do
       fulltext params[:search]
+      order_by(:votes, :desc)
     end
     @hacks = @search.results
   end

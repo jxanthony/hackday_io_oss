@@ -20,10 +20,9 @@ class Hack < ActiveRecord::Base
     text :title, :boost => 5
     text :description
     integer :votes
-
     #winning
   end
-  attr_accessible :description, :title, :url
+  attr_accessible :description, :title, :url, :win, :video, :time_index, :tags, :trophy
 
   serialize :upvoted_by
   serialize :downvoted_by

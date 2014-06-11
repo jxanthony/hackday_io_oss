@@ -11,6 +11,7 @@
     %meta{name: 'viewport', content: 'width=device-width, initial-scale=1'}
 
 
+
   %body
     .navbar.navbar-default.navbar-fixed-top{role: 'navigation'}
       .container
@@ -21,7 +22,10 @@
             %span.icon-bar
             %span.icon-bar
           = link_to "HackDay.io", root_path, class: 'navbar-brand'
-        
+          .search_bar
+            = form_tag hacks_path, :method => :get do
+              = text_field_tag :search, params[:search]
+              = submit_tag "Search", :name => nil
         .navbar-collapse.collapse
           - if current_user
             %ul.nav.navbar-nav.navbar-right

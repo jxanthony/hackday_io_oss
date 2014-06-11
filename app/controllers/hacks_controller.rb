@@ -28,6 +28,13 @@ class HacksController < ApplicationController
     @hack_comments = @hack.hackday.has_admin?(current_user) ? @hack.comments : @hack.comments.public
   end
 
+  def index
+    @search = Hack.search do
+      fulltext params[:search]
+    end
+    @hacks = @search.results
+  end
+
   def edit
   end
 

@@ -16,6 +16,9 @@
 #
 
 class Hack < ActiveRecord::Base
+  searchable do
+    text :title,:description
+  end
   attr_accessible :description, :title, :url
 
   serialize :upvoted_by

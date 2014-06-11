@@ -12,9 +12,11 @@ gem 'haml'
 gem 'bootstrap-sass'
 gem 'rails-timeago'
 gem "rails_config"
+gem 'sunspot_rails'
+gem 'sunspot_solr'
 
 group :production do
-  gem "pg"
+  #gem "pg"
   gem "newrelic_rpm"
   gem "rails_12factor"
 end
@@ -47,7 +49,7 @@ group :test do
   gem 'fabrication'
   gem 'rspec'
   gem 'shoulda-matchers'
-  gem 'capybara'
-  gem 'capybara-webkit'
+  #gem 'capybara'
+  #gem 'capybara-webkit'
   gem 'database_cleaner'
 end

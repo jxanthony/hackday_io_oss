@@ -1,3 +1,3 @@
 # App level settings
 
-auth_method: 'github'
+auth_method: 'yammer'

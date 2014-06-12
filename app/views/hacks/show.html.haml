@@ -50,11 +50,12 @@
                     id: 'hack-join'                                     |
 
 
-  %video#hack-video.video-js.vjs-default-skin{controls: "", "data-setup" => "{\"example_option\":true}", height: "264", poster: "http://video-js.zencoder.com/oceans-clip.png", preload: "auto", width: "640"}
-    %source{src: @hack.video + "#t=" + @hack.video_start + "," + @hack.video_end, type: "video/mp4"}
-    %p.vjs-no-js
-      To view this video please enable JavaScript, and consider upgrading to a web browser that
-      %a{href: "http://videojs.com/html5-video-support/", target: "_blank"} supports HTML5 video
+  - if @hack.video
+    %video#hack-video.video-js.vjs-default-skin{controls: "", "data-setup" => "{\"example_option\":true}", height: "264", poster: "http://video-js.zencoder.com/oceans-clip.png", preload: "auto", width: "640"}
+      %source{src: @hack.video + "#t=" + @hack.video_start + "," + @hack.video_end, type: "video/mp4"}
+      %p.vjs-no-js
+        To view this video please enable JavaScript, and consider upgrading to a web browser that
+        %a{href: "http://videojs.com/html5-video-support/", target: "_blank"} supports HTML5 video
 
   %h3 Comments
   - unless @hack.comments.empty?

@@ -1,6 +1,6 @@
 production:
   solr:
-    hostname: frozen-depths-6608.herokuapp.com/
+    hostname: frozen-depths-6608.herokuapp.com
     port: 8983
     log_level: WARNING
     path: /solr/production

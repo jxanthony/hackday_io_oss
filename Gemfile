@@ -14,6 +14,7 @@ gem 'rails-timeago'
 gem "rails_config"
 gem 'sunspot_rails'
 gem 'sunspot_solr'
+gem 'acts-as-taggable-on'
 
 group :production do
   gem "pg"

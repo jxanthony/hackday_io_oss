@@ -47,5 +47,13 @@ class User < ActiveRecord::Base
   def self.current=(user)
     Thread.current[:user] = user
   end
-  
+
+  def show_trophies
+    @trophies = Hack.find params[:id]
+  end
+
+  def show_hacks
+    @user_hacks = contributions.where(user_id: self.id)
+  end
+
 end

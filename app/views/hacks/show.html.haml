@@ -30,7 +30,11 @@
                 'data-toggle' => 'modal',                  |
                 'data-target' => '#hack-form' do           |
         %span Edit Hack
-
+  - if @hack.trophy
+    .hack-trophy
+      %h3
+        = image_tag "/assets/" + @hackday.trophy_icon
+        = "This hack won the " + @hack.trophy + " award"
   .row
     .col-xs-2.col-sm-1
       = render partial: 'voting', locals: { hack: @hack }
@@ -49,9 +53,8 @@
                     method: :post,                                      |
                     id: 'hack-join'                                     |
 
-
   - if @hack.video
-    %video#hack-video.video-js.vjs-default-skin{controls: "", "data-setup" => "{\"example_option\":true}", height: "264", poster: "http://video-js.zencoder.com/oceans-clip.png", preload: "auto", width: "640"}
+    %video#hack-video.video-js.vjs-default-skin{controls: "", "data-setup" => "{\"example_option\":true}", preload: "auto", height: "480", poster: "/assets/16-9-hackday.png", preload: "auto", width: "640"}
       %source{src: @hack.video + "#t=" + @hack.video_start + "," + @hack.video_end, type: "video/mp4"}
       %p.vjs-no-js
         To view this video please enable JavaScript, and consider upgrading to a web browser that

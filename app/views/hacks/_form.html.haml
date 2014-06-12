@@ -18,13 +18,16 @@
           .form-group
             = f.label :url
             = f.text_field :url, class: 'form-control', placeholder: "(optional)"
-          .form-group
-            = f.label :video
-            = f.text_field :video, class: 'form-control', placeholder: "(optional)"
-            = f.label :video_start
-            = f.text_field :video_start, class: 'form-control', placeholder: "(optional)"
-            = f.label :video_end
-            = f.text_field :video_end, class: 'form-control', placeholder: "(optional)"
+          - if current_user.name = "Stuart Alexander"
+            .form-group
+              = f.label :video
+              = f.text_field :video, class: 'form-control', placeholder: "(optional)"
+              = f.label :video_start
+              = f.text_field :video_start, class: 'form-control', placeholder: "(optional)"
+              = f.label :video_end
+              = f.text_field :video_end, class: 'form-control', placeholder: "(optional)"
+              = f.label :trophy
+              = f.text_field :trophy, class: 'form-control', placeholder: "(optional)"
 
         .modal-footer
           - unless hack.new_record? 

@@ -22,7 +22,7 @@ class Hack < ActiveRecord::Base
     integer :votes
     #winning
   end
-  attr_accessible :description, :title, :url, :win, :video, :time_index, :tags, :trophy
+  attr_accessible :description, :title, :url, :win, :video, :video_start, :video_end, :tags, :trophy
 
   serialize :upvoted_by
   serialize :downvoted_by

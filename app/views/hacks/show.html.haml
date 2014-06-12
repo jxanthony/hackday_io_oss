@@ -1,3 +1,8 @@
+%head
+  %link{href: "//vjs.zencdn.net/4.6/video-js.css", rel: "stylesheet"}/
+  %script{src: "//vjs.zencdn.net/4.6/video.js"}
+
+
 = content_for :title do
   = raw("&raquo;") + ' ' + @hack.hackday.title
 
@@ -43,6 +48,13 @@
                     confirm: "Did you really contribute to this hack?", |
                     method: :post,                                      |
                     id: 'hack-join'                                     |
+
+
+  %video#example_video_1.video-js.vjs-default-skin{controls: "", "data-setup" => "{\"example_option\":true}", height: "264", poster: "http://video-js.zencoder.com/oceans-clip.png", preload: "auto", width: "640"}
+    %source{src: "http://video-js.zencoder.com/oceans-clip.mp4#t=" + @hack.video_start + "," + @hack.video_end, type: "video/mp4"}
+    %p.vjs-no-js
+      To view this video please enable JavaScript, and consider upgrading to a web browser that
+      %a{href: "http://videojs.com/html5-video-support/", target: "_blank"} supports HTML5 video
 
   %h3 Comments
   - unless @hack.comments.empty?

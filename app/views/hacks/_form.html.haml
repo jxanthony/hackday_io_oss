@@ -22,8 +22,10 @@
             = f.label :video
             = f.text_field :video, class: 'form-control', placeholder: "(optional)"
           .form-group
-            = f.label :time_index
-            = f.text_field :time_index, class: 'form-control', placeholder: "(optional)"
+            = f.label :video_start
+            = f.text_field :video_start, class: 'form-control', placeholder: "(optional)"
+            = f.label :video_end
+            = f.text_field :video_end, class: 'form-control', placeholder: "(optional)"
 
         .modal-footer
           - unless hack.new_record? 

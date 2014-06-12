@@ -14,4 +14,5 @@
 //= require jquery_ujs
 //= require rails-timeago
 //= require bootstrap
+//= require autocomplete-rails
 //= require_tree .

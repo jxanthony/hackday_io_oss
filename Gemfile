@@ -15,6 +15,7 @@ gem "rails_config"
 gem 'sunspot_rails'
 gem 'sunspot_solr'
 gem 'acts-as-taggable-on'
+gem 'rails3-jquery-autocomplete'
 
 group :production do
   gem "pg"

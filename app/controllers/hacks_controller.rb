@@ -10,6 +10,8 @@ class HacksController < ApplicationController
                                             :join_presentation, 
                                             :leave_presentation]
 
+  autocomplete :tag, :name, :class_name => 'ActsAsTaggableOn::Tag'
+
   def create
     # FIXME: gross
     params[:hack].delete('url') unless /^http/.match(params[:hack][:url].to_s)
@@ -29,11 +31,16 @@ class HacksController < ApplicationController
   end
 
   def index
-    @search = Hack.search do
-      fulltext params[:search]
-      order_by(:votes, :desc)
+    if params[:tag]
+      @hacks = Hack.tagged_with(params[:tag])
     end
-    @hacks = @search.results
+    else if params[:search]
+      @search = Hack.search do
+        fulltext params[:search]
+        order_by(:votes, :desc)
+      end
+      @hacks = @search.results
+    end
   end
 
   def edit

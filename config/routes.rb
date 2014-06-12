@@ -4,6 +4,9 @@ Hacktracker::Application.routes.draw do
 
   resources :users, only: :show
 
+  get 'tags/:tag', to: 'hacks#index', as: :tag
+  root to: 'hacks#index'
+
   resources :hackdays do
     member do
       get :queue
@@ -13,7 +16,9 @@ Hacktracker::Application.routes.draw do
     resources :activities, only: [:index]
 
   end
+
   resources :hacks, only: [:show, :edit, :update, :destroy, :index] do
+    get :autocomplete_tag_name, :on => :collection
     member do
       post :move_up_in_queue, :move_down_in_queue, :finish_presentation, :join_queue, :leave_queue, :downvote, :upvote
       post :add_contribution

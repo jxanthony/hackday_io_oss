@@ -19,12 +19,12 @@ class Hack < ActiveRecord::Base
   searchable do
     text :title, :boost => 5
     text :description
+    text :tag_list
     integer :votes
     #winning
   end
-  attr_accessible :description, :title, :url, :win, :video, :video_start, :video_end, :tags, :trophy
-  # , :tag_list
-  # acts_as_taggable
+  attr_accessible :description, :title, :url, :win, :video, :video_start, :video_end, :tags, :trophy, :tag_list
+  acts_as_taggable_on :tags
 
   serialize :upvoted_by
   serialize :downvoted_by
@@ -43,6 +43,10 @@ class Hack < ActiveRecord::Base
 
   after_create :activity_for_create
   after_update :activity_for_update
+
+  def tag_name
+    hack.tag
+  end
 
   def upvote(user)
     self.lock!

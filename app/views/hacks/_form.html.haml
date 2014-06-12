@@ -28,8 +28,9 @@
               = f.text_field :video_end, class: 'form-control', placeholder: "(optional)"
               = f.label :trophy
               = f.text_field :trophy, class: 'form-control', placeholder: "(optional)"
-              -#= f.label :tag_list, "Tags (separated by commas)"
+              = f.label :tag_list, "Tags (separated by commas)"
               -#= f.text_field :tag_list
+              = f.autocomplete_field :tag_list, autocomplete_tag_name_hacks_path, :"data-delimiter" => ', '
 
         .modal-footer
           - unless hack.new_record? 

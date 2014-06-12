@@ -16,3 +16,5 @@
         .hack-description= truncate(hack.description, length: 140)
         .hack-contributors
           = render hack.contributors
+        .tag-list
+          = raw hack.tag_list.map { |t| link_to t, tag_path(t) }.join(', ')

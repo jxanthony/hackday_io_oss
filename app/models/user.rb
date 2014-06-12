@@ -48,12 +48,16 @@ class User < ActiveRecord::Base
     Thread.current[:user] = user
   end
 
-  def show_trophies
-    @trophies = Hack.find params[:id]
+  def winning_hacks
+    hacks.reject {|h| h.trophy.nil? }
   end
 
-  def show_hacks
-    @user_hacks = contributions.where(user_id: self.id)
+  def trophies
+    winning_hacks.map {|h| h.hackday.trophy_icon}
+  end
+
+  def hacks
+    @hacks ||= contributions.map(&:hack)
   end
 
 end

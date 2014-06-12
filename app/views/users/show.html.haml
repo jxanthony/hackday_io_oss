@@ -1,2 +1,12 @@
+= render @user
 = @user.name
-= @user.show_hacks
+
+%h1
+  = "Trophies achieved"
+= render partial: 'users/trophy', collection: @user.trophies
+
+%h1
+  = "Hacks contributed to"
+= render @user.hacks
+-#= render @user.winning_hacks
+

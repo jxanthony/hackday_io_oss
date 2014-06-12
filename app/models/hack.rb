@@ -23,6 +23,8 @@ class Hack < ActiveRecord::Base
     #winning
   end
   attr_accessible :description, :title, :url, :win, :video, :video_start, :video_end, :tags, :trophy
+  # , :tag_list
+  # acts_as_taggable
 
   serialize :upvoted_by
   serialize :downvoted_by

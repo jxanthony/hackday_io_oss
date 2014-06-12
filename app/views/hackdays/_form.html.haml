@@ -15,11 +15,11 @@
             = f.text_field :date,                                                       |
                            class: 'form-control',                                       |
                            placeholder: "when will people be showing off their hacks?"  |
-          -#.form-group
-          -#  = f.label :trophy_name
-          -#  = f.text_field :trophy_name, class: 'form-control'
-          -#  = f.label :trophy_icon
-          -#  = f.text_field :trophy_icon, class: 'form-control'
+          .form-group
+            = f.label :trophy_name
+            = f.text_field :trophy_name, class: 'form-control'
+            = f.label :trophy_icon
+            = f.text_field :trophy_icon, class: 'form-control'
 
         .modal-footer
           - unless hackday.new_record? 

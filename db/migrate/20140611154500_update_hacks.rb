@@ -4,6 +4,5 @@ class UpdateHacks < ActiveRecord::Migration
     add_column :hacks, :trophy, :string
     add_column :hacks, :tags, :string
     add_column :hacks, :video, :string
-    add_column :hacks, :time_index, :time_index
   end
 end

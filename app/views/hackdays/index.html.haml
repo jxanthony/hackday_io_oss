@@ -34,6 +34,6 @@
   %h2
     = "Hackday topics"
   #tag_cloud
-    - tag_cloud Hack.tag_counts, %w{s m l} do |tag, css_class|
+    - tag_cloud Hack.tag_counts(:limit => 40,:order => "count desc"), %w{s m l} do |tag, css_class|
       = link_to tag.name, tag_path(tag.name), class: css_class
 = render partial: 'hackdays/form', locals: { hackday: Hackday.new }

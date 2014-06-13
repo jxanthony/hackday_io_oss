@@ -30,7 +30,7 @@
                 'data-toggle' => 'modal',                  |
                 'data-target' => '#hack-form' do           |
         %span Edit Hack
-  - if @hack.trophy
+  - if @hack.trophy?
     .hack-trophy
       %h3
         - if @hack.hackday.trophy_icon

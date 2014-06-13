@@ -50,6 +50,7 @@
 #tag_cloud a {
  background-color:#44B344; color:#fff; line-height:25px; font-size:12px; padding:0px 5px; border-radius:3px; cursor:pointer;
 }
+#tag_cloud a:hover { background-color:lighten(#44B344, 10%); text-decoration:none; }
 
 
 // Front page

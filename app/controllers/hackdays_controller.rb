@@ -61,4 +61,8 @@ class HackdaysController < ApplicationController
     @judges_comments = @hackday.comments.where(private: true).order("created_at DESC")
   end
 
+  def feed
+    @hackday = Hackday.find(params[:id])
+  end
+
 end

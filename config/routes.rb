@@ -11,6 +11,7 @@ Hacktracker::Application.routes.draw do
     member do
       get :queue
       get :judges
+      get :feed
     end
     resources :hacks, only: [:index, :create]
     resources :activities, only: [:index]

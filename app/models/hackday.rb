@@ -11,7 +11,7 @@
 #
 
 class Hackday < ActiveRecord::Base
-  attr_accessible :date, :title, :trophy_name, :trophy_icon
+  attr_accessible :date, :title, :trophy_name, :trophy_icon, :group_id
   has_many :hacks, :dependent => :destroy
   has_many :activities, through: :hacks
   has_many :comments, through: :hacks

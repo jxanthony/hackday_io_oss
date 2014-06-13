@@ -3,7 +3,14 @@
 
 %h1
   = "Trophies achieved"
+
+
+
 = render partial: 'users/trophy', collection: @user.trophies
+.col-xs-10.col-sm-11
+  %h3
+    %i
+      = render partial: 'users/trophy_name', collection: @user.trophy_names
 
 %h1
   = "Hacks contributed to"

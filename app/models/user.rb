@@ -58,6 +58,10 @@ class User < ActiveRecord::Base
     winning_hacks.map {|h| h.hackday.trophy_icon}
   end
 
+  def trophy_names
+    winning_hacks.map {|h| h.trophy}
+  end
+
   def hacks
     @hacks ||= contributions.map(&:hack)
   end

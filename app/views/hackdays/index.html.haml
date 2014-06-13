@@ -1,5 +1,6 @@
 
 .col-md-6
+
   - unless @ongoing_hackdays.empty?
     .hackdays
       %h2 Hack Days going on right now!
@@ -30,5 +31,9 @@
     %br
 
     %button.btn.btn-success.btn-lg{'data-toggle' => 'modal', 'data-target' => '#hackday-form'} Create A Hack Day
-
+  %h2
+    = "Hackday topics"
+  #tag_cloud
+    - tag_cloud Hack.tag_counts, %w{s m l} do |tag, css_class|
+      = link_to tag.name, tag_path(tag.name), class: css_class
 = render partial: 'hackdays/form', locals: { hackday: Hackday.new }

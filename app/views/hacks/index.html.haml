@@ -1,20 +1,23 @@
 .results-container
   %h1
     = "Search results"
-  - @hacks.each do |hack|
-    .hacks
-      .col-xs-2.col-sm-1.hack-score
-        %h2
-          = hack.votes
-      .hack-details.col-xs-10.col-sm-11
-        %h3
-          = link_to hack.title, hack
-        %h4
-          = "Created at: " + hack.hackday.title
-        %p
-          = hack.hackday.date
-        .hack-description= truncate(hack.description, length: 140)
-        .hack-contributors
-          = render hack.contributors
-        .tag-list
-          = raw hack.tag_list.map { |t| link_to t, tag_path(t) }.join(', ')
+  - @hacks.each do |result|
+    - if defined?(result.title)
+      .hacks
+        .col-xs-2.col-sm-1.hack-score
+          %h2
+            = result.votes
+        .hack-details.col-xs-10.col-sm-11
+          %h3
+            = link_to result.title, result
+          %h4
+            = "Created at: " + result.hackday.title
+          %p
+            = result.hackday.date
+          .hack-description= truncate(result.description, length: 140)
+          .hack-contributors
+            = render result.contributors
+          .tag-list
+            = raw result.tag_list.map { |t| link_to t, tag_path(t) }.join(', ')
+    - if defined?(result.name)
+      = render result

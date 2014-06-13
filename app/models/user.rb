@@ -15,7 +15,9 @@
 #
 
 class User < ActiveRecord::Base
-
+  searchable do
+    text :name
+  end
   attr_accessible :name, :oauth_expires_at, :oauth_token, :provider, :uid, :bankroll, :mugshot_url
 
   has_many :contributions

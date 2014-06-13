@@ -99,3 +99,8 @@
 
 .results-container {margin-left: 15px;}
 //.hack-result{margin-left: 10px;}
+
+.tag-list { display:inline-block; margin-top: 10px;float: left}
+.tag-list .tag-count {background-color:green;color:#fff; line-height:25px; font-size:12px; padding:3px 5px; margin-left:-2px;  }
+.tag-list a { background-color:#44B344; color:#fff; line-height:25px; font-size:12px; padding:3px 5px; border-radius:3px; cursor:pointer; }
+.tag-list a:hover { background-color:lighten(#44B344, 10%); text-decoration:none; }

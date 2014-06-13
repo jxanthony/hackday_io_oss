@@ -35,9 +35,11 @@ class HacksController < ApplicationController
       @hacks = Hack.tagged_with(params[:tag])
     end
     else if params[:search]
-      @search = Hack.search do
-        fulltext params[:search]
-        order_by(:votes, :desc)
+      @search = Sunspot.search Hack, User do
+        fulltext params[:search] do
+          fields(:name, :title, :description, :tag_list)
+        end
+        # order_by(:votes, :desc)
       end
       @hacks = @search.results
     end

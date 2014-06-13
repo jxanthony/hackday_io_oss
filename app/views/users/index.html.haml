@@ -1,0 +1,6 @@
+.results-container
+  %h1
+    = "Search results"
+  - @users.each do |user|
+    = render @user
+    = @user.name

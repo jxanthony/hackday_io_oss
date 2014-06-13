@@ -4,4 +4,6 @@
   .hack-details.col-xs-10.col-sm-11
     %h3
       = link_to hack.title, hack
+      - if hack.video
+        = image_tag("/assets/video-icon24.png")
     .hack-description= truncate(hack.description, length: 140)

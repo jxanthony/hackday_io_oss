@@ -51,11 +51,11 @@ class User < ActiveRecord::Base
   end
 
   def winning_hacks
-    hacks.reject {|h| h.trophy.nil? }
+    hacks.reject {|h| h.trophy.nil? | h.trophy.blank?}
   end
 
   def trophies
-    winning_hacks.map {|h| h.hackday.trophy_icon}
+      winning_hacks.map {|h| h.hackday.trophy_icon}
   end
 
   def trophy_names

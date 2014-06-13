@@ -3,8 +3,7 @@
 
 %h1
   = "Trophies achieved"
-- if @user.trophies.count !=1
-  = render partial: 'users/trophy', collection: @user.trophies
+= render partial: 'users/trophy', collection: @user.trophies
 .col-xs-10.col-sm-11
   %h3
     %i

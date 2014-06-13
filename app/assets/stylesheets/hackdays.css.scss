@@ -39,13 +39,17 @@
 }
 
 #tag_cloud {
-  width: 400px;
+  width: 100%;
+  margin-bottom: 10px;
   line-height: 1.6em;
   .s { font-size: 0.8em; }
   .m { font-size: 1.2em; }
   .l { font-size: 1.8em; }
 }
 
+#tag_cloud a {
+ background-color:#44B344; color:#fff; line-height:25px; font-size:12px; padding:0px 5px; border-radius:3px; cursor:pointer;
+}
 
 
 // Front page

@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 ruby '2.0.0'
-gem 'rails', '3.2.17'
+gem 'rails', '~>4.0.0'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -15,7 +15,9 @@ gem "rails_config"
 gem 'sunspot_rails'
 gem 'sunspot_solr'
 gem 'acts-as-taggable-on'
-gem 'rails3-jquery-autocomplete'
+gem 'rails4_upgrade'
+gem 'rails4-autocomplete'
+
 
 group :production do
   gem "pg"
@@ -26,10 +28,11 @@ end
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass', "~> 3.2.5" # FIX: set to previous version to avoid heroku warnings
-  gem 'sass-rails'
-  gem 'coffee-rails'
-  gem 'uglifier', '>= 1.0.3'
+  gem 'sass' # FIX: set to previous version to avoid heroku warnings
+  gem 'sass-rails', '~>4.0.0'
+  gem 'coffee-rails', '~>4.0.0'
+  gem 'uglifier', '>=1.3.0'
+
 end
 
 gem 'jquery-rails'
@@ -55,3 +58,15 @@ group :test do
   #gem 'capybara-webkit'
   gem 'database_cleaner'
 end
+
+#update rails4 gems
+# Gemfile
+gem 'actionpack-action_caching', '~>1.0.0'
+gem 'actionpack-page_caching', '~>1.0.0'
+gem 'actionpack-xml_parser', '~>1.0.0'
+gem 'actionview-encoded_mail_to', '~>1.0.4'
+gem 'activerecord-session_store', '~>0.0.1'
+gem 'activeresource', '~>4.0.0.beta1'
+gem 'protected_attributes', '~>1.0.1'
+gem 'rails-observers', '~>0.1.1'
+gem 'rails-perftest', '~>0.0.2'

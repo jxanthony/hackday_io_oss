@@ -5,7 +5,7 @@ Hacktracker::Application.routes.draw do
   resources :users, only: :show
 
   get 'tags/:tag', to: 'hacks#index', as: :tag
-  root to: 'hacks#index'
+  # hacksroot to: 'hacks#index'
 
   resources :hackdays do
     member do
@@ -28,9 +28,9 @@ Hacktracker::Application.routes.draw do
     resources :activities, only: [:index]
   end
 
-  match 'auth/:provider/callback', to: 'sessions#create'
-  match 'auth/failure', to: redirect('/')
-  match 'signout', to: 'sessions#destroy', as: 'signout'
+  post 'auth/:provider/callback', to: 'sessions#create'
+  post 'auth/failure', to: redirect('/')
+  post 'signout', to: 'sessions#destroy', as: 'signout'
 
   resources :comments
   # resources :activities

@@ -22,7 +22,13 @@
                   class: 'btn btn-danger btn-xs',                               |
                   id: 'hack-dequeue' do                                         |
           %span= "Not Ready!"
-
+  - if @hack.trophy?
+    .hack-trophy
+      %h3
+        -#- if @hack.hackday.trophy_icon
+        -#  = image_tag "/assets/" + @hack.hackday.trophy_icon
+        %i
+          = "This hack won the " + @hack.trophy + " award"
   - if @hack.video?
     %video#hack-video.video-js.vjs-default-skin{controls: "", "data-setup" => "{\"example_option\":true}", preload: "auto", height: "380", poster: "/assets/16-9-hackday.png", preload: "auto", width: "640"}
       %source{src: @hack.video + "#t=" + @hack.video_start + "," + @hack.video_end, type: "video/mp4"}
@@ -40,29 +46,27 @@
   .row
     .col-xs-2.col-sm-1
       = render partial: 'voting', locals: { hack: @hack }
-      #team
-        %strong Team
-        %br
-        = render @hack.contributors
-        - if current_user and not @hack.has_contributor?(current_user)
-          = link_to "Join", add_contribution_hack_path(@hack),          |
-                    confirm: "Did you really contribute to this hack?", |
-                    method: :post,                                      |
-                    id: 'hack-join'
-    .col-xs-10.col-sm-11
-      .hack-details
-        %p= @hack.description
-        - unless @hack.url.blank?
-          = link_to "Learn more here!", @hack.url
 
-      .tag-list
-        = raw @hack.tag_list.map { |t| link_to t, tag_path(t) }.join(', ')                                   |
-  - if @hack.trophy?
-    .hack-trophy
-      %h3
-        -#- if @hack.hackday.trophy_icon
-        -#  = image_tag "/assets/" + @hack.hackday.trophy_icon
-        = "This hack won the " + @hack.trophy + " award"
+    .hack-details
+      %p= @hack.description
+      - unless @hack.url.blank?
+        = link_to "Learn more here!", @hack.url
+
+    .tag-list
+      = raw @hack.tag_list.map { |t| link_to t, tag_path(t) }.join(', ')
+  .col-xs-10.col-sm-11
+  #team
+    %strong Team
+    %br
+    = render @hack.contributors
+    - if current_user and not @hack.has_contributor?(current_user)
+      = link_to "Join", add_contribution_hack_path(@hack),          |
+                confirm: "Did you really contribute to this hack?", |
+                method: :post,                                      |
+                id: 'hack-join'
+    %br
+    %br                          |
+
   %h3 Comments
   - unless @hack.comments.empty?
     = render @hack.comments

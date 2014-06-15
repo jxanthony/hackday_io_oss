@@ -15,4 +15,5 @@
 //= require rails-timeago
 //= require bootstrap
 //= require autocomplete-rails
+//= require turbolinks
 //= require_tree .

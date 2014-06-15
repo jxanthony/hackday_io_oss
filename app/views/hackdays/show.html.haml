@@ -20,7 +20,7 @@
           %li
             = link_to "Judges Comments", judges_hackday_path(@hackday)
         %li
-          = link_to "Hackday Group", feed_hackday_path(@hackday)
+          = link_to "Hackday Group", feed_hackday_path(@hackday), data: { no_turbolink: false }
 
     - if current_user and not is_mobile_device?
       .col-md-4.pull-right.add-hack

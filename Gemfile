@@ -17,6 +17,7 @@ gem 'sunspot_solr'
 gem 'acts-as-taggable-on'
 gem 'rails4_upgrade'
 gem 'rails4-autocomplete'
+gem 'turbolinks'
 
 
 group :production do

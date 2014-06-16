@@ -8,7 +8,7 @@
 
 .col-md-8
   = link_to raw("&laquo;") + ' ' + @hack.hackday.title, @hack.hackday
-  - if @hack.has_contributor?(current_user) || current_user.name = "Stuart Alexander"
+  - if @hack.has_contributor?(current_user) || current_user.try(:name) == 'Stuart Alexander'
     .alert.alert-info
       - unless @hack.presenting?
         = "This hack will not be presented."

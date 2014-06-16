@@ -156,7 +156,7 @@ class HacksController < ApplicationController
   end
 
   def check_permission
-    unless @hack.has_contributor?(current_user) or @hack.hackday.has_admin?(current_user) or current_user.name = "Stuart Alexander"
+    unless @hack.has_contributor?(current_user) or @hack.hackday.has_admin?(current_user) or current_user.try(:name) == 'Stuart Alexander'
       flash[:error] = "You don't have permission to perform this action."
       return redirect_to @hack.hackday
     end

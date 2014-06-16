@@ -1,5 +1,5 @@
 .col-md-8
-  - if @hackday.has_admin?(current_user) || current_user.name = "Stuart Alexander"
+  - if (current_user && @hackday.has_admin?(current_user)) || current_user.try(:name) == 'Stuart Alexander'
     %h2
       = @hackday.title
       = link_to '#', class: 'edit-hackday', 'data-toggle' => 'modal', 'data-target' => '#hackday-form' do

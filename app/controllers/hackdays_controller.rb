@@ -42,8 +42,8 @@ class HackdaysController < ApplicationController
 
   def index
     @ongoing_hackdays = Hackday.where('date = ?', Date.today)
-    @upcoming_hackdays = Hackday.where('date > ?', Date.today)
-    @past_hackdays = Hackday.where('date < ?', Date.today)
+    @upcoming_hackdays = Hackday.where('date > ?', Date.today).order("date DESC")
+    @past_hackdays = Hackday.where('date < ?', Date.today).order("date DESC")
   end
 
   def queue

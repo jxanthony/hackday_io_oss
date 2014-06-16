@@ -15,7 +15,7 @@
 #
 
 Fabricator(:user) do
-  name "Kane Ren"
+  name "Stuart Alexander"
   provider "yammer"
   email "kane@ren.com"
   mugshot_url ""

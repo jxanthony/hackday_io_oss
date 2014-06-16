@@ -28,9 +28,9 @@ Hacktracker::Application.routes.draw do
     resources :activities, only: [:index]
   end
 
-  post 'auth/:provider/callback', to: 'sessions#create'
-  post 'auth/failure', to: redirect('/')
-  post 'signout', to: 'sessions#destroy', as: 'signout'
+  match 'auth/:provider/callback', to: 'sessions#create', via: [:get, :post]
+  match 'auth/failure', to: redirect('/'), via: [:get, :post]
+  get '/signout', to: 'sessions#destroy', as: 'signout'
 
   resources :comments
   # resources :activities

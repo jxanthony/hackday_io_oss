@@ -3,8 +3,10 @@
   <component name="DataSourceManagerImpl" format="xml" hash="3413423481">
     <data-source source="LOCAL" name="Rails hackdayio: development" uuid="f2d6bc26-75f2-476b-92b0-00d96adf987b">
       <driver-ref>sqlite.xerial</driver-ref>
-      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/db/development.sqlite3</jdbc-url>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://127.0.0.1/hackday</jdbc-url>
+      <user-name>hackdayadmin</user-name>
+      <user-password>dfc3dfc6dfc5dfdcdfcfdfd3dfcbdfc7dfc7dfcfdfd8</user-password>
       <libraries />
     </data-source>
     <data-source source="LOCAL" name="Rails hackdayio: test" uuid="f1fd1d40-fc7d-4297-91de-1cc0d51d43e9">

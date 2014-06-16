@@ -39,7 +39,7 @@
 
   %h2
     = @hack.title
-    - if @hack.has_contributor?(current_user) || current_user.name = "Stuart Alexander"
+    - if @hack.has_contributor?(current_user) || current_user.try(:name) == 'Stuart Alexander'
       = link_to '#', class: 'edit-hack', 'data-toggle' => 'modal', 'data-target' => '#hack-form' do
         %span.glyphicon.glyphicon-cog
 

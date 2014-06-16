@@ -21,7 +21,7 @@ class Comment < ActiveRecord::Base
 
   after_save :create_activity
 
-  scope :public, :conditions => { :private => false }
+  scope :public, -> {where(:private => false) }
 
 
   private

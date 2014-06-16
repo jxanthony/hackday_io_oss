@@ -9,7 +9,7 @@
             = result.votes
         .hack-details.col-xs-10.col-sm-11
           %h3
-            = link_to result.title, result
+            = link_to result.title, result, data: { no_turbolink: true }
             - if result.video?
               = image_tag("video-icon24.png")
             - if result.trophy?

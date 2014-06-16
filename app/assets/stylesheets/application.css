@@ -47,9 +47,11 @@ time, .time
 	span { text-align: center; }
 }
 
-.search_bar {
-    margin-left: 700px;
-    margin-top: 10px
+.navbar-form {
+    margin-top: 12px;
+}
+#search {
+    width: 400px;
 }
 .signin-yammer
 {

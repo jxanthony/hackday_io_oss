@@ -22,11 +22,9 @@
             %span.icon-bar
             %span.icon-bar
           = link_to "HackDay.io", root_path, class: 'navbar-brand'
-          .search_bar
-            = form_tag hacks_path, :method => :get do
-              = text_field_tag :search, params[:search]
-              = submit_tag "Search", :name => nil
+
         .navbar-collapse.collapse
+
           - if current_user
             %ul.nav.navbar-nav.navbar-right
               %li
@@ -43,6 +41,10 @@
                   = link_to "Sign In With Github", '/auth/github'
                 - elsif Settings.auth_method == 'yammer'
                   = link_to "Sign In With Yammer", '/auth/yammer'
+          .navbar-form.navbar-left
+            = form_tag hacks_path, :method => :get do
+              = text_field_tag :search, params[:search], placeholder: "Search for hacks"
+              = submit_tag "Search", :name => nil
 
     .container
       .row#alerts

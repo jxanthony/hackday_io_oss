@@ -1,6 +1,6 @@
 .row.comment{class: ('private' if comment.private?)}
   .col-xs-2.col-sm-1
-    - render comment.user
+    = render comment.user
   .col-xs-10.col-sm-11.comment-body
     %p
       %strong= comment.user.name

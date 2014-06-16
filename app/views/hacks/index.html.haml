@@ -11,12 +11,12 @@
           %h3
             = link_to result.title, result
             - if result.video?
-              = image_tag("/video-icon24.png")
+              = image_tag("video-icon24.png")
             - if result.trophy?
               - if (result.trophy.include? "Honourable")
-                = image_tag("/silver-star-24.png")
+                = image_tag("silver-star-24.png")
               - else
-                = image_tag("/trophy_24.png")
+                = image_tag("trophy_24.png")
           %h4
             = "Created at: " + result.hackday.title
           %p

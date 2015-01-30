@@ -18,7 +18,7 @@
           .form-group
             = f.label :url
             = f.text_field :url, class: 'form-control', placeholder: "(optional)"
-          - if current_user.try(:name) == 'Stuart Alexander'
+          - if ['Stuart Alexander', 'Grace Chang'].include?(current_user.try(:name))
             .form-group
               = f.label :video
               = f.text_field :video, class: 'form-control', placeholder: "(optional)"

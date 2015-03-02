@@ -4,7 +4,7 @@
       = form_for hackday do |f|
         .modal-header
           %button.close{type: 'button', 'data-dismiss' => 'modal', 'aria-hidden' => 'true'} &times;
-          %h4.modal-title      
+          %h4.modal-title
             = hackday.new_record? ? "Create a new Hack Day!" : "Edit " + hackday.title
         .modal-body
           .form-group
@@ -24,11 +24,11 @@
             = f.text_field :group_id, class: 'form-control', :value => "1253703"
 
         .modal-footer
-          - unless hackday.new_record? 
+          - unless hackday.new_record?
             = link_to "Delete Hackday", hackday,                    |
                       method: :delete,                              |
                       id: 'hack-delete',                            |
-                      confirm: "YOU WANT TO DELETE YOUR HACK DAY?!" |
+                      data: { confirm: "YOU WANT TO DELETE YOUR HACK DAY?!" } |
           %button.btn.btn-default{type: "button", 'data-dismiss'=>"modal"} Cancel
           - hackday.new_record? ? submit_text = "Create your Hack Day" : submit_text = "Update this hack day"
           = f.submit submit_text, class: 'btn btn-primary btn-success'

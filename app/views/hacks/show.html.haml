@@ -67,7 +67,7 @@
     = render @hack.contributors
     - if current_user and not @hack.has_contributor?(current_user)
       = link_to "Join", add_contribution_hack_path(@hack),          |
-                confirm: "Did you really contribute to this hack?", |
+                data: { confirm: "Did you really contribute to this hack?" }, |
                 method: :post,                                      |
                 id: 'hack-join'
     %br
@@ -76,7 +76,7 @@
   %h3 Comments
   - unless @hack.comments.empty?
     = render @hack_comments
-  - else 
+  - else
     %p Sadly no one has commented yet!
 
   - if current_user

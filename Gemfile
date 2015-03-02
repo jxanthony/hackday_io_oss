@@ -43,7 +43,7 @@ gem 'omniauth-yammer'
 gem 'omniauth-github'
 
 group :development, :test do
-  gem 'debugger' 
+  gem 'debugger'
   gem 'sqlite3'
 
   gem 'rspec-rails'
@@ -55,7 +55,7 @@ group :test do
   gem 'fabrication'
   gem 'rspec'
   gem 'shoulda-matchers'
-  #gem 'capybara'
+  gem 'capybara'
   #gem 'capybara-webkit'
   gem 'database_cleaner'
 end

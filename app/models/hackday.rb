@@ -55,6 +55,11 @@ class Hackday < ActiveRecord::Base
     create_activity(hack, 'move_down_in_queue')
   end
 
+  def add_admin(user)
+    return false unless user
+    admins << user
+  end
+
   private
 
   def bump_queue(index)

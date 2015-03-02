@@ -74,4 +74,16 @@ describe Hackday do
 
   end
 
+  describe 'admin management' do
+    before :each do
+      @hackday = Fabricate(:hackday)
+    end
+
+    it 'adds new admin' do
+      user = Fabricate(:user)
+      @hackday.add_admin(user)
+
+      expect(@hackday.admins).to eq [user]
+    end
+  end
 end

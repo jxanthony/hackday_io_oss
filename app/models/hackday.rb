@@ -64,6 +64,11 @@ class Hackday < ActiveRecord::Base
     admins << user
   end
 
+  def delete_admin(user)
+    return unless user
+    admins.delete(user)
+  end
+
   private
 
   def bump_queue(index)

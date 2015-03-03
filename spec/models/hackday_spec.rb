@@ -106,5 +106,16 @@ describe Hackday do
         expect(hackday.admins.sort).to eq [user1, user2]
       end
     end
+
+    describe '.delete_admin' do
+      it 'deletes existing admin' do
+        user = Fabricate(:user)
+        hackday = Fabricate(:hackday, admins: [user])
+
+        hackday.delete_admin(user)
+
+        expect(hackday.admins).to eq []
+      end
+    end
   end
 end

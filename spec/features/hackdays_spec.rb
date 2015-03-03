@@ -66,4 +66,13 @@ describe "browsing hackdays" do
 
   end
 
+  describe 'user admin' do
+    it 'shows add admin button for existing admin' do
+      test_sign_in
+      @hackday.admins << User.last
+      visit hackday_path(@hackday)
+
+      page.should have_content('Add Judge')
+    end
+  end
 end

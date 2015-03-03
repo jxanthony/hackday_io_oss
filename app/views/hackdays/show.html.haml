@@ -27,7 +27,7 @@
         - if @hackday.has_admin?(current_user) && !is_mobile_device?
           %li
             %button.btn.btn-success.btn-sm{'data-toggle' => 'modal', 'data-target' => '#admin-form'}
-              %span.glyphicon-plus.glyphicon
+              %span.glyphicon-user.glyphicon
               Add Judge
         - if current_user and not is_mobile_device?
           %li

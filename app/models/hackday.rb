@@ -15,7 +15,7 @@ class Hackday < ActiveRecord::Base
   has_many :hacks, :dependent => :destroy
   has_many :activities, through: :hacks
   has_many :comments, through: :hacks
-  has_and_belongs_to_many :admins, class_name: 'User'
+  has_and_belongs_to_many :admins, -> { uniq }, class_name: 'User'
 
   def has_admin?(user)
     self.admins.include? user
@@ -55,8 +55,12 @@ class Hackday < ActiveRecord::Base
     create_activity(hack, 'move_down_in_queue')
   end
 
+  def add_admins(users)
+    users.each { |user| add_admin(user) }
+  end
+
   def add_admin(user)
-    return false unless user
+    return unless user
     admins << user
   end
 
@@ -73,6 +77,5 @@ class Hackday < ActiveRecord::Base
   def create_activity(hack, action)
     hack.activities.create(action: action, user_id: User.current.id) if User.current
   end
-
 
 end

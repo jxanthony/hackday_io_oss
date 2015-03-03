@@ -75,15 +75,36 @@ describe Hackday do
   end
 
   describe 'admin management' do
-    before :each do
-      @hackday = Fabricate(:hackday)
+    describe '.add_admin' do
+      it 'adds new admin' do
+        user    = Fabricate(:user)
+        hackday = Fabricate(:hackday)
+
+        hackday.add_admin(user)
+
+        expect(hackday.admins).to eq [user]
+      end
+
+      it "doesn't add an admin if already an admin" do
+        user    = Fabricate(:user)
+        hackday = Fabricate(:hackday, admins: [user])
+
+        hackday.add_admin(user)
+
+        expect(hackday.admins).to eq [user]
+      end
     end
 
-    it 'adds new admin' do
-      user = Fabricate(:user)
-      @hackday.add_admin(user)
+    describe '.add_admins' do
+      it 'adds many new admins' do
+        user1   = Fabricate(:user)
+        user2   = Fabricate(:user)
+        hackday = Fabricate(:hackday)
 
-      expect(@hackday.admins).to eq [user]
+        hackday.add_admins([user1, user2])
+
+        expect(hackday.admins.sort).to eq [user1, user2]
+      end
     end
   end
 end

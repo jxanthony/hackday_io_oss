@@ -43,7 +43,7 @@
           %a{href: "http://videojs.com/html5-video-support/", target: "_blank"} supports HTML5 video
 
 
-  %h2
+  %h2#hack-title
     = @hack.title
     - if @hack.has_contributor?(current_user) || current_user.try(:name) == 'Stuart Alexander'
       = link_to '#', class: 'edit-hack', 'data-toggle' => 'modal', 'data-target' => '#hack-form' do

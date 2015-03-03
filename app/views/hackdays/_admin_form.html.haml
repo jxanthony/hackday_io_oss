@@ -13,7 +13,7 @@
             %ul.list-inline
               - admins.each do |admin|
                 - delete_link = link_to 'Revoke Judgeship', delete_admin_hackday_path(hackday, admin_id: admin.id), method: :delete, confirm: 'NO MORE JUDGEY?'
-                %li.has-popover{tabindex: 0, 'data-content' => delete_link, 'data-trigger' => 'focus', style: 'outline: none'}
+                %li.has-popover{tabindex: 0, title: admin.name, 'data-content' => delete_link, 'data-trigger' => 'focus', style: 'outline: none'}
                   = image_tag admin.mugshot_url, |
                               alt: admin.name, |
                               title: admin.name, |

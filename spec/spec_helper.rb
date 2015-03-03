@@ -20,15 +20,14 @@ OmniAuth.config.test_mode = true
 OmniAuth.config.mock_auth[:yammer] = {
     provider: 'yammer',
     uid: '123',
-    info: { 
-            name: 'Kevin Davis', 
+    info: {
+            name: 'Kevin Davis',
             image: 'http://www.flickr.com/photos/kgdavis/5567410776/',
             email: "kevin@builditforhumans.com"
           },
     extra: { raw_info: { network_id: '107' } },
     credentials: { token: 'this_is_a_fake_token' }
 }
-
 
 RSpec.configure do |config|
   # ## Mock Framework
@@ -68,6 +67,11 @@ RSpec.configure do |config|
 
   config.before(:each) do
     DatabaseCleaner.clean
+    ::Sunspot.session = ::Sunspot::Rails::StubSessionProxy.new(::Sunspot.session)
+  end
+
+  config.after(:each) do
+    ::Sunspot.session = ::Sunspot.session.original_session
   end
 
   def test_sign_in

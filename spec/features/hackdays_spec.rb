@@ -74,5 +74,12 @@ describe "browsing hackdays" do
 
       page.should have_content('Add Judge')
     end
+
+    it 'does not show add admin button for non-judges' do
+      test_sign_in
+      visit hackday_path(@hackday)
+
+      page.should_not have_content('Add Judge')
+    end
   end
 end

@@ -22,7 +22,7 @@
         %li
           = link_to "Hackday Group", feed_hackday_path(@hackday), data: { no_turbolink: false }
 
-    .col-md-
+    .col-md
       %ul.nav.nav-pills.pull-right.add-hack
         - if @hackday.has_admin?(current_user) && !is_mobile_device?
           %li

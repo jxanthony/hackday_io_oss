@@ -1,0 +1,26 @@
+.modal.fade#admin-form
+  .modal-dialog{role: 'dialog'}
+    .modal-content
+      = form_for hackday, url: add_admins_hackday_path, method: :put do |f|
+        .modal-header
+          %button.close{type: 'button', 'data-dismiss' => 'modal', 'aria-hidden' => 'true'} &times;
+          %h4.modal-title Add a new Judge (or more)
+        .modal-body
+          - admins = hackday.admins
+          - users = User.all - admins
+          #admins
+            %h4 Current Admins and Judges
+            %ul.list-inline
+              - admins.each do |admin|
+                - delete_link = link_to 'Revoke Judgeship', delete_admin_hackday_path(hackday, admin_id: admin.id), method: :delete, confirm: 'NO MORE JUDGEY?'
+                %li.has-popover{tabindex: 0, title: admin.name, 'data-content' => delete_link, 'data-trigger' => 'focus', style: 'outline: none'}
+                  = image_tag admin.mugshot_url, |
+                              alt: admin.name, |
+                              title: admin.name, |
+                              class: 'img-circle user-mugshot', |
+                              size: '45x45'
+          #judge-selector
+            = f.collection_select :admin_ids, users, :id, :name, { selected: nil }, { class: 'multiple-select', multiple: true, style: 'width: 100%'}
+        .modal-footer
+          %button.btn.btn-default{type: "button", 'data-dismiss'=>"modal"} Cancel
+          = f.submit 'JUDGIFY', class: 'btn btn-primary btn-success'

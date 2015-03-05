@@ -12,10 +12,11 @@ Hacktracker::Application.routes.draw do
       get :queue
       get :judges
       get :feed
+      put    :admin, to: 'hackdays#add_admins',    as: 'add_admins'
+      delete :admin, to: 'hackdays#delete_admin',  as: 'delete_admin'
     end
     resources :hacks, only: [:index, :create]
     resources :activities, only: [:index]
-
   end
 
   resources :hacks, only: [:show, :edit, :update, :destroy, :index] do

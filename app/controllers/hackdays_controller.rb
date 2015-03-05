@@ -1,10 +1,10 @@
 class HackdaysController < ApplicationController
 
   before_filter :check_signed_in, only: [:create, :update, :destroy]
-  
+
   def create
     hackday = Hackday.new(params[:hackday])
-    hackday.admins << current_user
+    hackday.add_admin(current_user)
 
     if hackday.save
       redirect_to hackday
@@ -59,6 +59,32 @@ class HackdaysController < ApplicationController
     end
 
     @judges_comments = @hackday.comments.where(private: true).order("created_at DESC")
+  end
+
+  def add_admins
+    hackday = Hackday.find(params[:id])
+    admins  = User.find_all_by_id(params[:hackday][:admin_ids].reject(&:empty?))
+
+    if hackday.add_admins(admins)
+      flash[:message] = 'User level: JUDGE.'
+      redirect_to hackday
+    else
+      flash[:error] = 'Users not cool enough to be judges.'
+      redirect_to hackday
+    end
+  end
+
+  def delete_admin
+    hackday = Hackday.find(params[:id])
+    admin   = User.find(params[:admin_id])
+
+    if admin && hackday.delete_admin(admin)
+      flash[:message] = 'User no longer has judgemental powers.'
+      redirect_to hackday
+    else
+      flash[:error] = 'User still is a judge...somehow.'
+      redirect_to hackday
+    end
   end
 
   def feed

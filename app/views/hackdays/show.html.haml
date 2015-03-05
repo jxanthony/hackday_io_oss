@@ -14,7 +14,7 @@
       %ul.nav.nav-pills
         %li.active
           = link_to "Top Hacks", hackday_path(@hackday)
-        %li 
+        %li
           = link_to "Queue", queue_hackday_path(@hackday)
         - if @hackday.has_admin?(current_user)
           %li
@@ -22,11 +22,18 @@
         %li
           = link_to "Hackday Group", feed_hackday_path(@hackday), data: { no_turbolink: false }
 
-    - if current_user and not is_mobile_device?
-      .col-md-4.pull-right.add-hack
-        %button.btn.btn-success.btn-sm{'data-toggle' => 'modal', 'data-target' => '#hack-form'}
-          %span.glyphicon-plus.glyphicon
-          Add Hack
+    .col-md-
+      %ul.nav.nav-pills.pull-right.add-hack
+        - if @hackday.has_admin?(current_user) && !is_mobile_device?
+          %li
+            %button.btn.btn-success.btn-sm{'data-toggle' => 'modal', 'data-target' => '#admin-form'}
+              %span.glyphicon-user.glyphicon
+              Add Judge
+        - if current_user and not is_mobile_device?
+          %li
+            %button.btn.btn-success.btn-sm{'data-toggle' => 'modal', 'data-target' => '#hack-form'}
+              %span.glyphicon-plus.glyphicon
+              Add Hack
 
   #hacks
     - unless @hacks.empty?
@@ -44,3 +51,4 @@
 
 = render partial: 'hacks/form', locals: { hack: @hackday.hacks.new }
 = render partial: 'hackdays/form', locals: { hackday: @hackday }
+= render partial: 'hackdays/admin_form', locals: { hackday: @hackday }

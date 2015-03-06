@@ -61,17 +61,14 @@
     .tag-list
       = raw @hack.tag_list.map { |t| link_to t, tag_path(t) }.join(', ')
   .col-xs-10.col-sm-11
-  #team
-    %strong Team
-    %br
-    = render @hack.contributors
+  #team.clearfix
+    %h3 Team
+    = render partial: "users/user", collection: @hack.contributors, locals: { hack: @hack }
     - if current_user and not @hack.has_contributor?(current_user)
       = link_to "Join", add_contribution_hack_path(@hack),          |
                 data: { confirm: "Did you really contribute to this hack?" }, |
                 method: :post,                                      |
                 id: 'hack-join'
-    %br
-    %br                          |
 
   %h3 Comments
   - unless @hack.comments.empty?

@@ -68,3 +68,20 @@ time, .time
 
   margin: auto;
 }
+
+/* Judge avatars */
+.icon-wrapper {
+  position: relative;
+}
+.icon-judge {
+  -webkit-box-shadow: 0 0 5px #f0ad4e;
+  -moz-box-shadow: 0 0 5px #f0ad4e;
+  box-shadow: 0 0 5px #f0ad4e;
+}
+.icon-wrapper .glyphicon {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  color: #f0ad4e;
+  text-shadow: #f0ad4e 0 0 3px;
+}

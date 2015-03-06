@@ -1,2 +1,11 @@
 /   / TODO: YAMMER SPECIFIC
-= link_to image_tag(user.mugshot_url, title: user.name, class: 'img-circle user-mugshot', size: '45x45'), user
+.icon-wrapper.pull-left
+  - is_admin = @hack.hackday.has_admin?(user)
+  = link_to image_tag(user.mugshot_url, |
+                      title: user.name, |
+                      class: [ "img-circle user-mugshot", |
+                               ("icon-judge" if is_admin) ], |
+                      size: '45x45'), |
+            user |
+  - if is_admin
+    %span.glyphicon.glyphicon-star

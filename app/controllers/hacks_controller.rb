@@ -2,12 +2,12 @@ class HacksController < ApplicationController
 
   before_filter :get_hack,         except: [:create, :index]
   before_filter :check_signed_in,  only:   [:upvote, :downvote]
-  before_filter :check_permission, only:   [:edit, 
-                                            :update, 
-                                            :destroy, 
-                                            :move_up_in_queue, 
-                                            :move_down_in_queue, 
-                                            :join_presentation, 
+  before_filter :check_permission, only:   [:edit,
+                                            :update,
+                                            :destroy,
+                                            :move_up_in_queue,
+                                            :move_down_in_queue,
+                                            :join_presentation,
                                             :leave_presentation]
 
   autocomplete :tag, :name, :class_name => 'ActsAsTaggableOn::Tag'
@@ -33,8 +33,7 @@ class HacksController < ApplicationController
   def index
     if params[:tag]
       @hacks = Hack.tagged_with(params[:tag])
-    end
-    else if params[:search]
+    elsif params[:search]
       @search = Sunspot.search Hack, User do
         fulltext params[:search] do
           fields(:name, :title, :description, :tag_list)

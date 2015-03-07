@@ -71,7 +71,31 @@ describe Hackday do
       @hackday.move_up_in_queue(@hack).should == false
       @hackday.move_down_in_queue(@hack2).should == false
     end
+  end
 
+  describe 'presentations' do
+    before :each do
+      @hackday = Fabricate(:hackday)
+    end
+
+    describe '.start_presentations' do
+      it 'should set presentation_in_progress' do
+        @hackday.presentation_in_progress.should be_false
+
+        @hackday.start_presentations
+        @hackday.presentation_in_progress.should be_true
+      end
+    end
+
+    describe '.end_presentations' do
+      it 'should unset presentation_in_progress' do
+        @hackday.start_presentations
+        @hackday.presentation_in_progress.should be_true
+
+        @hackday.end_presentations
+        @hackday.presentation_in_progress.should be_false
+      end
+    end
   end
 
   describe 'admin management' do

@@ -69,6 +69,14 @@ class Hackday < ActiveRecord::Base
     admins.delete(user)
   end
 
+  def start_presentations
+    update_attribute(:presentation_in_progress, true)
+  end
+
+  def end_presentations
+    update_attribute(:presentation_in_progress, false)
+  end
+
   private
 
   def bump_queue(index)

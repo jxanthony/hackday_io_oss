@@ -15,7 +15,7 @@
  *= require_tree .
  */
 
-body { padding-top: 50px; }
+body { padding: 50px; }
 #alerts { margin-top: 10px; }
 
 time, .time

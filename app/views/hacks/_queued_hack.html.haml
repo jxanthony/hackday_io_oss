@@ -15,7 +15,7 @@
         .label.label-default Please Get Ready
 
     .hack-description= truncate(@hack.description, length: 140)
-    = render partial: "users/user", collection: @hack.contributors, locals: { hack: @hack }
+    = render @hack.contributors, hack: @hack
 
     - if @hack.hackday.has_admin?(current_user) # only admin/mc should be allowed to move hacks around in presentation queue
       .queue-buttons

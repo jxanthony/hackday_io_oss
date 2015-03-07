@@ -63,7 +63,7 @@
   .col-xs-10.col-sm-11
   #team.clearfix
     %h3 Team
-    = render partial: "users/user", collection: @hack.contributors, locals: { hack: @hack }
+    = render @hack.contributors, hack: @hack
     - if current_user and not @hack.has_contributor?(current_user)
       = link_to "Join", add_contribution_hack_path(@hack),          |
                 data: { confirm: "Did you really contribute to this hack?" }, |

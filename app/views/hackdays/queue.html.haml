@@ -43,6 +43,20 @@
       %button.btn.btn-success.btn-sm{'data-toggle' => 'modal', 'data-target' => '#hack-form'}
         %span.glyphicon-plus.glyphicon
 
+  - if @hackday.has_admin?(current_user)
+    #presentations-control.row
+      .col-md-12
+        - if @hackday.presentation_in_progress?
+          = link_to end_presentations_hackday_path(@hackday), method: 'post', type: 'button', |
+            class: 'btn btn-danger btn-lg', |
+            id: 'end-hackday' do |
+            %span End Presentations
+        - else
+          = link_to start_presentations_hackday_path(@hackday), method: 'post', type: 'button', |
+            class: 'btn btn-success btn-lg', |
+            id: 'start-hackday' do |
+            %span Start Presentations
+
 - unless is_mobile_device?
   = render partial: 'activities/stream', locals: { scope: @hackday }
 

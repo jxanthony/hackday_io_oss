@@ -50,6 +50,28 @@ class HackdaysController < ApplicationController
     @hackday = Hackday.find(params[:id])
   end
 
+  def start_presentations
+    hackday = Hackday.find(params[:id])
+    if hackday.start_presentations
+      flash[:message] = "HACK DAY HAS STARTED!!!"
+      redirect_to queue_hackday_path(hackday)
+    else
+      flash[:error] = "Couldn't start Hack Day..."
+      redirect_to queue_hackday_path(hackday)
+    end
+  end
+
+  def end_presentations
+    hackday = Hackday.find(params[:id])
+    if hackday.end_presentations
+      flash[:message] = "Hack Day is over... T_T"
+      redirect_to queue_hackday_path(hackday)
+    else
+      flash[:error] = "Couldn't end Hack Day...FOREVER HACKING?!"
+      redirect_to queue_hackday_path(hackday)
+    end
+  end
+
   def judges
     @hackday = Hackday.find(params[:id])
 

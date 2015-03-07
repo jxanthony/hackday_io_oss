@@ -31,6 +31,38 @@ describe "browsing hackdays" do
 
   describe "presentation queue" do
     it "should show only the hacks that are ready to present"
+
+    context 'when admin' do
+      before :each do
+        test_sign_in
+        @hackday.admins << User.last
+      end
+
+      it 'should show presentation start button' do
+        visit queue_hackday_path(@hackday)
+
+        page.should have_content('Start Presentations')
+      end
+
+      it 'should let admin start presentations' do
+        visit queue_hackday_path(@hackday)
+        click_on 'Start Presentations'
+
+        find('#presentations-control span').text.should have_content('End Presentations')
+      end
+    end
+
+    context 'when plebeian hacker' do
+      before :each do
+        test_sign_in
+      end
+
+      it 'should not show presentation start button' do
+        visit queue_hackday_path(@hackday)
+
+        page.should_not have_content('Start Presentations')
+      end
+    end
   end
 
   describe "judges comments" do

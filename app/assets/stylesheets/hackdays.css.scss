@@ -5,9 +5,9 @@
   margin-bottom: 20px;
   overflow: auto;
 
-  h3 
-  { 
-    margin-top: 0; 
+  h3
+  {
+    margin-top: 0;
     margin-bottom: 0;
   }
 }
@@ -20,6 +20,10 @@
 
 // Presentation Queue
 .queue-buttons { margin-top: 5px; }
+#presentations-control {
+  margin-top: 20px;
+  text-align: right;
+}
 
 // Main nav
 .nav-pills li a { padding: 5px; }

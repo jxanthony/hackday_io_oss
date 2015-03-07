@@ -1,17 +1,22 @@
-= render @user
-= @user.name
+%p &nbsp;
+.item.row
+  .col-md-1
+    = image_tag @user.mugshot_url, |
+                alt: @user.name, |
+                title: @user.name, |
+                class: 'img-circle user-mugshot', |
+                size: '90x90'
+  .col-md-11
+    %h1= @user.name
 
-%h1
-  = "Trophies achieved"
+%h2= "Trophies achieved"
 = render partial: 'users/trophy', collection: @user.trophies
-.col-xs-10.col-sm-11
+.col-xs-10.col-sm-12
   %h3
-    %i
-      = render partial: 'users/trophy_name', collection: @user.trophy_names
+    %i= render partial: 'users/trophy_name', collection: @user.trophy_names
 
-%h1
+%h2
   = "Hacks contributed to"
 - if @user.hacks
   = render @user.hacks
 -#= render @user.winning_hacks
-

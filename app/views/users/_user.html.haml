@@ -1,6 +1,6 @@
 /   / TODO: YAMMER SPECIFIC
 .icon-wrapper.pull-left
-  - is_admin = @hack.hackday.has_admin?(user)
+  - is_admin = @hack && @hack.hackday.has_admin?(user)
   = link_to image_tag(user.mugshot_url, |
                       title: user.name, |
                       class: [ "img-circle user-mugshot", |

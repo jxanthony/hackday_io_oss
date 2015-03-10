@@ -1,0 +1,8 @@
+%h1= hack.title
+#display-queue-team
+  - hack.contributors.each do |user|
+    = image_tag user.mugshot_url, |
+                alt: user.name, |
+                title: user.name, |
+                class: 'img-circle user-mugshot', |
+                size: '45x45'

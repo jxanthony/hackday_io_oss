@@ -24,6 +24,36 @@
   margin-top: 20px;
   text-align: right;
 }
+#presentations {
+  height: 100%;
+  width: 100%;
+}
+#presentations-left, #presentations-right {
+  display: table;
+  width: 50%;
+  height: 100%;
+}
+#presentations-right {
+  position: absolute;
+  right: 0px;
+}
+#presentations [class*='col-'] {
+  padding: 0px;
+  margin: 0px;
+}
+.presentation-cell {
+  vertical-align: middle;
+  display: table-cell;
+}
+#standby {
+  height: 50%;
+}
+#ondeck, #getready {
+  height: 25%;
+}
+#display-queue-team img {
+  display: inline-block;
+}
 
 // Main nav
 .nav-pills li a { padding: 5px; }

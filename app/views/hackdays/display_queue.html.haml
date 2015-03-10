@@ -11,22 +11,28 @@
     %meta{name: 'viewport', content: 'width=device-width, initial-scale=1'}
 
   %body{ style: 'height: 100%; width: 100%; padding: 0px'}
-    #presentations.row-fluid
-      - queue = @hackday.queue_for_display
-      #presentations-left.col-md-6
-        #presenting.presentation-cell.text-center.bg-success
-          %h3.text-success PRESENTING NOW
-          = render partial: 'hack_for_display', locals: { hack: queue[0] }
-      #presentations-right.col-md-6
-        #standby.presentation-cell.col-md-12.text-center.bg-danger
-          %h3.text-danger STAND BY
-          = render partial: 'hack_for_display', locals: { hack: queue[1] }
-        #ondeck.presentation-cell.col-md-12.text-center.bg-warning
-          %h3.text-warning ON DECK
-          = render partial: 'hack_for_display', locals: { hack: queue[2] }
-        #getready.presentation-cell.col-md-12.text-center.bg-info
-          %h3.text-info GET READY
-          = render partial: 'hack_for_display', locals: { hack: queue[3] }
+    - if @hackday.presentation_in_progress?
+      #presentations.row-fluid
+        - queue = @hackday.queue_for_display
+        #presentations-left.col-md-6
+          #presenting.presentation-cell.text-center.bg-success
+            %h3.text-success PRESENTING NOW
+            = render partial: 'hack_for_display', locals: { hack: queue[0] }
+        #presentations-right.col-md-6
+          #standby.presentation-cell.col-md-12.text-center.bg-danger
+            %h3.text-danger STAND BY
+            = render partial: 'hack_for_display', locals: { hack: queue[1] }
+          #ondeck.presentation-cell.col-md-12.text-center.bg-warning
+            %h3.text-warning ON DECK
+            = render partial: 'hack_for_display', locals: { hack: queue[2] }
+          #getready.presentation-cell.col-md-12.text-center.bg-info
+            %h3.text-info GET READY
+            = render partial: 'hack_for_display', locals: { hack: queue[3] }
+    - else
+      #presentations.row-fluid
+        #not-presenting.col-md-12
+          #presenting-full.presentation-cell.text-center.bg-info
+            %h3.text-info This Hackday isn't presenting right now :(
 :javascript
   $(document).ready(function() {
     setTimeout("location.reload(true);", 30000);

@@ -54,6 +54,14 @@
 #display-queue-team img {
   display: inline-block;
 }
+#not-presenting {
+  display: table;
+  height: 100%;
+  width: 100%;
+}
+#presenting-full {
+  height: 100%;
+}
 
 // Main nav
 .nav-pills li a { padding: 5px; }

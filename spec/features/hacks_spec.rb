@@ -10,7 +10,7 @@ describe "watching a hack" do
 
   it "should display the contributors" do
     visit hack_path(@hack)
-    find('.team').should have_css('.user-mugshot', count: 3)
+    find('#team').should have_css('.user-mugshot', count: 3)
   end
 
   it "should let signed-in people comment" do
@@ -105,7 +105,7 @@ describe "adding a hack" do
 
     current_path.should == hack_path(Hack.first)
     page.should have_content(@hackday.title)
-    page.should have_css('.team img[title="Kevin Davis"]') # name from the auth hash
+    page.should have_css('#team img[alt="Kevin Davis"]') # name from the auth hash
     find('#hack-title').text.should == "BEST HACK OF ALL TIME"
     find('.hack-details p').text.should == "self explanatory"
     page.should have_css('.hack-details a[href="http://yammer.com"]')
@@ -139,7 +139,7 @@ describe "owning a hack" do
     visit hack_path(other_hack)
     click_on("Join")
 
-    page.should have_css('.team img[title="Kevin Davis"]')
+    page.should have_css('#team img[alt="Kevin Davis"]')
   end
   it "should indicate that you're a contributor"
 

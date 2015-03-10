@@ -59,7 +59,7 @@
         = link_to "Learn more here!", @hack.url
 
     .tag-list
-      = raw @hack.tag_list.map { |t| link_to t, tag_path(t) }.join(', ')
+      = raw @hack.tag_list.map { |t| link_to t, tag_path(t) }.join('')
   .col-xs-10.col-sm-11
   #team.clearfix
     %h3 Team

@@ -81,7 +81,7 @@ class Hack < ActiveRecord::Base
   def upvoted_by?(user)
     if user
       self.upvoted_by.include? user.id
-    else 
+    else
       false
     end
   end
@@ -111,6 +111,14 @@ class Hack < ActiveRecord::Base
 
   def presenting?
     presentation_index.present?
+  end
+
+  def add_tag(tag)
+    tag_list.add tag
+  end
+
+  def remove_tag(tag)
+    tag_list.remove tag
   end
 
   private

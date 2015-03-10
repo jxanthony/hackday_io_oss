@@ -50,6 +50,11 @@ class HackdaysController < ApplicationController
     @hackday = Hackday.find(params[:id])
   end
 
+  def display_queue
+    @hackday = Hackday.find(params[:id])
+    render layout: false
+  end
+
   def start_presentations
     hackday = Hackday.find(params[:id])
     if hackday.start_presentations

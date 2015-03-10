@@ -25,6 +25,14 @@ class Hackday < ActiveRecord::Base
     hacks.where("presentation_index IS NOT NULL").order("presentation_index ASC")
   end
 
+  def queue_for_display
+    queue.first(4)
+  end
+
+  def hack_at_index(num)
+    queue.detect{ |hack| hack.presentation_index == num}
+  end
+
   def join_queue(hack)
     hack.update_attribute(:presentation_index, queue.size + 1)
   end

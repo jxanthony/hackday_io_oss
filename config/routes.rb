@@ -9,7 +9,7 @@ Hacktracker::Application.routes.draw do
 
   resources :hackdays do
     member do
-      get :queue
+      get :queue, :display_queue
       get :judges
       get :feed
       post :start_presentations, :end_presentations

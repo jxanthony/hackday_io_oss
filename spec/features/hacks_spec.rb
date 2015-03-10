@@ -10,7 +10,7 @@ describe "watching a hack" do
 
   it "should display the contributors" do
     visit hack_path(@hack)
-    find('#team').should have_css('.user-mugshot', count: 3)
+    find('.team').should have_css('.user-mugshot', count: 3)
   end
 
   it "should let signed-in people comment" do
@@ -48,8 +48,8 @@ describe "watching a hack" do
   it "should require sign-in for voting" do
     visit hack_path(@hack)
     find(:xpath, "//a/img[@alt='Vote Up']/..").click
-    
-    page.should have_content("You need to be signed in") 
+
+    page.should have_content("You need to be signed in")
   end
 
   it "should let signed-in, non-contributors vote hacks up" do
@@ -92,7 +92,7 @@ describe "adding a hack" do
 
   before(:each) do
     @hackday = Fabricate(:hackday)
-  end  
+  end
 
   it "should let signed-in people add hacks" do
     test_sign_in
@@ -105,12 +105,12 @@ describe "adding a hack" do
 
     current_path.should == hack_path(Hack.first)
     page.should have_content(@hackday.title)
-    page.should have_css('#team img[title="Kevin Davis"]') # name from the auth hash
+    page.should have_css('.team img[title="Kevin Davis"]') # name from the auth hash
     find('#hack-title').text.should == "BEST HACK OF ALL TIME"
     find('.hack-details p').text.should == "self explanatory"
     page.should have_css('.hack-details a[href="http://yammer.com"]')
   end
-  
+
   it "should not let signed-out people add hacks" do
     visit hackday_path(@hackday)
 
@@ -129,17 +129,17 @@ describe "owning a hack" do
     @current_user = User.first
     @hackday = Fabricate(:hackday)
     @hack = Fabricate(:hack, hackday: @hackday)
-    @hack.contributors << @current_user  
+    @hack.contributors << @current_user
   end
 
   # TODO: would really prefer this model of adding contributors to the one below
-  it "should let contributors add others" 
+  it "should let contributors add others"
   it "should let people add themselves as contributors" do
     other_hack = Fabricate(:hack, hackday: @hackday)
     visit hack_path(other_hack)
     click_on("Join")
 
-    page.should have_css('#team img[title="Kevin Davis"]')
+    page.should have_css('.team img[title="Kevin Davis"]')
   end
   it "should indicate that you're a contributor"
 
@@ -172,10 +172,10 @@ describe "owning a hack" do
 
     current_path.should == hack_path(@hack)
     find('.alert.alert-success').text.should have_content("You have signed up to present your hack")
-    
+
     visit queue_hackday_path(@hackday)
 
-    page.should have_content(@hack.title)  
+    page.should have_content(@hack.title)
   end
 
   it "should let contributors remove their hacks from the presentation queue" do
@@ -199,7 +199,7 @@ describe "admins have super powers" do
     @current_user = User.first
     @hackday = Fabricate(:hackday)
     @hack = Fabricate(:hack, hackday: @hackday)
-    @hackday.admins << @current_user     
+    @hackday.admins << @current_user
   end
 
   it "should let admins move hacks up in the presentation queue" do

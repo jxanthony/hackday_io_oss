@@ -22,7 +22,7 @@
           %p
             = result.hackday.date
           .hack-description= truncate(result.description, length: 140)
-          .hack-contributors
+          .hack-contributors#team
             = render result.contributors
           .tag-list
             = raw result.tag_list.map { |t| link_to t, tag_path(t) }.join(', ')

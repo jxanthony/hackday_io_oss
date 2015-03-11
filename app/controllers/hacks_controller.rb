@@ -164,7 +164,7 @@ class HacksController < ApplicationController
   end
 
   def add_and_remove_tags(tags)
-    tags = tags.split(',')
+    tags = tags.downcase.split(',')
     @hack.add_tags(tags - @hack.tag_list)
     @hack.remove_tags(@hack.tag_list - tags)
   end

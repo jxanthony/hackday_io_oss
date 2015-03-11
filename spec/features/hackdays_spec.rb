@@ -48,7 +48,7 @@ describe "browsing hackdays" do
         visit queue_hackday_path(@hackday)
         click_on 'Start Presentations'
 
-        find('#presentations-control span').text.should have_content('End Presentations')
+        find('#end-hackday span').text.should have_content('End Presentations')
       end
     end
 

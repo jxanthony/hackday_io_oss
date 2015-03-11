@@ -110,6 +110,15 @@ class HacksController < ApplicationController
     redirect_to :back
   end
 
+  def update_tags
+    if @hack.has_contributor?(current_user) && add_and_remove_tags(params[:hack][:tag_list])
+      flash[:message] = 'Tagged!'
+    else
+      flash[:error] = "Can't tag this! (Na nanana)"
+    end
+    redirect_to :back
+  end
+
   def finish_presentation
     @hack.hackday.leave_queue(@hack)
     flash[:message] = "This hack has been presented - boom!"
@@ -152,6 +161,12 @@ class HacksController < ApplicationController
 
   def get_hack
     @hack = Hack.find(params[:id])
+  end
+
+  def add_and_remove_tags(tags)
+    tags = tags.split(',')
+    @hack.add_tags(tags - @hack.tag_list)
+    @hack.remove_tags(@hack.tag_list - tags)
   end
 
   def check_permission

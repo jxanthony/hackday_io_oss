@@ -5,27 +5,27 @@
 
 #team { margin-top: 15px; }
 
-.comment 
-{	
-	padding: 10px; 
-	margin: 0 0 15px 0;
+.comment
+{
+  padding: 10px;
+  margin: 0 0 15px 0;
 
-	div	{ padding: 0; }
-	img { margin-right: 10px; }
+  div { padding: 0; }
+  img { margin-right: 10px; }
 }
 .comment-body { padding-left: 10px; }
 
-.votes 
-{ 
-	font-size: 2em; 
-	vertical-align: middle;
-	margin: 7px;
-	line-height: 1em;
+.votes
+{
+  font-size: 2em;
+  vertical-align: middle;
+  margin: 7px;
+  line-height: 1em;
 }
-.hack-voting 
-{ 
-	width: 60px;
-	text-align: center; 
+.hack-voting
+{
+  width: 60px;
+  text-align: center;
 }
 
 .hack-score
@@ -39,51 +39,51 @@
   margin-top: 15px;
   margin-left: 60px;
 }
-#new_comment_form 
+#new_comment_form
 {
-	margin-top: 30px;
-	clear: both;
+  margin-top: 30px;
+  clear: both;
 
-	.checkbox { color: #aaa; }
-	.btn { width: 100%;	}
-	.col-xs-3 { padding-left: 5px; }
-	.col-xs-9 { padding-right: 0; }
+  .checkbox { color: #aaa; }
+  .btn { width: 100%; }
+  .col-xs-3 { padding-left: 5px; }
+  .col-xs-9 { padding-right: 0; }
 }
 .private
 {
-	background-color: #eee;
-	border-radius: 5px;
+  background-color: #eee;
+  border-radius: 5px;
 }
-.private-notice 
-{ 
-	color: #aaa;
-	font-size: 0.8em;
-	margin-left: 10px;
+.private-notice
+{
+  color: #aaa;
+  font-size: 0.8em;
+  margin-left: 10px;
 }
 
-#team img 
+#team img
 {
-	float: left;
-	display: block;
-	margin-right: 5px;
+  float: left;
+  display: block;
+  margin-right: 5px;
 }
 #hack-join
 {
-	border: 2px dashed #666;
-	background-color: #ddd;
-	color: #666;
-	border-radius: 45px;
-	text-align: center;
-	padding-top: 10px;
-	display: block;
-	float: left;
-	height: 45px; width: 45px;
+  border: 2px dashed #666;
+  background-color: #ddd;
+  color: #666;
+  border-radius: 45px;
+  text-align: center;
+  padding-top: 10px;
+  display: block;
+  float: left;
+  height: 45px; width: 45px;
 }
 #hack-join:hover
 {
-	border: 2px solid #666;
-	text-decoration: none;
-	color: #333;
+  border: 2px solid #666;
+  text-decoration: none;
+  color: #333;
 }
 
 #hack-edit { float: right; }
@@ -97,8 +97,8 @@
 
 #hack-delete
 {
-	color: #aaa;
-	float: left;
+  color: #aaa;
+  float: left;
 }
 
 .hack-description {
@@ -108,10 +108,32 @@
 .results-container {margin-left: 15px;}
 //.hack-result{margin-left: 10px;}
 
-.tag-list { display:inline-block; margin-top: 10px;float: left}
-.tag-list .tag-count {background-color:green;color:#fff; line-height:25px; font-size:12px; padding:3px 5px; margin-left:-2px;  }
-.tag-list a { background-color:#44B344; color:#fff; line-height:25px; font-size:12px; padding:3px 5px; border-radius:3px; cursor:pointer; }
-.tag-list a:hover { background-color:lighten(#44B344, 10%); text-decoration:none; }
+.tag-list {
+  display: inline-block;
+  margin-top: 10px;
+  float: left;
+}
+.tag-list .tag-count {
+  background-color: #5bc0de;
+  color: #fff;
+  line-height: 25px;
+  font-size: 12px;
+  padding: 0.3% 1%;
+  margin-left: -2px;
+}
+.tag-list a {
+  background-color: #5bc0de;
+  color: #fff;
+  line-height: 25px;
+  font-size: 12px;
+  padding: 3px 5px;
+  border-radius: 3px;
+  cursor:pointer;
+}
+.tag-list a:hover {
+  background-color: lighten(#5bc0de, 10%);
+  text-decoration:none;
+}
 
 .video-icon{
   margin-bottom: 5px;

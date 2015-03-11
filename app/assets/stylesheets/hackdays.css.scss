@@ -82,7 +82,7 @@
 
 #tag_cloud {
   width: 100%;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
   line-height: 1.6em;
   .s { font-size: 1em; }
   .m { font-size: 1.3em; }
@@ -90,9 +90,16 @@
 }
 
 #tag_cloud a {
- background-color:#44B344; color:#fff; line-height:25px; font-size:12px; padding:0px 5px; border-radius:3px; cursor:pointer;
+  background-color: #5bc0de;
+  color: #fff;
+  font-size: 12px;
+  padding: 0.3% 1%;
+  border-radius: 3px;
 }
-#tag_cloud a:hover { background-color:lighten(#44B344, 10%); text-decoration:none; }
+#tag_cloud a:hover {
+  background-color: lighten(#5bc0de, 10%);
+  text-decoration: none;
+}
 
 
 // Front page

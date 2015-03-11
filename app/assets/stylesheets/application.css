@@ -49,9 +49,6 @@ time, .time
 	span { text-align: center; }
 }
 
-.navbar-form {
-    margin-top: 12px;
-}
 #search {
     width: 400px;
 }

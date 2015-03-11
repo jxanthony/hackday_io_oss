@@ -1,7 +1,7 @@
 !!!
 %html
   %head
-    %title 
+    %title
       = "HackDay.io"
       = yield :title
     = stylesheet_link_tag 'application', media: 'all'
@@ -9,8 +9,6 @@
     = csrf_meta_tags
     = favicon_link_tag 'http://www.google.com/s2/favicons?domain=www.yammer.com'
     %meta{name: 'viewport', content: 'width=device-width, initial-scale=1'}
-
-
 
   %body
     .navbar.navbar-default.navbar-fixed-top{role: 'navigation'}
@@ -29,12 +27,12 @@
             %ul.nav.navbar-nav.navbar-right
               %li
                 = link_to signout_path do
-                  %span.visible-xs 
+                  %span.visible-xs
                     %span.glyphicon.glyphicon-off
                     Sign Out
                   %span.glyphicon.glyphicon-off.hidden-xs
             .navbar-text.navbar-right= current_user.name
-          - else 
+          - else
             %ul.nav.navbar-nav.navbar-right
               %li
                 - if Settings.auth_method == 'github'
@@ -43,8 +41,8 @@
                   = link_to "Sign In With Yammer", '/auth/yammer'
           .navbar-form.navbar-left
             = form_tag hacks_path, :method => :get do
-              = text_field_tag :search, params[:search], placeholder: "Search for hacks"
-              = submit_tag "Search", :name => nil
+              = text_field_tag :search, params[:search], placeholder: "Search for hacks", class: 'form-control'
+              = submit_tag "Search", :name => nil, class: 'btn btn-default'
 
     .container
       .row#alerts

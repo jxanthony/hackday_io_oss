@@ -190,6 +190,14 @@ describe "owning a hack" do
 
     page.should_not have_content(@hack.title)
   end
+
+  context 'tags list' do
+    it 'should show contributors button to update tags' do
+      visit hack_path(@hack)
+
+      find('.tag-list').text.should have_content('&plus;')
+    end
+  end
 end
 
 describe "admins have super powers" do

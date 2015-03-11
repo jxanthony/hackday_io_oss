@@ -27,23 +27,37 @@ describe Hack do
       @hack = Fabricate(:hack)
     end
 
-    context '#add_tag' do
-      it 'should add a new tag' do
-        @hack.add_tag 'awesome'
+    context '#add_tags' do
+      it 'should add tags from array' do
+        tags = ['awesome', 'wow']
+        @hack.add_tags tags
 
-        @hack.tag_list.should eq ['awesome']
+        @hack.tag_list.should eq ['awesome', 'wow']
+      end
+
+      it 'should add tags from string' do
+        tags = 'awesome,wow'
+        @hack.add_tags tags
+
+        @hack.tag_list.should eq ['awesome', 'wow']
       end
     end
 
-    context '#remove_tag' do
+    context '#remove_tags' do
       before :each do
-        @hack.tag_list.add 'awesome'
+        @hack.tag_list.add ['awesome', 'wow', 'yay']
       end
 
-      it 'removes a single tag' do
-        @hack.remove_tag 'awesome'
+      it 'removes tags from array' do
+        @hack.remove_tags ['awesome', 'yay']
 
-        @hack.tag_list.should be_empty
+        @hack.tag_list.should eq ['wow']
+      end
+
+      it 'removes tags from string' do
+        @hack.remove_tags 'awesome, yay'
+
+        @hack.tag_list.should eq ['wow']
       end
     end
   end

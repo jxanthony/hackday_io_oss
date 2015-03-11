@@ -25,6 +25,6 @@
           .hack-contributors#team
             = render result.contributors
           .tag-list
-            = raw result.tag_list.map { |t| link_to t, tag_path(t) }.join(', ')
+            = raw result.tag_list.map { |t| link_to t, tag_path(t) }.join(' ')
     - if defined?(result.name)
       = render result

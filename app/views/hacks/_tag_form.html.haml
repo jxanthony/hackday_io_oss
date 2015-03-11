@@ -1,0 +1,14 @@
+.modal.fade#tag-form
+  .modal-dialog{role: 'dialog'}
+    .modal-content
+      = form_for hack, url: update_tags_hack_path, method: :post do |f|
+        .modal-header
+          %button.close{type: 'button', 'data-dismiss' => 'modal', 'aria-hidden' => 'true'} &times;
+          %h4.modal-title Tag This Hack
+        .modal-body
+          = f.text_field :tag_list, |
+                         class: 'tag-select', |
+                         style: 'width: 100%' |
+        .modal-footer
+          %button.btn.btn-default{type: "button", 'data-dismiss'=>"modal"} Cancel
+          = f.submit 'Update Tags', class: 'btn btn-primary btn-success'

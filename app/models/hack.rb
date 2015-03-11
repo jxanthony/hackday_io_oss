@@ -113,12 +113,14 @@ class Hack < ActiveRecord::Base
     presentation_index.present?
   end
 
-  def add_tag(tag)
-    tag_list.add tag
+  def add_tags(tags)
+    tag_list.add(tags, parse: true)
+    save!
   end
 
-  def remove_tag(tag)
-    tag_list.remove tag
+  def remove_tags(tags)
+    tag_list.remove(tags, parse: true)
+    save!
   end
 
   private

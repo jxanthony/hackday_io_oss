@@ -61,8 +61,9 @@
     .tag-list
       - tags = @hack.tag_list.map { |t| link_to t, tag_path(t) }.join(' ')
       = raw tags
-      %button.btn.btn-success.btn-xs{'data-toggle' => 'modal', 'data-target' => '#tag-form'}
-        %span &plus;
+      - if @hack.has_contributor?(current_user)
+        %button.btn.btn-success.btn-xs{'data-toggle' => 'modal', 'data-target' => '#tag-form'}
+          %span &plus;
   .col-xs-10.col-sm-11
   #team.clearfix
     %h3 Team

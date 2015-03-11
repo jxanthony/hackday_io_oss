@@ -19,7 +19,6 @@ gem 'rails4_upgrade'
 gem 'rails4-autocomplete'
 gem 'turbolinks'
 
-
 group :production do
   gem "pg"
   gem "newrelic_rpm"
@@ -33,11 +32,12 @@ group :assets do
   gem 'sass-rails', '~>4.0.0'
   gem 'coffee-rails', '~>4.0.0'
   gem 'uglifier', '>=1.3.0'
-
 end
 
 gem 'jquery-rails'
 gem 'select2-rails'
+gem 'momentjs-rails', '>= 2.9.0'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.0.0'
 
 gem 'omniauth'
 gem 'omniauth-yammer'

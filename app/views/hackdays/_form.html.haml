@@ -12,9 +12,9 @@
             = f.text_field :title, class: 'form-control', placeholder: "something cool like \"Hackapalooza\" or \"Hackoween\""
           .form-group
             = f.label :date, "Demo Day"
-            = f.text_field :date,                                                       |
-                           class: 'form-control',                                       |
-                           placeholder: "when will people be showing off their hacks?"  |
+            = f.text_field :date,                                                      |
+                           class: 'form-control datepicker',                           |
+                           placeholder: "when will people be showing off their hacks?" |
           .form-group
             = f.label :trophy_name
             = f.text_field :trophy_name, class: 'form-control'
@@ -32,3 +32,9 @@
           %button.btn.btn-default{type: "button", 'data-dismiss'=>"modal"} Cancel
           - hackday.new_record? ? submit_text = "Create your Hack Day" : submit_text = "Update this hack day"
           = f.submit submit_text, class: 'btn btn-primary btn-success'
+:javascript
+  $(document).ready(function() {
+    $('.datepicker').datetimepicker({
+      format: 'YYYY-MM-DD'
+    });
+  });

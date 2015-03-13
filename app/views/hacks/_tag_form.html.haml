@@ -12,3 +12,9 @@
         .modal-footer
           %button.btn.btn-default{type: "button", 'data-dismiss'=>"modal"} Cancel
           = f.submit 'Update Tags', class: 'btn btn-primary btn-success'
+:javascript
+  $(document).ready(function() {
+    $(".tag-select").select2({
+      tags: #{all_tags}
+    })
+  })

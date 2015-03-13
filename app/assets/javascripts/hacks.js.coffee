@@ -5,7 +5,5 @@
 data =
 ready = ->
   $('[data-tooltip]').tooltip()
-  $(".tag-select").select2
-    tags: []
 $(document).ready(ready)
 $(document).on('page:load', ready)

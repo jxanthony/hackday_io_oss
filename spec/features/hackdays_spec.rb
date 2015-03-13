@@ -32,6 +32,17 @@ describe "browsing hackdays" do
   describe "presentation queue" do
     it "should show only the hacks that are ready to present"
 
+    it 'should show number of hacks remaining' do
+      hack2 = Fabricate(:hack, hackday: @hackday)
+      @hackday.join_queue(@hack)
+      @hackday.join_queue(hack2)
+
+      test_sign_in
+      visit queue_hackday_path(@hackday)
+
+      page.should have_content('2 hacks queued')
+    end
+
     context 'when admin' do
       before :each do
         test_sign_in
@@ -48,7 +59,7 @@ describe "browsing hackdays" do
         visit queue_hackday_path(@hackday)
         click_on 'Start Presentations'
 
-        find('#end-hackday span').text.should have_content('End Presentations')
+        find('#end-hackday').text.should have_content('End Presentations')
       end
     end
 

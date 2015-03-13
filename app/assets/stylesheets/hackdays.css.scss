@@ -21,8 +21,10 @@
 // Presentation Queue
 .queue-buttons { margin-top: 5px; }
 #presentations-control {
-  margin-top: 20px;
-  text-align: right;
+  padding-top: 20px;
+}
+#presentations-control h3 {
+  margin-top: 10px;
 }
 #presentations {
   height: 100%;

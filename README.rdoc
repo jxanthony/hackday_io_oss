@@ -1,1 +1,6 @@
 HACK THIS
+
+Features to add:
+* History of hacks presented in order of queued
+* Select winning hacks
+* Add videos

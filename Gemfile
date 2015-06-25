@@ -6,8 +6,8 @@ gem 'rails', '~>4.0.0'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'thin'
-gem 'unicorn'
+gem 'dotenv-rails'
+gem 'puma'
 gem 'haml'
 gem 'bootstrap-sass'
 gem 'rails-timeago'
@@ -44,7 +44,8 @@ gem 'omniauth-yammer'
 gem 'omniauth-github'
 
 group :development, :test do
-  gem 'debugger'
+#  gem 'debugger'
+  gem 'pry-nav'
   gem 'sqlite3'
 
   gem 'rspec-rails'

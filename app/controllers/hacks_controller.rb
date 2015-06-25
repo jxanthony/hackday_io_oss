@@ -23,6 +23,7 @@ class HacksController < ApplicationController
       redirect_to hack
     else
       flash[:error] = hack.errors.full_messages.join(", ")
+      redirect_to hack.hackday
     end
   end
 

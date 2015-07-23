@@ -24,34 +24,34 @@ bundle install
 ```
 
 ### Making changes and committing
-1. Create a new local branch
+- Create a new local branch
 ```sh
 git checkout -b branch_name
 ```
-2. Make your changes
-3. Push your branch to github
+- Make your changes
+- Push your branch to github
 ```sh
 git push origin branch_name
 ```
-4. Open a pull request
-5. Code reviewz   
-6. Merge to master
+- Open a pull request
+- Code reviewz   
+- Merge to master
 
 ### Deploying
-1. Request access to the hacktracker server group in [homie2](https://homie2.int.yammer.com) (sub-group is under IT)
-2. Once your access is approved, you should be able to ssh into yamsfo221 and login with your LDAP credentials
+- Request access to the hacktracker server group in [homie2](https://homie2.int.yammer.com) (sub-group is under IT)
+- Once your access is approved, you should be able to ssh into yamsfo221 and login with your LDAP credentials
 ```sh
 ssh yamsfo221
 ```
-3. Change directory to the project folder
+- Change directory to the project folder
 ```sh
 cd /var/www/hackdayio
 ```
-4. Pull the changes
+- Pull the changes
 ```sh
 git pull origin master
 ```
-5. Restart the server
+- Restart the server
 ```sh
 sudo restart puma-manager
 ```

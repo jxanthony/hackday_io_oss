@@ -17,10 +17,10 @@
 ### Setup
 Clone the repo and install dependencies
   ```sh
-  cd <your_project_directory>
-  git clone git@github.int.yammer.com:yammer/hackdayio.git
-  cd hackdayio
-  bundle install
+    cd <your_project_directory>
+    git clone git@github.int.yammer.com:yammer/hackdayio.git
+    cd hackdayio
+    bundle install
   ```
 
 ### Making changes and committing

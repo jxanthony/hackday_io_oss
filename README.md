@@ -18,10 +18,10 @@
 Clone the repo and install dependencies
 
   ```sh
-    cd <your_project_directory>
-    git clone git@github.int.yammer.com:yammer/hackdayio.git
-    cd hackdayio
-    bundle install
+  cd <your_project_directory>
+  git clone git@github.int.yammer.com:yammer/hackdayio.git
+  cd hackdayio
+  bundle install
   ```
 
 ### Making changes and committing
@@ -45,7 +45,7 @@ Clone the repo and install dependencies
 2. Once your access is approved, you should be able to ssh into yamsfo221 and login with your LDAP credentials
   
   ```sh
-    ssh yamsfo221
+  ssh yamsfo221
   ```
 3. Change directory to the project folder
   

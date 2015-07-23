@@ -25,13 +25,15 @@ Clone the repo and install dependencies
 
 ### Making changes and committing
 1. Create a new local branch
+  
   ```sh
-    git checkout -b branch_name
+  git checkout -b branch_name
   ```
 2. Make your changes
 3. Push your branch to github
+  
   ```sh
-    git push origin branch_name
+  git push origin branch_name
   ```
 4. Open a pull request
 5. Code reviewz   

@@ -16,6 +16,7 @@
 ## Contributing
 ### Setup
 Clone the repo and install dependencies
+
   ```sh
     cd <your_project_directory>
     git clone git@github.int.yammer.com:yammer/hackdayio.git
@@ -42,18 +43,22 @@ Clone the repo and install dependencies
 ### Deploying
 1. Request access to the hacktracker server group in [homie2](https://homie2.int.yammer.com) (sub-group is under IT)
 2. Once your access is approved, you should be able to ssh into yamsfo221 and login with your LDAP credentials
+  
   ```sh
     ssh yamsfo221
   ```
 3. Change directory to the project folder
+  
   ```sh
   cd /var/www/hackdayio
   ```
 4. Pull the changes
+  
   ```sh
   git pull origin master
   ```
 5. Restart the server
+  
   ```sh
   sudo restart puma-manager
   ```

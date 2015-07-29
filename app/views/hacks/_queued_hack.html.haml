@@ -2,7 +2,11 @@
 .hack.row{id: ["hack", @hack.id]}
   .col-xs-12.clearfix
     %h3
-      = link_to @hack.title, @hack
+      #{@hack.presentation_index}.
+      - if @hack.breaktime?
+        = @hack.title
+      - else
+        = link_to @hack.title, @hack
 
     - if @hack.hackday.presentation_in_progress
       - if @hack.presentation_index == 1
@@ -20,6 +24,10 @@
 
     - if @hack.hackday.has_admin?(current_user) # only admin/mc should be allowed to move hacks around in presentation queue
       .queue-buttons
+        - if @hack.breaktime?
+          = link_to remove_break_hackday_path(@hack), method: 'delete', class: 'btn btn-xs btn-default', data: { confirm: 'Really remove this break?' } do
+            %span.glyphicon.glyphicon-remove
+            %span Remove
         - if @hack.presentation_index != 1
           = link_to move_up_in_queue_hack_path(@hack), method: 'post', class: 'btn btn-xs btn-default' do
             %span.glyphicon.glyphicon-arrow-up

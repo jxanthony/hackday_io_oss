@@ -31,7 +31,7 @@
 
   #hacks
     - unless @hackday.queue.empty?
-      = render partial: 'hacks/queued_hack', collection: @hackday.queue
+      %ol= render partial: 'hacks/queued_hack', collection: @hackday.queue
     - else
       %p.blank-slate
         Nothing is queued up to present :(
@@ -49,6 +49,10 @@
         %h3= pluralize(@hackday.queue.count, 'hack') + " queued"
       .col-md-8.text-right
         - if @hackday.has_admin?(current_user)
+          %button.btn.btn-info.btn-lg{'data-toggle' => 'modal', 'data-target' => '#break-form'}
+            %span.glyphicon-pause.glyphicon
+            Add Break
+
           - if @hackday.presentation_in_progress?
             = link_to 'Projector View', display_queue_hackday_path(@hackday),
                       method: 'get', role: 'button',
@@ -69,3 +73,4 @@
 
 = render partial: 'hacks/form', locals: { hack: @hackday.hacks.new }
 = render partial: 'hackdays/admin_form', locals: { hackday: @hackday }
+= render partial: 'hackdays/break_form', locals: { hackday: @hackday }

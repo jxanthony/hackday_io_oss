@@ -11,6 +11,7 @@ private
   def default_values
     self.title = 'BREAK'
     self.description = 'BREAK TIME'
+    self.breaktime = true
   end
 
 end

@@ -13,6 +13,8 @@ Hacktracker::Application.routes.draw do
       get :judges
       get :feed
       post :start_presentations, :end_presentations
+      put :break, to: 'hackdays#add_break', as: 'add_break'
+      delete :break, to: 'hackdays#remove_break', as: 'remove_break'
       put    :admin, to: 'hackdays#add_admins',    as: 'add_admins'
       delete :admin, to: 'hackdays#delete_admin',  as: 'delete_admin'
     end
@@ -23,7 +25,8 @@ Hacktracker::Application.routes.draw do
   resources :hacks, only: [:show, :edit, :update, :destroy, :index] do
     get :autocomplete_tag_name, :on => :collection
     member do
-      post :move_up_in_queue, :move_down_in_queue, :finish_presentation, :join_queue, :leave_queue, :downvote, :upvote
+      post :move_up_in_queue, :move_down_in_queue, :move_to_position,
+           :finish_presentation, :join_queue, :leave_queue, :downvote, :upvote
       post :add_contribution
       post :remove_contribution
       post :update_tags

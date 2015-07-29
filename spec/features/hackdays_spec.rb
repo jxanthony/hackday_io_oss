@@ -26,6 +26,7 @@ describe "browsing hackdays" do
       visit hackday_path(@hackday)
       page.should have_content(@hack.title)
       page.should_not have_content(alt_hack.title)
+      page.should_not have_content('BREAK')
     end
   end
 
@@ -61,6 +62,13 @@ describe "browsing hackdays" do
 
         find('#end-hackday').text.should have_content('End Presentations')
       end
+
+      it 'should show button for adding breaks' do
+        visit queue_hackday_path(@hackday)
+
+        page.should have_content('Add Break')
+      end
+
     end
 
     context 'when plebeian hacker' do

@@ -1,0 +1,15 @@
+.modal.fade#break-form
+  .modal-dialog{role: 'dialog'}
+    .modal-content
+      = form_for hackday, url: add_break_hackday_path, method: :put do |f|
+        .modal-header
+          %button.close{type: 'button', 'data-dismiss' => 'modal', 'aria-hidden' => 'true'} &times;
+          %h4.modal-title Gimme a break.
+        .modal-body
+          - max_value = hackday.queue.size + 1
+          = select_tag 'position', |
+                       options_for_select((1..max_value).to_a, max_value)
+
+        .modal-footer
+          %button.btn.btn-default{type: "button", 'data-dismiss'=>"modal"} Cancel
+          = f.submit 'BREAK', class: 'btn btn-primary btn-success'

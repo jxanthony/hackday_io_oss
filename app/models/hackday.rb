@@ -65,7 +65,7 @@ class Hackday < ActiveRecord::Base
     create_activity(hack, 'move_down_in_queue')
   end
 
-  def add_break(position = nil)
+  def add_break(position)
     breaktime = Breaktime.new
     breaktime.hackday = self
     breaktime.presentation_index = queue.size + 1

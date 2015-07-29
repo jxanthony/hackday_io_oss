@@ -3,7 +3,8 @@
     = render partial: 'hacks/voting', locals: { hack: hack }
   .hack-details.col-xs-10.col-sm-11
     %h3
-      = link_to hack.title, hack, data: { no_turbolink: true }
+      - unless hack.breaktime?
+        = link_to hack.title, hack, data: { no_turbolink: true }
       - if hack.video?
         = image_tag("video-icon24.png")
       - if hack.trophy?

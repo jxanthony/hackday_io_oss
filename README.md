@@ -42,10 +42,10 @@ Clone the repo and install dependencies
 
 ### Deploying
 1. Request access to the hacktracker server group in [homie2](https://homie2.int.yammer.com) (sub-group is under IT)
-2. Once your access is approved, you should be able to ssh into yamsfo221 and login with your LDAP credentials
+2. Once your access is approved, you should be able to ssh into 'hacktracker' and login with your LDAP credentials
   
   ```sh
-  ssh yamsfo221
+  ssh hacktracker
   ```
 3. Change directory to the project folder
   

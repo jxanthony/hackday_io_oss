@@ -21,8 +21,10 @@ class Hackday < ActiveRecord::Base
     self.admins.include? user
   end
 
-  def queue
-    hacks.where("presentation_index IS NOT NULL").order("presentation_index ASC")
+  def queue(exclude_breaks = true)
+    all_hacks = hacks.where("presentation_index IS NOT NULL")
+    all_hacks = all_hacks.where(breaktime: false) if exclude_breaks
+    all_hacks.order("presentation_index ASC")
   end
 
   def queue_for_display

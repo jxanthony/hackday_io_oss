@@ -77,8 +77,9 @@ describe Activity do
     Activity.first.user.should == @user
   end
 
-  it "is created when a hack is moved up in the queue" do 
-    @hack.update_attribute(:presentation_index, 2)
+  it "is created when a hack is moved up in the queue" do
+    hack2 = Fabricate(:hack, hackday: @hackday, presentation_index: 1)
+    @hackday.join_queue(@hack)
     @hackday.move_up_in_queue(@hack)
 
     Activity.first.action.should == 'move_up_in_queue'

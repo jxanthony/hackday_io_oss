@@ -71,6 +71,28 @@ describe Hackday do
       @hackday.move_up_in_queue(@hack).should == false
       @hackday.move_down_in_queue(@hack2).should == false
     end
+
+    it 'adds a break to the correct position' do
+      @hackday.join_queue(@hack)
+      @hackday.join_queue(@hack2)
+
+      @hackday.add_break(2)
+
+      @hackday.hack_at_index(2).title.should eq 'BREAK'
+    end
+
+    it 'removes a break from queue and destroys it' do
+      @hackday.join_queue(@hack)
+      @hackday.join_queue(@hack2)
+      @hackday.add_break(2)
+      breaktime = @hackday.hack_at_index(2)
+
+      @hackday.remove_break(breaktime)
+
+      @hackday.hack_at_index(2).should eq @hack2
+      @hackday.hacks.should_not include(breaktime)
+    end
+
   end
 
   describe 'presentations' do

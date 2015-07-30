@@ -245,5 +245,12 @@ describe "admins have super powers" do
     page.should_not have_content(@hack.title)
   end
 
+  it 'should let admins remove breaks' do
+    breaktime = Fabricate(:hack, hackday: @hackday, presentation_index: 2, breaktime: true)
+
+    visit queue_hackday_path(@hackday)
+    find('#hack_' + breaktime.id.to_s).should have_content('Remove')
+  end
+
 end
 

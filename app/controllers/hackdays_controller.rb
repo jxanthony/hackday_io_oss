@@ -37,7 +37,7 @@ class HackdaysController < ApplicationController
 
   def show
     @hackday = Hackday.find(params[:id])
-    @hacks = @hackday.hacks.order("votes DESC")
+    @hacks = @hackday.hacks.order("votes DESC").reject(&:breaktime?)
   end
 
   def index
@@ -75,6 +75,31 @@ class HackdaysController < ApplicationController
       flash[:error] = "Couldn't end Hack Day...FOREVER HACKING?!"
       redirect_to queue_hackday_path(hackday)
     end
+  end
+
+  def add_break
+    hackday = Hackday.find(params[:id])
+
+    if hackday.add_break(params[:position])
+      flash[:message] = 'Break me off a piece of that HACK DAY BAR'
+    else
+      flash[:error] = 'No breaks for you!'
+    end
+
+    redirect_to queue_hackday_path(hackday)
+  end
+
+  def remove_break
+    breaktime = Hack.find(params[:id])
+    hackday = breaktime.hackday
+
+    if hackday.remove_break(breaktime)
+      flash[:message] = 'Break is over! Get back to hacking!'
+    else
+      flash[:error] = 'Can\'t get rid of that break.'
+    end
+
+    redirect_to queue_hackday_path(hackday)
   end
 
   def judges

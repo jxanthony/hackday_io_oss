@@ -43,24 +43,40 @@ class Hackday < ActiveRecord::Base
     bump_queue(former_index)
   end
 
+  def swap_positions(initial_position, target_position)
+    initial_hack = hacks.find_by_presentation_index(initial_position)
+    target_hack = hacks.find_by_presentation_index(target_position)
+
+    target_hack.update_attribute(:presentation_index, initial_position)
+    initial_hack.update_attribute(:presentation_index, target_position)
+  end
+
   def move_up_in_queue(hack)
     return false if hack.presentation_index.nil? or hack.presentation_index == 1
 
-    swap_target = hacks.find_by_presentation_index(hack.presentation_index - 1)
-    swap_target.update_attribute(:presentation_index, hack.presentation_index) if swap_target
-    hack.update_attribute(:presentation_index, hack.presentation_index - 1)
-
+    swap_positions(hack.presentation_index - 1, hack.presentation_index)
     create_activity(hack, 'move_up_in_queue')
   end
 
   def move_down_in_queue(hack)
     return false if hack.presentation_index.nil? or hack.presentation_index + 1 > queue.size
 
-    swap_target = hacks.find_by_presentation_index(hack.presentation_index + 1)
-    swap_target.update_attribute(:presentation_index, hack.presentation_index) if swap_target
-    hack.update_attribute(:presentation_index, hack.presentation_index + 1)
-
+    swap_positions(hack.presentation_index + 1, hack.presentation_index)
     create_activity(hack, 'move_down_in_queue')
+  end
+
+  def add_break(position)
+    breaktime = Breaktime.new
+    breaktime.hackday = self
+    breaktime.presentation_index = queue.size + 1
+    breaktime.save!
+
+    swap_positions(breaktime.presentation_index, position) if position
+  end
+
+  def remove_break(breaktime)
+    leave_queue(breaktime)
+    breaktime.destroy
   end
 
   def add_admins(users)

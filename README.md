@@ -47,17 +47,22 @@ Clone the repo and install dependencies
   ```sh
   ssh hacktracker
   ```
-3. Change directory to the project folder
+3. Impersonate the yadmin user
+
+  ```sh
+  sudo su - yadmin
+  ```
+4. Change directory to the project folder
   
   ```sh
   cd /var/www/hackdayio
   ```
-4. Pull the changes
+5. Pull the changes
   
   ```sh
   git pull origin master
   ```
-5. Restart the server
+6. Restart the server
   
   ```sh
   sudo restart puma-manager

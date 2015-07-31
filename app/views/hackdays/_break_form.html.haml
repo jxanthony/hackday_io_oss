@@ -6,7 +6,7 @@
           %button.close{type: 'button', 'data-dismiss' => 'modal', 'aria-hidden' => 'true'} &times;
           %h4.modal-title Gimme a break.
         .modal-body
-          - max_value = hackday.queue.size + 1
+          - max_value = hackday.queue(false).size + 1
           = select_tag 'position', |
                        options_for_select((1..max_value).to_a, max_value)
 

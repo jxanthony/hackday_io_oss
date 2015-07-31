@@ -46,7 +46,7 @@
   #presentations-control.row
     .col-md-12.alert.alert-info
       .col-md-3
-        %h3= pluralize(@hackday.queue.count, 'hack') + " left"
+        %h3= pluralize(@hackday.queue(true).count, 'hack') + " left"
       .col-md-9.text-right
         - if @hackday.has_admin?(current_user)
           %button.btn.btn-info.btn-lg{'data-toggle' => 'modal', 'data-target' => '#break-form'}

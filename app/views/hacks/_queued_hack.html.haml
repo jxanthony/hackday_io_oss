@@ -32,7 +32,7 @@
           = link_to move_up_in_queue_hack_path(@hack), method: 'post', class: 'btn btn-xs btn-default' do
             %span.glyphicon.glyphicon-arrow-up
             %span Move Up
-        - if @hack.presentation_index != @hack.hackday.queue.size
+        - if @hack.presentation_index != @hack.hackday.queue(true).size
           = link_to move_down_in_queue_hack_path(@hack), method: 'post', class: 'btn btn-xs btn-default' do
             %span.glyphicon.glyphicon-arrow-down
             %span Move Down

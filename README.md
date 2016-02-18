@@ -41,7 +41,7 @@ Clone the repo and install dependencies
 6. Merge to master
 
 ### Deploying
-1. Request access to the hacktracker server group in [homie2](https://homie2.int.yammer.com) (sub-group is under IT)
+1. Request access to the hacktracker server group in [homie3](https://homie3.int.yammer.com) (sub-group is under IT)
 2. Once your access is approved, you should be able to ssh into 'hacktracker' and login with your LDAP credentials
   
   ```sh

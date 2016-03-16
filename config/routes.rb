@@ -28,6 +28,7 @@ Hacktracker::Application.routes.draw do
       post :move_up_in_queue, :move_down_in_queue, :move_to_position,
            :finish_presentation, :join_queue, :leave_queue, :downvote, :upvote
       post :add_contribution
+      post :add_contributions
       post :remove_contribution
       post :update_tags
     end

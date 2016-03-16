@@ -4,7 +4,7 @@
     - tag_cloud @hackday.hacks  .tag_counts(:limit => 30, :order => "count desc"), %w{s m l} do |tag, css_class|
       = link_to tag.name, tag_path(tag.name), class: css_class
   .row
-    .col-md-7
+    .col-md-8
       %ul.nav.nav-pills
         %li
           = link_to "Top Hacks", hackday_path(@hackday)

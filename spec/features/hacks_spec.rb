@@ -132,8 +132,12 @@ describe "owning a hack" do
     @hack.contributors << @current_user
   end
 
-  # TODO: would really prefer this model of adding contributors to the one below
-  it "should let contributors add others"
+  it "should let contributors add others" do
+    visit hack_path(@hack)
+
+    page.should have_css('#contributor-selector')
+  end
+
   it "should let people add themselves as contributors" do
     other_hack = Fabricate(:hack, hackday: @hackday)
     visit hack_path(other_hack)
@@ -141,6 +145,7 @@ describe "owning a hack" do
 
     page.should have_css('#team img[alt="Kevin Davis"]')
   end
+
   it "should indicate that you're a contributor"
 
   it "should let contributors edit the hack details" do

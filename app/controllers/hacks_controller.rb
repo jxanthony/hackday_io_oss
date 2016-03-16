@@ -101,12 +101,23 @@ class HacksController < ApplicationController
     redirect_to :back
   end
 
+  def add_contributions
+    users = User.find_all_by_id(params[:hack][:contributor_ids].reject(&:empty?))
+    if @hack.has_contributor?(current_user) && @hack.add_contributions(users)
+      flash[:message] = 'Teamwork! Go team, go!'
+    else
+      flash[:error] = 'Users not cool enough to be contributors.'
+    end
+    redirect_to :back
+  end
+
   def remove_contribution
-    unless @hack.has_contributor?(current_user)
+    user = User.find_by_id(params[:user_id]) || current_user
+    unless @hack.has_contributor?(user)
       flash[:error] = "what are you doing? you aren't a contributor!"
     else
-      @hack.remove_contribution(current_user)
-      flash[:message] = "you are no longer a contributor :("
+      @hack.remove_contribution(user)
+      flash[:message] = "No longer a contributor :("
     end
     redirect_to :back
   end

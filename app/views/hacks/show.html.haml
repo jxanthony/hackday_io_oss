@@ -73,6 +73,9 @@
                 data: { confirm: "Did you really contribute to this hack?" }, |
                 method: :post,                                      |
                 id: 'hack-join'
+    - if @hack.has_contributor?(current_user)
+      = link_to "Add", '#', data: { toggle: 'modal', target: '#contributor-form' }, |
+                id: 'add-team'
 
   %h3 Comments
   - unless @hack.comments.empty?
@@ -102,3 +105,4 @@
 
 = render partial: 'hacks/form', locals: { hack: @hack }
 = render partial: 'hacks/tag_form', locals: { hack: @hack }
+= render partial: 'hacks/contributor_form', locals: { hack: @hack }

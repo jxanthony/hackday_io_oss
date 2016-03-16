@@ -22,6 +22,9 @@
             = f.text_field :trophy_icon, class: 'form-control'
             = f.label :group_id
             = f.text_field :group_id, class: 'form-control', :value => "1253703"
+          .form-group
+            = f.check_box :disable_downvote
+            = f.label :disable_downvote, "Disable downvotes?"
 
         .modal-footer
           - unless hackday.new_record?

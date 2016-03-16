@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150729210351) do
+ActiveRecord::Schema.define(version: 20160315184617) do
 
   create_table "activities", force: true do |t|
     t.integer  "user_id"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20150729210351) do
     t.string   "trophy_name"
     t.string   "trophy_icon"
     t.integer  "group_id"
+    t.boolean  "disable_downvote",         default: false
   end
 
   create_table "hackdays_users", force: true do |t|

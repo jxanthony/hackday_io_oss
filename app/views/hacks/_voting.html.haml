@@ -5,8 +5,9 @@
     - else
       = image_tag('arrow-up.png', alt: "Vote Up")
   %span.votes= hack.votes
-  = link_to downvote_hack_path(hack), method: 'post' do
-    - if hack.downvoted_by?(current_user)
-      = image_tag('arrow-down-voted.png', alt: "Clear Your Vote", class: 'voted-down')
-    - else  
-      = image_tag('arrow-down.png', alt: "Vote Down")
+  - unless hack.hackday.disable_downvote
+    = link_to downvote_hack_path(hack), method: 'post' do
+      - if hack.downvoted_by?(current_user)
+        = image_tag('arrow-down-voted.png', alt: "Clear Your Vote", class: 'voted-down')
+      - else
+        = image_tag('arrow-down.png', alt: "Vote Down")

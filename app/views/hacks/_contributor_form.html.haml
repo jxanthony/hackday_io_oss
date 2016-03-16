@@ -1,0 +1,26 @@
+.modal.fade#contributor-form
+  .modal-dialog{role: 'dialog'}
+    .modal-content
+      = form_for hack, url: add_contributions_hack_path, method: :post do |f|
+        .modal-header
+          %button.close{type: 'button', 'data-dismiss' => 'modal', 'aria-hidden' => 'true'} &times;
+          %h4.modal-title Hack Contributors
+        .modal-body
+          - current_contributors = hack.contributors
+          - users = User.all - current_contributors
+          #contributors
+            %h4 Current Contributors
+            %ul.list-inline
+              - current_contributors.each do |contributor|
+                - delete_link = link_to 'Remove Contributor', remove_contribution_hack_path(hack, user_id: contributor.id), method: :post, data: { confirm: 'REMOVE FROM HACK?' }
+                %li.has-popover{tabindex: 0, title: contributor.name, 'data-content' => delete_link, 'data-trigger' => 'focus', style: 'outline: none'}
+                  = image_tag contributor.mugshot_url, |
+                              alt: contributor.name, |
+                              title: contributor.name, |
+                              class: 'img-circle user-mugshot', |
+                              size: '45x45'
+          #contributor-selector
+            = f.collection_select :contributor_ids, users, :id, :name, { selected: nil }, { class: 'multiple-select', multiple: true, style: 'width: 100%'}
+        .modal-footer
+          %button.btn.btn-default{type: "button", 'data-dismiss'=>"modal"} Cancel
+          = f.submit 'Update', class: 'btn btn-primary btn-success'

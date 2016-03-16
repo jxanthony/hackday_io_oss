@@ -1,0 +1,14 @@
+.modal.fade#move-hack{id: hack.id}
+  .modal-dialog{role: 'dialog'}
+    .modal-content
+      = form_tag move_in_queue_hack_path, method: :post do |f|
+        .modal-header
+          %button.close{type: 'button', 'data-dismiss' => 'modal', 'aria-hidden' => 'true'} &times;
+          %h4.modal-title= "Move '#{hack.title}' in queue"
+        .modal-body
+          - max_value = hack.hackday.queue(false).size
+          = select_tag 'position', |
+                       options_for_select((1..max_value).to_a)
+        .modal-footer
+          %button.btn.btn-default{type: "button", 'data-dismiss'=>"modal"} Cancel
+          = f.submit 'Move', class: 'btn btn-primary btn-success'

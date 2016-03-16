@@ -1,6 +1,6 @@
 ready = ->
   $(".multiple-select").select2
-    placeholder: 'Pick a Judge'
+    placeholder: 'Pick Someone'
   $('.has-tooltip').tooltip
   $('.has-popover').popover
     placement: 'top',

@@ -103,6 +103,10 @@ class Hack < ActiveRecord::Base
     create_activity('add_contribution')
   end
 
+  def add_contributions(users)
+    users.each{ |user| add_contribution(user) }
+  end
+
   def remove_contribution(user)
     return false if self.contributors.empty? or not has_contributor?(user)
     contributions.where(user_id: user.id).delete_all

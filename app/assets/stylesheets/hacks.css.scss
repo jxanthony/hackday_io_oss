@@ -67,7 +67,7 @@
   display: block;
   margin-right: 5px;
 }
-#hack-join
+#hack-join, #add-team
 {
   border: 2px dashed #666;
   background-color: #ddd;
@@ -79,7 +79,7 @@
   float: left;
   height: 45px; width: 45px;
 }
-#hack-join:hover
+#hack-join:hover, #add-team:hover
 {
   border: 2px solid #666;
   text-decoration: none;

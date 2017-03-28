@@ -76,3 +76,8 @@ Clone the repo and install dependencies
 - [x] Move presentations to a specific spot in the queue
 - [ ] Make votes harder to cheat
 - [ ] More...
+
+# Contributing
+
+This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+>>>>>>> daf601810c699d06b863114e976ec65318a640c1

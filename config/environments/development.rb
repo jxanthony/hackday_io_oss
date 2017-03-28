@@ -36,16 +36,3 @@ Hacktracker::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
 end
-
-OmniAuth.config.test_mode = true
-OmniAuth.config.mock_auth[:yammer] = {
-  provider: 'yammer',
-  uid: '1',
-  info: {
-    name: 'Doge',
-    image: 'http://img2.wikia.nocookie.net/__cb20141105223610/r2d/images/7/73/Dogepic.png',
-    email: 'doge@wow.com'
-  },
-  extra: { raw_info: { network_id: '1' } },
-  credentials: { token: 'some_token' }
-}

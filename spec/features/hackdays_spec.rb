@@ -41,7 +41,7 @@ describe "browsing hackdays" do
       test_sign_in
       visit queue_hackday_path(@hackday)
 
-      page.should have_content('2 hacks queued')
+      page.should have_content('2 hacks left')
     end
 
     context 'when admin' do

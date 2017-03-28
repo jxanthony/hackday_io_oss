@@ -139,8 +139,4 @@ class HackdaysController < ApplicationController
     end
   end
 
-  def feed
-    @hackday = Hackday.find(params[:id])
-  end
-
 end

@@ -17,8 +17,8 @@ require 'capybara/rails'
 Capybara.javascript_driver = :webkit
 
 OmniAuth.config.test_mode = true
-OmniAuth.config.mock_auth[:yammer] = {
-    provider: 'yammer',
+OmniAuth.config.mock_auth[:github] = {
+    provider: 'github',
     uid: '123',
     info: {
             name: 'Kevin Davis',
@@ -75,7 +75,7 @@ RSpec.configure do |config|
   end
 
   def test_sign_in
-    visit '/auth/yammer'
+    visit '/auth/github'
   end
 
 end

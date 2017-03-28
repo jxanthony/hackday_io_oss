@@ -11,7 +11,6 @@ Hacktracker::Application.routes.draw do
     member do
       get :queue, :display_queue
       get :judges
-      get :feed
       post :start_presentations, :end_presentations
       put :break, to: 'hackdays#add_break', as: 'add_break'
       delete :break, to: 'hackdays#remove_break', as: 'remove_break'

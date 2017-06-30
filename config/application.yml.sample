@@ -7,3 +7,4 @@ NEW_RELIC_KEY: 'optional'
 GITHUB_KEY: 'github_key (ghe/org)'
 GITHUB_SECRET: 'github_secret (ghe/org)'
 GITHUB_URL: 'github_url (ghe/org)'
+GITHUB_API_URL: https://api.github.com

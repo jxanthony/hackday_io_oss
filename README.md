@@ -3,24 +3,8 @@
 ## About
 - Hack Tracker is a rails based application written to ease tracking and ranking hackday projects and presentations. It dedicates authentication and authorization to Github. 
 
-## Dependencies
-- Ruby 2.0.0
-- Rails 4.0.0
-- puma - the Rails server
-- postgresql - you'll need a postgres server to test
-
-## Contributing
-### Setup
-Clone the repo and install dependencies
-
-  ```sh
-  cd <your_project_directory>
-  git clone git@github.com:Microsoft/hackday_io_oss.git
-  cd hackday_io_oss
-  bundle install
-  ```
-
-  Copy the application.yml.sample file contents located under the config directory and change the values accordingly:
+### Bootstrap your development:
+Copy the application.yml.sample file contents located under the config directory and change the values accordingly:
 
   ```
 SECRET_TOKEN: 'a secured token usually obtained by running: rake secrets'
@@ -45,6 +29,32 @@ GITHUB_API_URL: 'https://api.github.com or your private ghe api endpoint.'
     | |- sockets
     |
     |- ...
+  ```
+
+  Run the following command to respectively
+  Start your sunspot server 
+  Migrate your database
+
+  ```
+  rake sunspot:solr:start
+  rake db:create && rake db:migrate
+  ```
+
+## Dependencies
+- Ruby 2.0.0
+- Rails 4.0.0
+- puma - the Rails server
+- postgresql - you'll need a postgres server to test
+
+## Contributing
+### Setup
+Clone the repo and install dependencies
+
+  ```sh
+  cd <your_project_directory>
+  git clone git@github.com:Microsoft/hackday_io_oss.git
+  cd hackday_io_oss
+  bundle install
   ```
 
 ### Making changes and committing

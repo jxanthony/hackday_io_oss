@@ -19,8 +19,6 @@
         - if @hackday.has_admin?(current_user)
           %li
             = link_to "Judges Comments", judges_hackday_path(@hackday)
-        %li
-          = link_to "Hackday Group", feed_hackday_path(@hackday), data: { no_turbolink: false }
 
     .col-md
       %ul.nav.nav-pills.pull-right.add-hack

@@ -25,9 +25,9 @@ test:
 
 production:
   adapter: postgresql
-  database: <%=ENV["DATABASE"]%>
-  host: <%=ENV["DATABASE_HOST"]%>
+  host: <%= ENV['DATABASE_HOST'] %>
+  database: <%= ENV['DATABASE'] %>
   pool: 5
-  username: <%=ENV["DATABASE_USERNAME"]%>
-  password: <%=ENV["DATABASE_PW"]%>
+  username: <%= ENV['DATABASE_USERNAME'] %>
+  password: <%= ENV['DATABASE_PW'] %>
   timeout: 5000

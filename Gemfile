@@ -19,13 +19,13 @@ gem 'rails4_upgrade', '= 0.5.0'
 gem 'rails4-autocomplete', '= 1.1.0'
 gem 'turbolinks', '= 2.2.2'
 gem 'rake', '< 11.0'
+gem "figaro", '= 1.1.1'
 
 
 group :production do
   gem "pg", '= 0.17.1'
   gem "newrelic_rpm", '= 3.7.3.204'
   gem "rails_12factor", '= 0.0.2'
-  gem "figaro", '= 1.1.1'
 end
 
 # Gems used only for assets and not required
@@ -42,13 +42,12 @@ gem 'select2-rails', '= 3.5.9.3'
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.0.0'
 
-gem 'omniauth', '= 1.2.1'
+gem 'omniauth', '= 1.1.4'
 gem 'omniauth-github', '= 1.1.1'
 
 group :development, :test do
   gem 'debugger', '= 1.6.8'
   gem 'sqlite3', '1.3.9'
-  gem 'dotenv-rails', '= 2.0.2'
   gem 'rspec-rails', '= 2.14.2'
   gem 'annotate', '= 2.6.2'
   gem 'simplecov', '= 0.8.2'

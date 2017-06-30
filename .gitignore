@@ -40,3 +40,7 @@ bower.json
 
 # Ignore Byebug command history file.
 .byebug_history
+
+solr/*
+shared/*
+config/application.yml

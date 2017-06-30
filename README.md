@@ -1,11 +1,7 @@
 # HACK THIS
 
 ## About
-- Hack Tracker support & hosting is now owned by the Yammer Internal Services Engineering team. It is hosted on our Hyper-V VMs on Corpnet.
-- The postgres server is running on yamsfo220
-- The Hack Tracker puma server is running on yamsfo221 (see below on how to get access)
-- See the hack tracker at https://hacktracker.corp.microsoft.com.
-- hackday.int.yammer.com will also redirect to the above URL
+- Hack Tracker is a rails based application written to ease tracking and ranking hackday projects and presentations. It dedicates authentication and authorization to Github.
 
 ## Dependencies
 - Ruby 2.0.0
@@ -19,8 +15,8 @@ Clone the repo and install dependencies
 
   ```sh
   cd <your_project_directory>
-  git clone git@github.int.yammer.com:yammer/hackdayio.git
-  cd hackdayio
+  git clone git@github.com:Microsoft/hackday_io_oss.git
+  cd hackday_io_oss
   bundle install
   ```
 
@@ -40,33 +36,7 @@ Clone the repo and install dependencies
 5. Code reviewz   
 6. Merge to master
 
-### Deploying
-1. Request access to the hacktracker server group in [homie3](https://homie3.int.yammer.com) (sub-group is under IT)
-2. Once your access is approved, you should be able to ssh into 'hacktracker' and login with your LDAP credentials
-  
-  ```sh
-  ssh hacktracker
-  ```
-3. Impersonate the yadmin user
 
-  ```sh
-  sudo su - yadmin
-  ```
-4. Change directory to the project folder
-  
-  ```sh
-  cd /var/www/hackdayio
-  ```
-5. Pull the changes
-  
-  ```sh
-  git pull origin master
-  ```
-6. Restart the server
-  
-  ```sh
-  sudo restart puma-manager
-  ```
 
 ## Features to add:
 - [ ] History of hacks presented in order of queued
